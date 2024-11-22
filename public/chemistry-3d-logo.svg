@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- 背景圆形 - 加深 -->
+  <circle cx="100" cy="100" r="90" fill="#e1effe"/>
+  
+  <!-- 3D立方体 - 加深 -->
+  <path d="M70 70 L130 50 L130 110 L70 130 Z" fill="#1d4ed8" opacity="0.9"/>
+  <path d="M130 50 L160 70 L160 130 L130 110 Z" fill="#1e40af" opacity="0.9"/>
+  <path d="M70 130 L130 110 L160 130 L100 150 Z" fill="#1e3a8a" opacity="0.9"/>
+  
+  <!-- 分子结构 - 加深 -->
+  <circle cx="85" cy="85" r="8" fill="#172554"/>
+  <circle cx="115" cy="75" r="8" fill="#172554"/>
+  <circle cx="100" cy="105" r="8" fill="#172554"/>
+  
+  <!-- 连接线 - 加深 -->
+  <line x1="85" y1="85" x2="115" y2="75" stroke="#172554" stroke-width="3"/>
+  <line x1="115" y1="75" x2="100" y2="105" stroke="#172554" stroke-width="3"/>
+  <line x1="100" y1="105" x2="85" y2="85" stroke="#172554" stroke-width="3"/>
+  
+  <!-- 动感线条装饰 - 加深 -->
+  <path d="M40 100 Q 70 40, 100 100 T 160 100" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.6"/>
+</svg>
