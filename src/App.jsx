@@ -13,12 +13,12 @@ function App() {
   return (
     <SimulationProvider>
       <Router>
-        <div className="flex flex-col min-h-screen bg-gray-50">
+        <div className="flex flex-col min-h-screen">
           {/* 头部导航 / Header navigation */}
-          <Header />
+          <Header className="fixed top-0 w-full z-50" />
           
           {/* 主要内容区域 / Main content area */}
-          <main className="flex-grow">
+          <main className="flex-1 pt-16">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/simulation" element={<Simulator />} />

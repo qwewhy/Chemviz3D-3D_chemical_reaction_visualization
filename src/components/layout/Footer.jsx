@@ -1,3 +1,6 @@
+// Footer.tsx
+import { Link } from 'react-router-dom';
+
 // Footer组件：网站底部信息
 // Footer component: Website footer information
 const Footer = () => {
@@ -8,7 +11,7 @@ const Footer = () => {
           {/* 项目信息 / Project information */}
           <div>
             <h3 className="text-lg font-bold mb-2">
-            Chemical Reaction 3D Visualization
+              Chemical Reaction 3D Visualization
               <span className="block text-sm opacity-75">Chemical Reaction 3D</span>
             </h3>
             <p className="text-sm text-gray-300">
@@ -20,9 +23,9 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-2">Quick Links</h4>
             <ul className="text-sm space-y-2">
-              <li><a href="/about" className="hover:text-gray-300">About Us</a></li>
-              <li><a href="/contact" className="hover:text-gray-300">Contact</a></li>
-              <li><a href="/help" className="hover:text-gray-300">Help</a></li>
+              <li><Link to="/about" className="hover:text-gray-300">About Us</Link></li>
+              <li><Link to="/contact" className="hover:text-gray-300">Contact</Link></li>
+              <li><Link to="/help" className="hover:text-gray-300">Help</Link></li>
             </ul>
           </div>
 
@@ -30,8 +33,8 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-2">Contact Us</h4>
             <div className="text-sm space-y-2 text-gray-300">
-              <p>Email: contact@chemviz3d.com</p>
-              <p>GitHub: github.com/chemviz3d</p>
+              <p>Email: ?????@?????.com</p>
+              <p>GitHub: https://github.com/qwewhy/Chemviz3D-3D_chemical_reaction_visualization</p>
             </div>
           </div>
         </div>
@@ -40,4 +43,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
