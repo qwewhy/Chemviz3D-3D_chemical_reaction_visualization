@@ -12,34 +12,19 @@ const Beaker = () => {
     collisionResponse: 1
   };
 
-  // 墙体 - 更宽且更矮
+  // 墙体
   const [wallRef] = useCylinder(() => ({
     ...wallPhysicsConfig,
-    position: [0, 1.5, 0], // 降低高度
-    args: [6, 6, 4, 32], // 增加半径，减少高度
-  }));
-
-  // 内部空腔
-  const [cavityRef] = useCylinder(() => ({
-    ...wallPhysicsConfig,
-    position: [0, 1.6, 0],
-    args: [5.8, 5.8, 4.2, 32],
-    isTrigger: true,
-  }));
-
-  // 底部
-  const [bottomRef] = useCylinder(() => ({
-    ...wallPhysicsConfig,
-    position: [0, -0.5, 0], // 调整底部位置
-    args: [6, 6, 0.2, 32], // 匹配新的半径
+    position: [0, 0.2, 0], // 高度
+    args: [6, 6, 4, 32], // 半径
   }));
 
   return (
     <group>
       <mesh ref={wallRef}>
-        <cylinderGeometry args={[6, 6, 4, 32]} />
+        <cylinderGeometry args={[10, 10, 4, 32]} />
         <meshStandardMaterial
-          color="#ff0000"
+          color="#009AA0"
           transparent={true}
           opacity={0.1}
           side={THREE.DoubleSide}
