@@ -90,10 +90,7 @@ chemical-reaction-3d/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/chemical-reaction-3d.git
-
-# Navigate to project directory
-cd chemical-reaction-3d
+git clone https://github.com/qwewhy/Chemviz3D-3D_chemical_reaction_visualization.git
 
 # Install dependencies
 npm install
