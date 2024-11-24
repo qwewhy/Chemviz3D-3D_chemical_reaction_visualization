@@ -35,25 +35,47 @@ An interactive 3D visualization platform for chemical reactions, built with Reac
 - **Build Tool**: Vite 5.4.10
 - **Type Support**: TypeScript support included
 
-## 📦 Project Structure
+## 📦 项目结构
 
 ```plaintext
 chemical-reaction-3d/
 ├── public/
-│   ├── assets/
-│   │   ├── molecules/    # Molecule models and textures
-│   │   └── textures/     # General textures
-│   └── chemistry-3d-logo.svg
+│   ├── assets
+│   └── chemistry-3d-logo.svg # 项目Logo
 ├── src/
-│   ├── components/       # React components
-│   │   ├── layout/      # Layout components (Header, Footer)
-│   │   ├── three/       # Three.js related components
-│   │   └── ui/          # UI components
-│   ├── hooks/           # Custom React hooks
-│   ├── pages/           # Page components
-│   ├── store/           # State management
-│   ├── utils/           # Utility functions
-│   └── i18n/           # Internationalization
+│   ├── components/       
+│   │   ├── layout/      # 布局组件 Layout components
+│   │   │   ├── Header/  # 页面顶端及导航栏 Header component
+│   │   │   └── Footer/  # 页脚 Footer component
+│   │   ├── three/       # Three.js 相关组件
+│   │   │   ├── Scene.jsx        # 3D场景 3D scene
+│   │   │   ├── Molecule.jsx     # 分子渲染和3js分子性质 Molecule rendering and 3js molecule properties
+│   │   │   └── Breaker.jsx      # 场景底部的容器（烧杯） Container at the bottom of the scene
+│   │   └── ui/          # UI组件 UI components
+│   │       ├── Controls.jsx     # 反应界面右侧的控制面板 Control panel on the right side of the reaction interface
+│   │       ├── Panel.jsx        # 信息面板 Information panel
+│   │       └── LanguageSwitch.jsx # 语言切换 Language switch
+│   ├── models/          # 分子和原子模型 Molecules and atoms models
+│   │   ├── atoms/       # 原子基类和具体实现 Atom base class and implementation
+│   │   │   ├── BaseAtom.ts # 原子基类
+│   │   │   ├── Hydrogen.ts # 氢原子
+│   │   │   └── ...
+│   │   └── molecules/   # 分子基类和具体实现 Molecule base class and implementation
+│   │       ├── BaseMolecule.ts # 分子基类
+│   │       ├── WaterMolecule.ts # 水分子
+│   │       └── ...
+│   ├── hooks/           # 自定义React hooks Custom React hooks
+│   ├── pages/           # 页面组件 Page components
+│   ├── store/           # 状态管理 State management
+│   │   └── simulationStore.js # 对场景中的分子进行增加、删除等操作的接口 Interface for adding, deleting, etc. molecules in the scene
+│   ├── utils/           # 工具函数 Utility functions
+│   │   ├── constants.js # 常量 
+│   │   └── moleculeHelpers.js # 分子辅助函数 Molecule helper functions
+│   ├── i18n/           # 国际化语言工具 Internationalization language tools
+│   │   ├── config.js # 国际化配置文件
+│   │   └── locales/ # 国际化语言文件
+│   └── context/        # React Context 
+│       └── SimulationContext.jsx #simulation 状态文件
 └── ...
 ```
 
@@ -77,7 +99,9 @@ cd chemical-reaction-3d
 npm install
 
 # Start development server
-npm run dev
+npm run dev 
+or
+npm start
 ```
 
 The application will be available at `http://localhost:5173`
@@ -98,15 +122,6 @@ npm run preview
 
 # Run linting
 npm run lint
-```
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-VITE_APP_TITLE=Chemical Reaction 3D
-VITE_API_URL=your-api-url
 ```
 
 ## 🌐 Internationalization
@@ -148,28 +163,168 @@ The application is fully responsive and supports:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## 🧪 add new chemical reaction
+
+To add new chemical reactions to the system, please follow these detailed steps:
+
+### 1. Create atom model
+Navigate to src/models/atoms and check if the required atoms already exist:
+- If the atom class exists, you can use it directly
+- If needed, create a new atom class that extends BaseAtom.ts
+- Define all required physical and chemical properties as specified in BaseAtom.ts
+
+### 2. Create Molecule Models
+Create new molecule classes in src/models/molecules following BaseMolecule.ts structure:
+
+```typescript
+import { Vector3 } from 'three';
+import { BaseMolecule } from './BaseMolecule';
+import { YourAtom } from '../atoms/YourAtom';
+
+export class YourMolecule extends BaseMolecule {
+    readonly bondLength: number = 0.00;
+    readonly boilingPoint: number = 0.00;
+    readonly meltingPoint: number = 0.00;
+
+    atom1: YourAtom;
+
+    atom2: YourAtom;
+
+    constructor(position?: Vector3, rotation?: Vector3) {
+        super(
+            'XX2',              // Molecular formula
+            0.00,              // Molecular mass g/mol
+            0.00,              // Density g/cm³
+            position,
+            rotation
+        );
+
+        // Initialize atoms
+        this.atom1 = new YourAtom();
+        this.atom2 = new YourAtom();
+
+        // Add atoms to the molecule
+        this.atoms = [this.atom1, this.atom2];
+        
+        this.updateAtomicPositions();
+    }
+
+    /**
+     * Updates positions of all atoms in the molecule
+     */
+    updateAtomicPositions(): void {
+        // Place first atom at half bond length before center
+        this.atom1.setPosition(new Vector3(
+            this.position.x - this.bondLength / 2,
+            this.position.y,
+            this.position.z
+        ));
+
+        // Place second atom at half bond length after center
+        this.atom2.setPosition(new Vector3(
+            this.position.x + this.bondLength / 2,
+            this.position.y,
+            this.position.z
+        ));
+    }
+}
+```
+
+### 3. Import Molecule Class and Add Molecule Creation Handler
+In src/components/ui/Controls.jsx:
+
+```javascript
+// 1. Import your new molecule class:
+import { NewMolecule } from '../../models/molecules/NewMolecule';
+
+// 2. Add molecule creation handler:
+const handleAddNewMolecule = () => {
+  try {
+    const randomX = (Math.random() - 0.5) * 6;
+    const newMolecule = new NewMolecule(
+      new Vector3(randomX, 8, randomX) // Spawn position of the molecule
+    );
+    addMolecule(newMolecule);
+  } catch (error) {
+    console.error('Error creating molecule:', error);
+  }
+};
+
+// 3. Add UI button:
+<button
+  onClick={handleAddNewMolecule}
+  className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg
+    transition-colors mb-4"
+>
+  //t('***') is a i18n translation key, please refer to src/i18n/config.json
+  {t('simulator.controls.addNewMolecule')} ({molecules.length}) 
+</button>
+```
+
+### 4. Register New Molecule and Add Reaction Rules and Product Handling
+In src/components/three/Scene.jsx:
+```javascript
+// 1. Import new molecule:
+import { NewMolecule } from '../../models/molecules/NewMolecule';
+
+// 2. Add all reaction rules about all molecules in this project:
+const reactionRules = [
+  {
+    reactants: { 'ReactantA': 1, 'ReactantB': 1 },
+    products: { 'NewProduct': 1 },
+    name: 'New chemical reaction' // Reaction name, shown in browser console
+  },
+  {
+      reactants: { 'NH3': 2, 'Cl2': 3 },
+      products: { 'N2': 1, 'HCl': 6 },
+      name: 'ammonia and chlorine to nitrogen and hydrochloric acid'
+  }
+  // ... add more reaction rules here
+];
+
+// 3. Update product handling in checkReactionPossibility:
+const checkReactionPossibility = () => {
+  // ...
+  for (const [product, count] of Object.entries(rule.products)) {
+    for (let i = 0; i < count; i++) {
+      let newMolecule;
+      switch (product) {
+        case 'NH4OH':
+          newMolecule = new AmmoniaHydrate();
+          break;
+        case 'H2O':
+          newMolecule = new WaterMolecule();
+          break;
+        case 'NH3':
+          newMolecule = new AmmoniaMolecule();
+          break;
+        case 'HClO':
+          newMolecule = new HypochlorousAcid();
+          break;
+        // ... add your new product here
+        default:
+          console.warn(`unknown product: ${product}`);
+          continue;
+      }
+      allNewMolecules.push(newMolecule);
+    }
+  }
+};
+```
+
+### 5. Testing and Validation
+- When the reactant conditions meet the chemical reaction conditions, add any 1 more new molecule to the scene to trigger the reaction, and the reaction will occur
+- The new molecule renders correctly in the 3D scene
+- Chemical reactions proceed as expected
+- Collision detection works properly
+- Physics simulation behaves correctly with the new molecule
+
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License
 
 ## 👥 Authors
 
-- Your Name - Initial work - [YourGithub](https://github.com/yourusername)
-
-## 🙏 Acknowledgments
-
-- Three.js community
-- React Three Fiber team
-- All contributors and supporters
-
-## 📝 Changelog
-
-### [1.0.0] - 2024-03-XX
-- Initial release
-- Basic molecular visualization
-- Multi-language support
-- Reaction simulation features
-
----
+- Hongyuan Wang
 
 <p align="center">Made with ❤️ for chemistry education</p>

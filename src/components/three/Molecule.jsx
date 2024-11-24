@@ -19,15 +19,15 @@ const Molecule = ({ molecule }) => {
     mass: 1,
     position: molecule.position.toArray(),
     args: [1.5, 1.5, 1.5],
-    linearDamping: 0.1,
-    angularDamping: 0.1,
+    linearDamping: 0.999,
+    angularDamping: 0.999,
     friction: 0.1,
     restitution: 0.2,
-    allowSleep: false,
+    allowSleep: true,
     fixedRotation: true,
     collisionResponse: 1,
     onCollide: (e) => {
-      console.log('Molecule collision:', e);
+      // 碰撞事件处理 / Collision event handling
     }
   }));
 
