@@ -33,14 +33,14 @@ const Controls = ({
   }));
 
   // adds water molecule / 添加水分子
+  // if src\components\three\Beaker.jsx has changed, the randomX should be changed accordingly
+  // 如果src\components\three\Beaker.jsx有改变，则randomX也应该相应改变
   const handleAddWaterMolecule = () => {
-    console.log('Button clicked'); // 添加按钮点击日志
-    
     try {
       // Random position at the top of the beaker
       const randomX = (Math.random() - 0.5) * 6;
       const waterMolecule = new H2O(
-        new Vector3(randomX, 8, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX) // 水分子在容器顶部随机位置 water molecule at random position at the top of the container
       );
     
       addMolecule(waterMolecule);
@@ -53,7 +53,7 @@ const Controls = ({
   const handleAddHydrogenMolecule = () => {
     try {
       const randomX = (Math.random() - 0.5) * 6;
-      const hydrogenMolecule = new H2(new Vector3(randomX, 8, randomX));
+      const hydrogenMolecule = new H2(new Vector3(randomX, Math.abs(randomX % 3)+4, randomX));//氢分子在容器顶部随机位置 hydrogen molecule at random position at the top of the container
       addMolecule(hydrogenMolecule);
     } catch (error) {
       console.error('Error creating molecule:', error); // 捕获可能的错误
@@ -65,7 +65,7 @@ const Controls = ({
      try {
       const randomX = (Math.random() - 0.5) * 6;
       const ammoniaHydrateMolecule = new NH3H2O(
-        new Vector3(randomX, 8, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX) // 一水合氨分子在容器顶部随机位置 ammonia hydrate molecule at random position at the top of the container
       );
       addMolecule(ammoniaHydrateMolecule);
      } catch (error) {
@@ -78,7 +78,7 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const ammoniaMolecule = new NH3(
-        new Vector3(randomX, 8, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
       );
       addMolecule(ammoniaMolecule);
     } catch (error) {
@@ -91,7 +91,7 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const chlorineMolecule = new Cl2(
-        new Vector3(randomX, 8, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
       );
       addMolecule(chlorineMolecule);
     } catch (error) {
@@ -104,7 +104,7 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const hypochlorousAcidMolecule = new HClO(
-        new Vector3(randomX, 8, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
       );
       addMolecule(hypochlorousAcidMolecule);
     } catch (error) {
@@ -117,7 +117,7 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const hydrochloricAcidMolecule = new HCl(
-        new Vector3(randomX, 8, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
       );
       addMolecule(hydrochloricAcidMolecule);
     } catch (error) {
@@ -130,7 +130,7 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const nitrogenMolecule = new N2(
-        new Vector3(randomX, 8, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
       );
       addMolecule(nitrogenMolecule);
     } catch (error) {
@@ -142,7 +142,7 @@ const Controls = ({
   const handleAddOxygenMolecule = () => {
     try {
       const randomX = (Math.random() - 0.5) * 6;
-      const oxygenMolecule = new O2(new Vector3(randomX, 8, randomX));
+      const oxygenMolecule = new O2(new Vector3(randomX, Math.abs(randomX % 3)+4, randomX));
       addMolecule(oxygenMolecule);
     } catch (error) {
       console.error('Error creating molecule:', error); // 捕获可能的错误
@@ -153,7 +153,7 @@ const Controls = ({
   const handleAddHydrogenPeroxideMolecule = () => {
     try {
       const randomX = (Math.random() - 0.5) * 6;
-      const hydrogenPeroxideMolecule = new H2O2(new Vector3(randomX, 8, randomX));
+      const hydrogenPeroxideMolecule = new H2O2(new Vector3(randomX, Math.abs(randomX % 3)+4, randomX));
       addMolecule(hydrogenPeroxideMolecule);
     } catch (error) {
       console.error('Error creating molecule:', error); // 捕获可能的错误
