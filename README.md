@@ -9,7 +9,7 @@ An interactive 3D visualization platform for chemical reactions, built with Reac
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.170.0-green.svg)](https://threejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4.10-purple.svg)](https://vitejs.dev/)
-<!-- [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) -->
+[![License]()](LICENSE)
 
 [Live Demo](https://your-demo-link.com) 
 <!-- | [Documentation](https://your-docs-link.com) -->
@@ -328,7 +328,7 @@ const checkReactionPossibility = () => {
 
 ## 📄 MIT License
 
-Copyright <2024> <Hongyuan Wang>
+Copyright <2024 Hongyuan Wang>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
