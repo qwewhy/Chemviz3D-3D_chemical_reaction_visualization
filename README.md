@@ -9,7 +9,7 @@ An interactive 3D visualization platform for chemical reactions, built with Reac
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.170.0-green.svg)](https://threejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4.10-purple.svg)](https://vitejs.dev/)
-[![License]()](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [Live Demo](https://your-demo-link.com) 
 <!-- | [Documentation](https://your-docs-link.com) -->
