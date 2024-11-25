@@ -9,9 +9,10 @@ An interactive 3D visualization platform for chemical reactions, built with Reac
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-0.170.0-green.svg)](https://threejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4.10-purple.svg)](https://vitejs.dev/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<!-- [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) -->
 
-[Live Demo](https://your-demo-link.com) | [Documentation](https://your-docs-link.com)
+[Live Demo](https://your-demo-link.com) 
+<!-- | [Documentation](https://your-docs-link.com) -->
 
 ## 🚀 Features
 
@@ -35,19 +36,21 @@ An interactive 3D visualization platform for chemical reactions, built with Reac
 - **Build Tool**: Vite 5.4.10
 - **Type Support**: TypeScript support included
 
-## 📦 项目结构
+## 📦 Project Structure
 
 ```plaintext
 chemical-reaction-3d/
 ├── public/
 │   ├── assets
-│   └── chemistry-3d-logo.svg # 项目Logo
+│   └── chemistry-3d-logo.svg # 项目Logo project logo
 ├── src/
 │   ├── components/       
-│   │   ├── layout/      # 布局组件 Layout components
-│   │   │   ├── Header/  # 页面顶端及导航栏 Header component
-│   │   │   └── Footer/  # 页脚 Footer component
-│   │   ├── three/       # Three.js 相关组件
+│   │   ├── layout/      # 布局组件 Layout components 
+│   │   │   ├── Header/  # 页面顶端 Header component
+│   │   │   ├── Footer/  # 页脚 Footer component
+│   │   │   └── Navigation.jsx # 导航栏 Navigation component
+|   |   |   
+│   │   ├── three/       # Three.js 相关组件 Three.js related components
 │   │   │   ├── Scene.jsx        # 3D场景 3D scene
 │   │   │   ├── Molecule.jsx     # 分子渲染和3js分子性质 Molecule rendering and 3js molecule properties
 │   │   │   └── Breaker.jsx      # 场景底部的容器（烧杯） Container at the bottom of the scene
@@ -56,26 +59,33 @@ chemical-reaction-3d/
 │   │       ├── Panel.jsx        # 信息面板 Information panel
 │   │       └── LanguageSwitch.jsx # 语言切换 Language switch
 │   ├── models/          # 分子和原子模型 Molecules and atoms models
-│   │   ├── atoms/       # 原子基类和具体实现 Atom base class and implementation
-│   │   │   ├── BaseAtom.ts # 原子基类
-│   │   │   ├── Hydrogen.ts # 氢原子
+│   │   ├── atoms/       # 原子基类和具体实现 Atoms base class and specific implementations
+│   │   │   ├── BaseAtom.ts     # 原子基类 Atoms base class 
+│   │   │   ├── H.ts            # 氢原子 Hydrogen atom
+│   │   │   ├── O.ts            # 氧原子 Oxygen atom
+│   │   │   ├── N.ts            # 氮原子 Nitrogen atom
+│   │   │   ├── Cl.ts           # 氯原子 Chlorine atom
 │   │   │   └── ...
-│   │   └── molecules/   # 分子基类和具体实现 Molecule base class and implementation
-│   │       ├── BaseMolecule.ts # 分子基类
-│   │       ├── WaterMolecule.ts # 水分子
+│   │   └── molecules/   # 分子基类和具体实现 Molecules base class and specific implementations
+│   │       ├── BaseMolecule.ts # 分子基类 Molecules base class
+│   │       ├── H2O.ts          # 水分子 Water molecule
+│   │       ├── NH3.ts          # 氨分子 Ammonia molecule
+│   │       ├── HCl.ts          # 氯化氢分子 Hydrochloric acid molecule
+│   │       ├── H2O2.ts         # 过氧化氢分子 Hydrogen peroxide molecule
+│   │       ├── HClO.ts         # 次氯酸分子 Hypochlorous acid molecule
 │   │       └── ...
 │   ├── hooks/           # 自定义React hooks Custom React hooks
 │   ├── pages/           # 页面组件 Page components
 │   ├── store/           # 状态管理 State management
-│   │   └── simulationStore.js # 对场景中的分子进行增加、删除等操作的接口 Interface for adding, deleting, etc. molecules in the scene
+│   │   └── simulationStore.js # 对场景中的分子进行增加、删除等操作的接口 Interface for adding, deleting molecules in the scene
 │   ├── utils/           # 工具函数 Utility functions
-│   │   ├── constants.js # 常量 
+│   │   ├── constants.js # 常量 Constants
 │   │   └── moleculeHelpers.js # 分子辅助函数 Molecule helper functions
 │   ├── i18n/           # 国际化语言工具 Internationalization language tools
-│   │   ├── config.js # 国际化配置文件
-│   │   └── locales/ # 国际化语言文件
-│   └── context/        # React Context 
-│       └── SimulationContext.jsx #simulation 状态文件
+│   │   ├── config.js   # 国际化配置文件 Internationalization configuration file
+│   │   └── locales/    # 国际化语言文件 Internationalization language files
+│   └── context/        
+│       └── SimulationContext.jsx # simulation 状态文件 Simulation state file
 └── ...
 ```
 
@@ -170,7 +180,7 @@ Navigate to src/models/atoms and check if the required atoms already exist:
 - If needed, create a new atom class that extends BaseAtom.ts
 - Define all required physical and chemical properties as specified in BaseAtom.ts
 
-### 2. Create Molecule Models
+### 2. Create molecule models
 Create new molecule classes in src/models/molecules following BaseMolecule.ts structure:
 
 ```typescript
@@ -189,7 +199,7 @@ export class YourMolecule extends BaseMolecule {
 
     constructor(position?: Vector3, rotation?: Vector3) {
         super(
-            'XX2',              // Molecular formula
+            'XX2',             // Molecular formula
             0.00,              // Molecular mass g/mol
             0.00,              // Density g/cm³
             position,
@@ -227,7 +237,7 @@ export class YourMolecule extends BaseMolecule {
 }
 ```
 
-### 3. Import Molecule Class and Add Molecule Creation Handler
+### 3. Import molecule class and add molecule creation handler
 In src/components/ui/Controls.jsx:
 
 ```javascript
@@ -258,7 +268,7 @@ const handleAddNewMolecule = () => {
 </button>
 ```
 
-### 4. Register New Molecule and Add Reaction Rules and Product Handling
+### 4. Register new molecule and add reaction rules and product handling
 In src/components/three/Scene.jsx:
 ```javascript
 // 1. Import new molecule:
@@ -309,16 +319,22 @@ const checkReactionPossibility = () => {
 };
 ```
 
-### 5. Testing and Validation
+### 5. Testing and validation
 - When the reactant conditions meet the chemical reaction conditions, add any 1 more new molecule to the scene to trigger the reaction, and the reaction will occur
 - The new molecule renders correctly in the 3D scene
 - Chemical reactions proceed as expected
 - Collision detection works properly
 - Physics simulation behaves correctly with the new molecule
 
-## 📄 License
+## 📄 MIT License
 
-This project is licensed under the MIT License
+Copyright <2024> <Hongyuan Wang>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## 👥 Authors
 

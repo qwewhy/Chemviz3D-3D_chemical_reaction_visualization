@@ -1,14 +1,14 @@
 import { Vector3 } from 'three';
 import { BaseMolecule } from './BaseMolecule';
-import { HydrogenAtom } from '../atoms/HydrogenAtom';
-import { ChlorineAtom } from '../atoms/ChlorineAtom';
-import { OxygenAtom } from '../atoms/OxygenAtom';
+import { H } from '../atoms/H';
+import { O } from '../atoms/O';
+import { Cl } from '../atoms/Cl';
 
 /**
- * HypochlorousAcid represents HClO molecule structure and properties
+ * HClO represents HClO molecule structure and properties
  * 次氯酸分子(HClO)的结构与性质
  */
-export class HypochlorousAcid extends BaseMolecule {
+export class HClO extends BaseMolecule {
     /**
      * H-O-Cl bond angle in degrees
      * 氢-氧-氯键角(度)
@@ -28,68 +28,58 @@ export class HypochlorousAcid extends BaseMolecule {
     readonly cloBondLength: number = 1.69;
 
     /**
-     * The chlorine atom
-     * 氯原子
+     * The hydrogen atom
+     * 氢原子
      */
-    chlorineAtom: ChlorineAtom;
+    hydrogenAtom: H;
 
     /**
      * The oxygen atom
      * 氧原子
      */
-    oxygenAtom: OxygenAtom;
+    oxygenAtom: O;
 
     /**
-     * The hydrogen atom
-     * 氢原子
+     * The chlorine atom
+     * 氯原子
      */
-    hydrogenAtom: HydrogenAtom;
+    chlorineAtom: Cl;
 
-    /**
-     * Creates a hypochlorous acid molecule at specified position and rotation
-     * 在指定位置和旋转角度创建次氯酸分子
-     * @param position - 3D position vector (三维位置向量)
-     * @param rotation - 3D rotation vector (三维旋转向量)
-     */
     constructor(position?: Vector3, rotation?: Vector3) {
         super(
             'HClO',             // Molecular formula (分子式)
-            52.46,             // Molecular mass g/mol (分子量 克/摩尔)
+            52.457,             // Molecular mass g/mol (分子量 克/摩尔)
             1.003,             // Density g/cm³ at 20°C (密度 克/立方厘米，在20°C时)
             position,
             rotation
         );
 
         // Initialize atoms (初始化原子)
-        this.chlorineAtom = new ChlorineAtom();
-        this.oxygenAtom = new OxygenAtom();
-        this.hydrogenAtom = new HydrogenAtom();
+        this.hydrogenAtom = new H();
+        this.oxygenAtom = new O();
+        this.chlorineAtom = new Cl();
 
         // Add atoms to the molecule
-        this.atoms = [this.chlorineAtom, this.oxygenAtom, this.hydrogenAtom];
+        this.atoms = [this.hydrogenAtom, this.oxygenAtom, this.chlorineAtom];
         
         this.updateAtomicPositions();
     }
 
-    /**
-     * Updates positions of all atoms in the hypochlorous acid molecule
-     * 更新次氯酸分子中所有原子的位置
-     */
     updateAtomicPositions(): void {
-        // Place oxygen atom at molecule center
+        // 氧原子在中心
         this.oxygenAtom.setPosition(this.position.clone());
-
-        // Position chlorine atom along the x-axis
+    
+        // 氯原子位置
         this.chlorineAtom.setPosition(new Vector3(
             this.position.x + this.cloBondLength,
             this.position.y,
             this.position.z
         ));
-
-        // Calculate hydrogen position using bond angle and length
+    
+        // 氢原子位置(
         const angleRad = (this.bondAngle * Math.PI) / 180;
         this.hydrogenAtom.setPosition(new Vector3(
-            this.position.x + this.ohBondLength * Math.cos(angleRad),
+            this.position.x - this.ohBondLength * Math.cos(angleRad),
             this.position.y + this.ohBondLength * Math.sin(angleRad),
             this.position.z
         ));
@@ -138,4 +128,4 @@ export class HypochlorousAcid extends BaseMolecule {
             this.hydrogenAtom.setPosition(rotatePoint(this.hydrogenAtom.position, centerPos));
         }
     }
-}
+} 

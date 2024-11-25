@@ -1,7 +1,7 @@
 import { BaseAtom } from './BaseAtom';
 import { Vector3 } from 'three';
 
-export class NitrogenAtom extends BaseAtom {
+export class N extends BaseAtom {
   constructor(position?: Vector3) {
     super(
       7,                    // 原子序数 atomicNumber
@@ -17,4 +17,4 @@ export class NitrogenAtom extends BaseAtom {
       position             // 位置 position
     );
   }
-}
+} 

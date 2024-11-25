@@ -1,14 +1,14 @@
 import { Vector3 } from 'three';
 import { BaseMolecule } from './BaseMolecule';
-import { HydrogenAtom } from '../atoms/HydrogenAtom';
-import { OxygenAtom } from '../atoms/OxygenAtom';
-import { NitrogenAtom } from '../atoms/NitrogenAtom';
+import { H } from '../atoms/H';
+import { O } from '../atoms/O';
+import { N } from '../atoms/N';
 
 /**
- * AmmoniaHydrate represents NH3·H2O molecule structure and properties
+ * NH3H2O represents NH3·H2O molecule structure and properties
  * 一水合氨分子(NH3·H2O)的结构与性质
  */
-export class AmmoniaHydrate extends BaseMolecule {
+export class NH3H2O extends BaseMolecule {
     /**
      * H-N-H bond angle in ammonia part (degrees)
      * 氨部分的氢-氮-氢键角(度)
@@ -45,32 +45,26 @@ export class AmmoniaHydrate extends BaseMolecule {
      * Center nitrogen atom
      * 中心氮原子
      */
-    nitrogenAtom: NitrogenAtom;
+    nitrogenAtom: N;
 
     /**
      * Oxygen atom from water
      * 水分子中的氧原子
      */
-    oxygenAtom: OxygenAtom;
+    oxygenAtom: O;
 
     /**
      * Three hydrogen atoms bonded to nitrogen
      * 与氮原子成键的三个氢原子
      */
-    nitrogenHydrogens: HydrogenAtom[];
+    nitrogenHydrogens: H[];
 
     /**
      * Two hydrogen atoms from water
      * 水分子中的两个氢原子
      */
-    oxygenHydrogens: HydrogenAtom[];
+    oxygenHydrogens: H[];
 
-    /**
-     * Creates an ammonia hydrate molecule at specified position and rotation
-     * 在指定位置和旋转角度创建一水合氨分子
-     * @param position - 3D position vector (三维位置向量)
-     * @param rotation - 3D rotation vector (三维旋转向量)
-     */
     constructor(position?: Vector3, rotation?: Vector3) {
         super(
             'NH3·H2O',         // Molecular formula (分子式)
@@ -81,20 +75,20 @@ export class AmmoniaHydrate extends BaseMolecule {
         );
 
         // Initialize atoms (初始化原子)
-        this.nitrogenAtom = new NitrogenAtom();
-        this.oxygenAtom = new OxygenAtom();
+        this.nitrogenAtom = new N();
+        this.oxygenAtom = new O();
         
         // Initialize hydrogen atoms for NH3 part
         this.nitrogenHydrogens = [
-            new HydrogenAtom(),
-            new HydrogenAtom(),
-            new HydrogenAtom()
+            new H(),
+            new H(),
+            new H()
         ];
 
         // Initialize hydrogen atoms for H2O part
         this.oxygenHydrogens = [
-            new HydrogenAtom(),
-            new HydrogenAtom()
+            new H(),
+            new H()
         ];
 
         // Combine all atoms into the molecule
@@ -108,10 +102,6 @@ export class AmmoniaHydrate extends BaseMolecule {
         this.updateAtomicPositions();
     }
 
-    /**
-     * Updates positions of all atoms in the ammonia hydrate molecule
-     * 更新一水合氨分子中所有原子的位置
-     */
     updateAtomicPositions(): void {
         // Place nitrogen at molecule center
         this.nitrogenAtom.setPosition(this.position.clone());
@@ -155,4 +145,4 @@ export class AmmoniaHydrate extends BaseMolecule {
             this.oxygenAtom.position.z
         ));
     }
-}
+} 

@@ -5,12 +5,17 @@ import Beaker from './Beaker';
 import { useSimulationStore } from '../../store/simulationStore';
 import { Physics } from '@react-three/cannon';
 import { useEffect, useState, useRef } from 'react';
-import { WaterMolecule } from '../../models/molecules/WaterMolecule';
-import { AmmoniaMolecule } from '../../models/molecules/AmmoniaMolecule';
-import { AmmoniaHydrate } from '../../models/molecules/AmmoniaHydrate';
-import { HypochlorousAcid } from '../../models/molecules/HypochlorousAcid';
-import { HydrochloricAcid } from '../../models/molecules/HydrochloricAcid';
-import { NitrogenMolecule } from '../../models/molecules/NitrogenMolecule';
+
+import { H2O } from '../../models/molecules/H2O';
+import { O2 } from '../../models/molecules/O2';
+import { H2O2 } from '../../models/molecules/H2O2';
+import { H2 } from '../../models/molecules/H2';
+import { NH3 } from '../../models/molecules/NH3';
+import { NH3H2O } from '../../models/molecules/NH3H2O';
+import { Cl2 } from '../../models/molecules/Cl2';
+import { HCl } from '../../models/molecules/HCl';
+import { HClO } from '../../models/molecules/HClO';
+import { N2 } from '../../models/molecules/N2';
 
 /**
  * Main 3D scene component for molecular simulation
@@ -64,6 +69,16 @@ const Scene = ({ mountKey }) => {
       reactants: { 'NH3': 2, 'Cl2': 3 },
       products: { 'N2': 1, 'HCl': 6 },
       name: 'ammonia and chlorine to nitrogen and hydrochloric acid'
+    },
+    {
+      reactants: { 'H2O': 2, 'O2': 1 },
+      products: { 'H2O2': 2 },
+      name: 'water and oxygen to hydrogen peroxide'
+    },
+    {
+      reactants: { 'H2': 2, 'O2': 1 },
+      products: { 'H2O': 2 },
+      name: 'hydrogen and oxygen to water'
     }
   ];
 
@@ -112,30 +127,42 @@ const Scene = ({ mountKey }) => {
           }
         });
         
-        // 一次性创建所有生成物
-        // Create all products at once
+        // 创建所有生成物
+        // Create all products
         const allNewMolecules = [];
         for (const [product, count] of Object.entries(rule.products)) {
           for (let i = 0; i < count; i++) {
             let newMolecule;
             switch (product) {
               case 'NH4OH':
-                newMolecule = new AmmoniaHydrate();
+                newMolecule = new NH3H2O();
                 break;
               case 'H2O':
-                newMolecule = new WaterMolecule();
+                newMolecule = new H2O();
                 break;
               case 'NH3':
-                newMolecule = new AmmoniaMolecule();
+                newMolecule = new NH3();
                 break;
               case 'HClO':
-                newMolecule = new HypochlorousAcid();
+                newMolecule = new HClO();
                 break;
               case 'HCl':
-                newMolecule = new HydrochloricAcid();
+                newMolecule = new HCl();
                 break;
               case 'N2':
-                newMolecule = new NitrogenMolecule();
+                newMolecule = new N2();
+                break;
+              case 'H2O2':
+                newMolecule = new H2O2();
+                break;
+              case 'H2':
+                newMolecule = new H2();
+                break;
+              case 'O2':
+                newMolecule = new O2();
+                break;
+              case 'Cl2':
+                newMolecule = new Cl2();
                 break;
               default:
                 console.warn(`unknown product: ${product}`);

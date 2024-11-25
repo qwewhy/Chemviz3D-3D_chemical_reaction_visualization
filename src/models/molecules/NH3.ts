@@ -1,13 +1,13 @@
 import { Vector3 } from 'three';
 import { BaseMolecule } from './BaseMolecule';
-import { HydrogenAtom } from '../atoms/HydrogenAtom';
-import { NitrogenAtom } from '../atoms/NitrogenAtom';
+import { H } from '../atoms/H';
+import { N } from '../atoms/N';
 
 /**
- * AmmoniaMolecule represents NH3 molecule structure and properties
+ * NH3 represents NH3 molecule structure and properties
  * 氨气分子(NH3)的结构与性质
  */
-export class AmmoniaMolecule extends BaseMolecule {
+export class NH3 extends BaseMolecule {
     /**
      * H-N-H bond angle in degrees
      * 氢-氮-氢键角(度)
@@ -36,20 +36,14 @@ export class AmmoniaMolecule extends BaseMolecule {
      * Center nitrogen atom
      * 中心氮原子
      */
-    nitrogenAtom: NitrogenAtom;
+    nitrogenAtom: N;
 
     /**
      * Three hydrogen atoms
      * 三个氢原子
      */
-    hydrogenAtoms: HydrogenAtom[];
+    hydrogenAtoms: H[];
 
-    /**
-     * Creates an ammonia molecule at specified position and rotation
-     * 在指定位置和旋转角度创建氨气分子
-     * @param position - 3D position vector (三维位置向量)
-     * @param rotation - 3D rotation vector (三维旋转向量)
-     */
     constructor(position?: Vector3, rotation?: Vector3) {
         super(
             'NH3',              // Molecular formula (分子式)
@@ -60,21 +54,17 @@ export class AmmoniaMolecule extends BaseMolecule {
         );
 
         // Initialize atoms (初始化原子)
-        this.nitrogenAtom = new NitrogenAtom();
+        this.nitrogenAtom = new N();
         this.hydrogenAtoms = [
-            new HydrogenAtom(),
-            new HydrogenAtom(),
-            new HydrogenAtom()
+            new H(),
+            new H(),
+            new H()
         ];
 
         this.atoms = [this.nitrogenAtom, ...this.hydrogenAtoms];
         this.updateAtomicPositions();
     }
 
-    /**
-     * Updates positions of all atoms in the ammonia molecule
-     * 更新氨气分子中所有原子的位置
-     */
     updateAtomicPositions(): void {
         // Place nitrogen at molecule center (将氮原子置于分子中心)
         this.nitrogenAtom.setPosition(this.position.clone());
@@ -98,4 +88,4 @@ export class AmmoniaMolecule extends BaseMolecule {
             ));
         }
     }
-}
+} 

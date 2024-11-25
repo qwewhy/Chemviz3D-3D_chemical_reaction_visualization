@@ -1,13 +1,13 @@
 import { Vector3 } from 'three';
 import { BaseMolecule } from './BaseMolecule';
-import { HydrogenAtom } from '../atoms/HydrogenAtom';
-import { ChlorineAtom } from '../atoms/ChlorineAtom';
+import { H } from '../atoms/H';
+import { Cl } from '../atoms/Cl';
 
 /**
- * HydrochloricAcid represents HCl molecule structure and properties
+ * HCl represents HCl molecule structure and properties
  * 氯化氢分子(HCl)的结构与性质
  */
-export class HydrochloricAcid extends BaseMolecule {
+export class HCl extends BaseMolecule {
     /**
      * H-Cl bond length in Angstroms
      * 氢-氯键长(埃)
@@ -30,32 +30,26 @@ export class HydrochloricAcid extends BaseMolecule {
      * The hydrogen atom
      * 氢原子
      */
-    hydrogenAtom: HydrogenAtom;
+    hydrogenAtom: H;
 
     /**
      * The chlorine atom
      * 氯原子
      */
-    chlorineAtom: ChlorineAtom;
+    chlorineAtom: Cl;
 
-    /**
-     * Creates a hydrochloric acid molecule at specified position and rotation
-     * 在指定位置和旋转角度创建氯化氢分子
-     * @param position - 3D position vector (三维位置向量)
-     * @param rotation - 3D rotation vector (三维旋转向量)
-     */
     constructor(position?: Vector3, rotation?: Vector3) {
         super(
             'HCl',             // Molecular formula (分子式)
-            36.46,            // Molecular mass g/mol (分子量 克/摩尔)
+            36.458,            // Molecular mass g/mol (分子量 克/摩尔)
             1.49,             // Density g/cm³ at -85.05°C (密度 克/立方厘米，在-85.05°C时)
             position,
             rotation
         );
 
         // Initialize atoms (初始化原子)
-        this.hydrogenAtom = new HydrogenAtom();
-        this.chlorineAtom = new ChlorineAtom();
+        this.hydrogenAtom = new H();
+        this.chlorineAtom = new Cl();
 
         // Add atoms to the molecule
         this.atoms = [this.hydrogenAtom, this.chlorineAtom];
@@ -63,10 +57,6 @@ export class HydrochloricAcid extends BaseMolecule {
         this.updateAtomicPositions();
     }
 
-    /**
-     * Updates positions of all atoms in the hydrochloric acid molecule
-     * 更新氯化氢分子中所有原子的位置
-     */
     updateAtomicPositions(): void {
         // Place hydrogen atom at half bond length before center
         this.hydrogenAtom.setPosition(new Vector3(
@@ -134,4 +124,4 @@ export class HydrochloricAcid extends BaseMolecule {
             ));
         }
     }
-}
+} 

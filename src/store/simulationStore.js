@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { WaterMolecule } from '../models/molecules/WaterMolecule';
+import { H2O } from '../models/molecules/H2O';
 import { Vector3 } from 'three';
 
 export const useSimulationStore = create((set) => ({

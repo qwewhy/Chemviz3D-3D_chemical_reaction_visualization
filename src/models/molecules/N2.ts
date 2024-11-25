@@ -1,81 +1,64 @@
 import { Vector3 } from 'three';
 import { BaseMolecule } from './BaseMolecule';
-import { ChlorineAtom } from '../atoms/ChlorineAtom';
+import { N } from '../atoms/N';
 
 /**
- * ChlorineMolecule represents Cl2 molecule structure and properties
- * 氯气分子(Cl2)的结构与性质
+ * N2 represents N2 molecule structure and properties
+ * 氮气分子(N2)的结构与性质
  */
-export class ChlorineMolecule extends BaseMolecule {
+export class N2 extends BaseMolecule {
     /**
-     * Cl-Cl bond length in Angstroms
-     * 氯-氯键长(埃)
+     * N-N triple bond length in Angstroms
+     * 氮-氮三重键键长(埃)
      */
-    readonly bondLength: number = 1.99;
+    readonly bondLength: number = 1.098;
 
     /**
      * Boiling point in Celsius
      * 沸点(摄氏度)
      */
-    readonly boilingPoint: number = -34.04;
+    readonly boilingPoint: number = -195.79;
 
     /**
      * Melting point in Celsius
      * 熔点(摄氏度)
      */
-    readonly meltingPoint: number = -101.5;
+    readonly meltingPoint: number = -210.01;
 
     /**
-     * First chlorine atom
-     * 第一个氯原子
+     * Nitrogen atoms
+     * 氮原子
      */
-    chlorineAtom1: ChlorineAtom;
+    nitrogenAtoms: N[];
 
-    /**
-     * Second chlorine atom
-     * 第二个氯原子
-     */
-    chlorineAtom2: ChlorineAtom;
-
-    /**
-     * Creates a chlorine molecule at specified position and rotation
-     * 在指定位置和旋转角度创建氯气分子
-     * @param position - 3D position vector (三维位置向量)
-     * @param rotation - 3D rotation vector (三维旋转向量)
-     */
     constructor(position?: Vector3, rotation?: Vector3) {
         super(
-            'Cl2',              // Molecular formula (分子式)
-            70.90,             // Molecular mass g/mol (分子量 克/摩尔)
-            3.214,             // Density g/cm³ at -34.04°C (密度 克/立方厘米，在-34.04°C时)
+            'N2',               // Molecular formula (分子式)
+            28.014,            // Molecular mass g/mol (分子量 克/摩尔)
+            1.2506,            // Density g/L at 0°C, 1 atm (密度 克/升，在0°C，1个标准大气压下)
             position,
             rotation
         );
 
         // Initialize atoms (初始化原子)
-        this.chlorineAtom1 = new ChlorineAtom();
-        this.chlorineAtom2 = new ChlorineAtom();
+        this.nitrogenAtoms = [new N(), new N()];
 
         // Add atoms to the molecule
-        this.atoms = [this.chlorineAtom1, this.chlorineAtom2];
+        this.atoms = this.nitrogenAtoms;
         
         this.updateAtomicPositions();
     }
 
-    /**
-     * Updates positions of all atoms in the chlorine molecule
-     * 更新氯气分子中所有原子的位置
-     */
     updateAtomicPositions(): void {
-        // Place first chlorine atom at half bond length before center
-        this.chlorineAtom1.setPosition(new Vector3(
+        // Place first nitrogen atom at half bond length before center
+        this.nitrogenAtoms[0].setPosition(new Vector3(
             this.position.x - this.bondLength / 2,
             this.position.y,
             this.position.z
         ));
 
-        // Place second chlorine atom at half bond length after center
-        this.chlorineAtom2.setPosition(new Vector3(
+        // Place second nitrogen atom at half bond length after center
+        this.nitrogenAtoms[1].setPosition(new Vector3(
             this.position.x + this.bondLength / 2,
             this.position.y,
             this.position.z
@@ -85,8 +68,8 @@ export class ChlorineMolecule extends BaseMolecule {
         if (this.rotation.length() > 0) {
             // Create rotation matrix around center
             const rotationMatrix = new Vector3().subVectors(
-                this.chlorineAtom2.position,
-                this.chlorineAtom1.position
+                this.nitrogenAtoms[1].position,
+                this.nitrogenAtoms[0].position
             );
             
             // Rotate around x-axis
@@ -120,17 +103,17 @@ export class ChlorineMolecule extends BaseMolecule {
             }
 
             // Apply rotated positions
-            this.chlorineAtom1.setPosition(new Vector3(
+            this.nitrogenAtoms[0].setPosition(new Vector3(
                 this.position.x - rotationMatrix.x / 2,
                 this.position.y - rotationMatrix.y / 2,
                 this.position.z - rotationMatrix.z / 2
             ));
 
-            this.chlorineAtom2.setPosition(new Vector3(
+            this.nitrogenAtoms[1].setPosition(new Vector3(
                 this.position.x + rotationMatrix.x / 2,
                 this.position.y + rotationMatrix.y / 2,
                 this.position.z + rotationMatrix.z / 2
             ));
         }
     }
-}
+} 
