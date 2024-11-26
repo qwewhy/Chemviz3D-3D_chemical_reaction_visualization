@@ -169,10 +169,7 @@ The application is fully responsive and supports:
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-### Code Style Guidelines
-
-1. File Headers Format:
+6. File Headers Format:
 ```typescript
 /**
  * @file filename.jsx - Brief description
@@ -184,6 +181,7 @@ The application is fully responsive and supports:
  * Detailed description of the file's purpose and functionality.
  * Multiple lines are allowed for complex explanations.
  */
+```
 
 ## 🧪 add new chemical reaction
 
