@@ -1,3 +1,12 @@
+/**
+ * @file H2O2.ts
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the H2O2 (Hydrogen peroxide) molecule class, providing
+ * atomic structure, bond properties and 3D positioning calculations.
+ */
+
 import { Vector3 } from 'three';
 import { BaseMolecule } from './BaseMolecule';
 import { H } from '../atoms/H';

@@ -1,3 +1,20 @@
+/**
+ * @file simulationStore.js - Global State Management for Chemistry Simulation
+ * @author Hongyuan Wang <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 Hongyuan Wang
+ * @license MIT
+ * @description
+ * Zustand store implementation for managing the global state of the chemistry
+ * simulation application. Manages:
+ * - Molecule collection and manipulation (add, delete, clear)
+ * - Molecule selection state
+ * - Reaction progress tracking
+ * - Simulation running state
+ * 
+ * Provides a centralized state management solution with atomic updates
+ * and real-time synchronization across components.
+ */
+
 import { create } from 'zustand';
 import { H2O } from '../models/molecules/H2O';
 import { Vector3 } from 'three';

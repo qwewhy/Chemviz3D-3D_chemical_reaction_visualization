@@ -1,3 +1,11 @@
+/**
+ * @file Simulator.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the Simulator page component, providing a simulation Page.
+ */
+
 import { useState, useCallback } from 'react';
 import Scene from '../components/three/Scene';
 import Controls from '../components/ui/Controls';

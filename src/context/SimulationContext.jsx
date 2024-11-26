@@ -1,3 +1,15 @@
+/**
+ * @file SimulationContext.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description  * A React Context provider that manages global simulation state for the
+ * chemistry visualization application. Handles core simulation parameters including:
+ * - Simulation running state
+ * - Simulation speed control
+ * - Temperature and pressure values
+ */
+
 import { createContext, useContext, useState } from 'react';
 
 const SimulationContext = createContext(null);

@@ -1,3 +1,11 @@
+/**
+ * @file LanguageSwitch.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the LanguageSwitch component, providing a language switch with i18n support.
+ */
+
 import { useTranslation } from 'react-i18next';
 import { Menu } from '@headlessui/react';
 

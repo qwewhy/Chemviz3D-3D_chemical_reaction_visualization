@@ -1,3 +1,11 @@
+/**
+ * @file index.css
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the global styles for the application.
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

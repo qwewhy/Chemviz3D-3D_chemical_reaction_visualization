@@ -1,4 +1,4 @@
-# Chemical Reaction 3D Visualization
+# Chemical Reaction 3D Visualization V1.1.1
 
 <p align="center">
   <img src="public/chemistry-3d-logo.svg" alt="Project Logo" width="200"/>
@@ -170,6 +170,21 @@ The application is fully responsive and supports:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+### Code Style Guidelines
+
+1. File Headers Format:
+```typescript
+/**
+ * @file filename.jsx - Brief description
+ * @author1 Original Author <email@example.com>
+ * @author2 Contributor Name <email@example.com> (if applicable)
+ * @copyright Copyright (c) 2024 Original Author
+ * @license MIT
+ * @description
+ * Detailed description of the file's purpose and functionality.
+ * Multiple lines are allowed for complex explanations.
+ */
+
 ## 🧪 add new chemical reaction
 
 To add new chemical reactions to the system, please follow these detailed steps:
@@ -336,8 +351,16 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-## 👥 Authors
+## 👥 Authors and Contributors
 
-- Hongyuan Wang
+### Original Author
+- **Hongyuan Wang** - *Initial work & Core Development* - <HW8545626@gmail.com>
+  - Project architecture design
+  - Core functionality implementation
+  - 3D visualization system
+  - Molecule reaction simulation engine
+  - Basic Atom and Molecule models
+  - UI/UX design and implementation
+  - Documentation
 
 <p align="center">Made with ❤️ for chemistry education</p>

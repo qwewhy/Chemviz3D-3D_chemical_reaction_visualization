@@ -1,3 +1,18 @@
+/**
+ * @file Controls.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description * A React component that provides a comprehensive control interface for the
+ * chemical reaction simulation. Features include:
+ * - Molecule addition buttons for different chemical species (H2O, NH3, Cl2, etc.)
+ * - Temperature and pressure control sliders with real-time updates
+ * - Simulation reset functionality
+ * - Molecule counter display
+ * - Internationalization support for multiple languages
+ * - Random positioning system for new molecules
+ */
+
 // Controls组件：模拟控制面板
 // Controls component: Simulation control panel
 import { useTranslation } from 'react-i18next';

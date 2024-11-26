@@ -1,3 +1,12 @@
+/**
+ * @file O.ts
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the O (Oxygen) atom class, providing
+ * atomic properties and 3D positioning calculations.
+ */
+
 import { BaseAtom } from './BaseAtom';
 import { Vector3 } from 'three';
 
