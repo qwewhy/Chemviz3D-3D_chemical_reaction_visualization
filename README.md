@@ -183,7 +183,7 @@ The application is fully responsive and supports:
  */
 ```
 
-## 🧪 add new chemical reaction
+## 🧪 Add new chemical reaction
 
 To add new chemical reactions to the system, please follow these detailed steps:
 

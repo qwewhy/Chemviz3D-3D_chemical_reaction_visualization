@@ -1,6 +1,6 @@
 /**
  * @file Controls.jsx
- * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @author1 [Hongyuan Wang] <HW8545626@gmail.com>
  * @copyright Copyright (c) 2024 [Hongyuan Wang]
  * @license MIT
  * @description * A React component that provides a comprehensive control interface for the
@@ -15,22 +15,21 @@
 
 // Controls组件：模拟控制面板
 // Controls component: Simulation control panel
-import { useTranslation } from 'react-i18next';
-import { useSimulationStore } from '../../store/simulationStore';
-import { Vector3 } from 'three';
-import { useCallback } from 'react';
+import { useTranslation } from "react-i18next";
+import { useSimulationStore } from "../../store/simulationStore";
+import { Vector3 } from "three";
+import { useCallback, useState, useEffect } from "react";
 
-import { NH3H2O } from '../../models/molecules/NH3H2O';
-import { NH3 } from '../../models/molecules/NH3';
-import { Cl2 } from '../../models/molecules/Cl2';
-import { HClO } from '../../models/molecules/HClO';
-import { HCl } from '../../models/molecules/HCl';
-import { N2 } from '../../models/molecules/N2';
-import { H2O } from '../../models/molecules/H2O';
-import { O2 } from '../../models/molecules/O2';
-import { H2O2 } from '../../models/molecules/H2O2';
-import { H2 } from '../../models/molecules/H2';
-
+import { NH3H2O } from "../../models/molecules/NH3H2O";
+import { NH3 } from "../../models/molecules/NH3";
+import { Cl2 } from "../../models/molecules/Cl2";
+import { HClO } from "../../models/molecules/HClO";
+import { HCl } from "../../models/molecules/HCl";
+import { N2 } from "../../models/molecules/N2";
+import { H2O } from "../../models/molecules/H2O";
+import { O2 } from "../../models/molecules/O2";
+import { H2O2 } from "../../models/molecules/H2O2";
+import { H2 } from "../../models/molecules/H2";
 
 const Controls = ({
   onReset,
@@ -41,11 +40,13 @@ const Controls = ({
   onForceReset,
 }) => {
   const { t } = useTranslation();
-  const { addMolecule, molecules, clearMolecules } = useSimulationStore(state => ({
-    addMolecule: state.addMolecule,
-    molecules: state.molecules,
-    clearMolecules: state.clearMolecules
-  }));
+  const { addMolecule, molecules, clearMolecules } = useSimulationStore(
+    (state) => ({
+      addMolecule: state.addMolecule,
+      molecules: state.molecules,
+      clearMolecules: state.clearMolecules,
+    })
+  );
 
   // adds water molecule / 添加水分子
   // if src\components\three\Beaker.jsx has changed, the randomX should be changed accordingly
@@ -55,37 +56,42 @@ const Controls = ({
       // Random position at the top of the beaker
       const randomX = (Math.random() - 0.5) * 6;
       const waterMolecule = new H2O(
-        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX) // 水分子在容器顶部随机位置 water molecule at random position at the top of the container
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX) // 水分子在容器顶部随机位置 water molecule at random position at the top of the container
       );
-    
+
       addMolecule(waterMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
   };
+
+  // 分子信息状态跟踪器
+  const [moleculeInfo, setMoleculeInfo] = useState(new Map());
 
   //add hydrogen molecule / 添加氢分子
   const handleAddHydrogenMolecule = () => {
     try {
       const randomX = (Math.random() - 0.5) * 6;
-      const hydrogenMolecule = new H2(new Vector3(randomX, Math.abs(randomX % 3)+4, randomX));//氢分子在容器顶部随机位置 hydrogen molecule at random position at the top of the container
+      const hydrogenMolecule = new H2(
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
+      ); //氢分子在容器顶部随机位置 hydrogen molecule at random position at the top of the container
       addMolecule(hydrogenMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
-  };  
+  };
 
   // adds ammonia hydrate molecule / 添加一水合氨分子
   const handleAddAmmoniaHydrateMolecule = () => {
-     try {
+    try {
       const randomX = (Math.random() - 0.5) * 6;
       const ammoniaHydrateMolecule = new NH3H2O(
-        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX) // 一水合氨分子在容器顶部随机位置 ammonia hydrate molecule at random position at the top of the container
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX) // 一水合氨分子在容器顶部随机位置 ammonia hydrate molecule at random position at the top of the container
       );
       addMolecule(ammoniaHydrateMolecule);
-     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
-     }
+    } catch (error) {
+      console.error("Error creating molecule:", error); // 捕获可能的错误
+    }
   };
 
   // adds ammonia molecule / 添加氨分子
@@ -93,11 +99,11 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const ammoniaMolecule = new NH3(
-        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
       );
       addMolecule(ammoniaMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
   };
 
@@ -106,11 +112,11 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const chlorineMolecule = new Cl2(
-        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
       );
       addMolecule(chlorineMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
   };
 
@@ -119,11 +125,11 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const hypochlorousAcidMolecule = new HClO(
-        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
       );
       addMolecule(hypochlorousAcidMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
   };
 
@@ -132,11 +138,11 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const hydrochloricAcidMolecule = new HCl(
-        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
       );
       addMolecule(hydrochloricAcidMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
   };
 
@@ -145,11 +151,11 @@ const Controls = ({
     try {
       const randomX = (Math.random() - 0.5) * 6;
       const nitrogenMolecule = new N2(
-        new Vector3(randomX, Math.abs(randomX % 3)+4, randomX)
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
       );
       addMolecule(nitrogenMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
   };
 
@@ -157,10 +163,12 @@ const Controls = ({
   const handleAddOxygenMolecule = () => {
     try {
       const randomX = (Math.random() - 0.5) * 6;
-      const oxygenMolecule = new O2(new Vector3(randomX, Math.abs(randomX % 3)+4, randomX));
+      const oxygenMolecule = new O2(
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
+      );
       addMolecule(oxygenMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
   };
 
@@ -168,18 +176,33 @@ const Controls = ({
   const handleAddHydrogenPeroxideMolecule = () => {
     try {
       const randomX = (Math.random() - 0.5) * 6;
-      const hydrogenPeroxideMolecule = new H2O2(new Vector3(randomX, Math.abs(randomX % 3)+4, randomX));
+      const hydrogenPeroxideMolecule = new H2O2(
+        new Vector3(randomX, Math.abs(randomX % 3) + 4, randomX)
+      );
       addMolecule(hydrogenPeroxideMolecule);
     } catch (error) {
-      console.error('Error creating molecule:', error); // 捕获可能的错误
+      console.error("Error creating molecule:", error); // 捕获可能的错误
     }
-  };  
+  };
 
   // 处理完全重置
   const handleCompleteReset = useCallback(() => {
     clearMolecules(); // 清除所有分子
     onForceReset(); // 触发场景重新挂载
   }, [clearMolecules, onForceReset]);
+
+  // useEffect更新分子信息
+  useEffect(() => {
+    const newMoleculeInfo = new Map();
+    molecules.forEach((molecule) => {
+      const moleculeType = molecule.molecularFormula;
+      newMoleculeInfo.set(
+        moleculeType,
+        (newMoleculeInfo.get(moleculeType) || 0) + 1
+      );
+    });
+    setMoleculeInfo(newMoleculeInfo);
+  }, [molecules]);
 
   return (
     <div className="space-y-4">
@@ -189,18 +212,17 @@ const Controls = ({
         className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addWater')} ({molecules.length})
+        {t("simulator.controls.addWater")} ({molecules.length})
       </button>
 
-      {/* 添加氢气分子按钮 / Add Hydrogen Molecule Button */  }
+      {/* 添加氢气分子按钮 / Add Hydrogen Molecule Button */}
       <button
         onClick={handleAddHydrogenMolecule}
         className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addHydrogen')} ({molecules.length})
-      </button> 
-    
+        {t("simulator.controls.addHydrogen")} ({molecules.length})
+      </button>
 
       {/* 添加氨分子按钮 / Add Ammonia Molecule Button */}
       <button
@@ -208,7 +230,7 @@ const Controls = ({
         className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addAmmonia')} ({molecules.length})
+        {t("simulator.controls.addAmmonia")} ({molecules.length})
       </button>
 
       {/* 添加一水合氨分子按钮 / Add Ammonia Hydrate Molecule Button */}
@@ -217,7 +239,7 @@ const Controls = ({
         className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addAmmoniaHydrate')} ({molecules.length})
+        {t("simulator.controls.addAmmoniaHydrate")} ({molecules.length})
       </button>
 
       {/* 添加氯分子按钮 / Add Chlorine Molecule Button */}
@@ -226,7 +248,7 @@ const Controls = ({
         className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addChlorine')} ({molecules.length})
+        {t("simulator.controls.addChlorine")} ({molecules.length})
       </button>
 
       {/* 添加次氯酸分子按钮 / Add Hypochlorous Acid Molecule Button */}
@@ -235,7 +257,7 @@ const Controls = ({
         className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addHypochlorousAcid')} ({molecules.length})
+        {t("simulator.controls.addHypochlorousAcid")} ({molecules.length})
       </button>
 
       {/* 添加氯化氢分子按钮 / Add Hydrochloric Acid Molecule Button */}
@@ -244,7 +266,7 @@ const Controls = ({
         className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addHydrochloricAcid')} ({molecules.length})
+        {t("simulator.controls.addHydrochloricAcid")} ({molecules.length})
       </button>
 
       {/* 添加氮分子按钮 / Add Nitrogen Molecule Button */}
@@ -253,7 +275,7 @@ const Controls = ({
         className="w-full bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg  
           transition-colors mb-4"
       >
-        {t('simulator.controls.addNitrogen')} ({molecules.length})
+        {t("simulator.controls.addNitrogen")} ({molecules.length})
       </button>
 
       {/* 添加氧气分子按钮 / Add Oxygen Molecule Button */}
@@ -262,8 +284,8 @@ const Controls = ({
         className="w-full bg-blue-500 hover:bg-gray-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addOxygen')} ({molecules.length})
-      </button> 
+        {t("simulator.controls.addOxygen")} ({molecules.length})
+      </button>
 
       {/* 添加过氧化氢分子按钮 / Add Hydrogen Peroxide Molecule Button */}
       <button
@@ -271,7 +293,7 @@ const Controls = ({
         className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t('simulator.controls.addHydrogenPeroxide')} ({molecules.length})
+        {t("simulator.controls.addHydrogenPeroxide")} ({molecules.length})
       </button>
 
       {/* 修改重置按钮的点击处理函数 */}
@@ -280,11 +302,11 @@ const Controls = ({
           onClick={handleCompleteReset}
           className="btn bg-gray-500 hover:bg-gray-600 text-white w-full"
         >
-          {t('simulator.controls.reset')}
+          {t("simulator.controls.reset")}
         </button>
       </div>
 
-      {/* 温度控制 / Temperature Control */}
+      {/* 温度控制 / Temperature Control
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
           {t('simulator.controls.temperature')} (K)
@@ -302,9 +324,9 @@ const Controls = ({
           <span>{temperature}K</span>
           <span>373K</span>
         </div>
-      </div>
+      </div> */}
 
-      {/* 压力控制 / Pressure Control */}
+      {/* 压力控制 / Pressure Control
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
           {t('simulator.controls.pressure')} (atm)
@@ -322,19 +344,29 @@ const Controls = ({
           <span>{pressure} atm</span>
           <span>10 atm</span>
         </div>
-      </div>
+      </div> */}
 
       {/* 分子计数器 / Molecule Counter */}
-      <div className="mt-4 p-3 bg-gray-100 rounded-lg">
-        <h3 className="text-sm font-medium text-gray-700 mb-2">
-          {t('simulator.controls.moleculeCount')}
+      <div className="mt-4 p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+        <h3 className="text-base font-semibold text-gray-800 mb-3">
+          {t("simulator.controls.moleculeCount")}
         </h3>
-        <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
-          <div>H₂O: <span>{molecules.length}</span></div>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+          {Array.from(moleculeInfo).map(([type, count]) => (
+            <div
+              key={type}
+              className="flex justify-between items-center py-1 px-2 rounded hover:bg-gray-100"
+            >
+              <span className="text-sm font-medium text-gray-700">{type}</span>
+              <span className="text-sm font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+                {count}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default Controls; 
+export default Controls;
