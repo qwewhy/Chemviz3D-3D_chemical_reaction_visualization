@@ -59,6 +59,8 @@ chemical-reaction-3d/
 │   │       ├── Controls.jsx     # 反应界面右侧的控制面板 Control panel on the right side of the reaction interface
 │   │       ├── Panel.jsx        # 信息面板 Information panel
 │   │       └── LanguageSwitch.jsx # 语言切换 Language switch
+│   ├── data/            # 数据配置文件 Data configuration files
+│   │   └── reactionRules.js    # 化学反应规则配置 Chemical reaction rules configuration
 │   ├── models/          # 分子和原子模型 Molecules and atoms models
 │   │   ├── atoms/       # 原子基类和具体实现 Atoms base class and specific implementations
 │   │   │   ├── BaseAtom.ts     # 原子基类 Atoms base class 
@@ -288,7 +290,7 @@ In src/components/three/Scene.jsx:
 // 1. Import new molecule:
 import { NewMolecule } from '../../models/molecules/NewMolecule';
 
-// 2. Add all reaction rules about all molecules in this project:
+// 2. Add all reaction rules in ‘src\data\reactionRules.js’ about all molecules in this project:
 const reactionRules = [
   {
     reactants: { 'ReactantA': 1, 'ReactantB': 1 },
@@ -303,33 +305,19 @@ const reactionRules = [
   // ... add more reaction rules here
 ];
 
-// 3. Update product handling in checkReactionPossibility:
-const checkReactionPossibility = () => {
-  // ...
-  for (const [product, count] of Object.entries(rule.products)) {
-    for (let i = 0; i < count; i++) {
-      let newMolecule;
-      switch (product) {
-        case 'NH4OH':
-          newMolecule = new AmmoniaHydrate();
-          break;
-        case 'H2O':
-          newMolecule = new WaterMolecule();
-          break;
-        case 'NH3':
-          newMolecule = new AmmoniaMolecule();
-          break;
-        case 'HClO':
-          newMolecule = new HypochlorousAcid();
-          break;
-        // ... add your new product here
-        default:
-          console.warn(`unknown product: ${product}`);
-          continue;
-      }
-      allNewMolecules.push(newMolecule);
-    }
-  }
+// 3. Update add molecule type mapping in src/components/three/Scene.jsx::
+const moleculeClassMap = {
+  'NH3H2O': NH3H2O,
+  'H2O': H2O,
+  'NH3': NH3,
+  'HClO': HClO,
+  'HCl': HCl,
+  'N2': N2,
+  'H2O2': H2O2,
+  'H2': H2,
+  'O2': O2,
+  'Cl2': Cl2,
+  'NH4Cl': NH4Cl,
 };
 ```
 

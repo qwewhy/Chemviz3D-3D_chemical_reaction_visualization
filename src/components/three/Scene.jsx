@@ -30,6 +30,24 @@ import { Cl2 } from '../../models/molecules/Cl2';
 import { HCl } from '../../models/molecules/HCl';
 import { HClO } from '../../models/molecules/HClO';
 import { N2 } from '../../models/molecules/N2';
+import { NH4Cl } from '../../models/molecules/NH4Cl';
+
+import { reactionRules } from '../../data/reactionRules';
+
+// 在文件顶部添加分子类型映射
+const moleculeClassMap = {
+  'NH3H2O': NH3H2O,
+  'H2O': H2O,
+  'NH3': NH3,
+  'HClO': HClO,
+  'HCl': HCl,
+  'N2': N2,
+  'H2O2': H2O2,
+  'H2': H2,
+  'O2': O2,
+  'Cl2': Cl2,
+  'NH4Cl': NH4Cl,
+};
 
 /**
  * Main 3D scene component for molecular simulation
@@ -55,51 +73,6 @@ const Scene = ({ mountKey }) => {
   // 添加一个标志来防止反应循环
   // Add a flag to prevent reaction loops
   const isReacting = useRef(false);
-
-  /**
-   * Define chemical reaction rules
-   * 定义化学反应规则
-   * reactants: Required reactants and their quantities 所需反应物及其数量
-   * products: Products and their quantities 生成物及其数量
-   * name: Reaction name 反应名称
-   */
-  const reactionRules = [
-    {
-      reactants: { 'H2O': 1, 'NH3': 1 },
-      products: { 'NH4OH': 1 },
-      name: 'water and ammonia to ammonia hydrate'
-    },
-    {
-      reactants: { 'H2O': 2, 'Cl2': 1 },
-      products: { 'HClO': 2 },
-      name: 'water and chlorine to hypochlorous acid'
-    },
-    {
-      reactants: { 'H2O': 1, 'HCl': 1 },
-      products: { 'HClO': 1 },
-      name: 'water and hydrochloric acid to hypochlorous acid'
-    },
-    {
-      reactants: { 'NH3': 2, 'Cl2': 3 },
-      products: { 'N2': 1, 'HCl': 6 },
-      name: 'ammonia and chlorine to nitrogen and hydrochloric acid'
-    },
-    {
-      reactants: { 'H2O': 2, 'O2': 1 },
-      products: { 'H2O2': 2 },
-      name: 'water and oxygen to hydrogen peroxide'
-    },
-    {
-      reactants: { 'H2': 2, 'O2': 1 },
-      products: { 'H2O': 2 },
-      name: 'hydrogen and oxygen to water'
-    },
-    {
-      reactants: { 'H2': 1, 'Cl2': 1 },
-      products: { 'HCl': 2 },
-      name: 'hydrogen and chlorine to hydrogen chloride'
-    }
-  ];
 
   /**
    * Check and execute possible chemical reactions
@@ -151,43 +124,12 @@ const Scene = ({ mountKey }) => {
         const allNewMolecules = [];
         for (const [product, count] of Object.entries(rule.products)) {
           for (let i = 0; i < count; i++) {
-            let newMolecule;
-            switch (product) {
-              case 'NH4OH':
-                newMolecule = new NH3H2O();
-                break;
-              case 'H2O':
-                newMolecule = new H2O();
-                break;
-              case 'NH3':
-                newMolecule = new NH3();
-                break;
-              case 'HClO':
-                newMolecule = new HClO();
-                break;
-              case 'HCl':
-                newMolecule = new HCl();
-                break;
-              case 'N2':
-                newMolecule = new N2();
-                break;
-              case 'H2O2':
-                newMolecule = new H2O2();
-                break;
-              case 'H2':
-                newMolecule = new H2();
-                break;
-              case 'O2':
-                newMolecule = new O2();
-                break;
-              case 'Cl2':
-                newMolecule = new Cl2();
-                break;
-              default:
-                console.warn(`unknown product: ${product}`);
-                continue;
+            const MoleculeClass = moleculeClassMap[product];
+            if (!MoleculeClass) {
+              console.warn(`未知的产物类型: ${product}`);
+              continue;
             }
-            allNewMolecules.push(newMolecule);
+            allNewMolecules.push(new MoleculeClass());
           }
         }
 

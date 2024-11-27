@@ -1,3 +1,15 @@
+/**
+ * @file Molecule.jsx
+ * @author1 [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description A React Three Fiber component for interactive 3D molecular visualization.
+ * Implements real-time physics simulation and collision detection for molecules,
+ * renders atoms as spheres and chemical bonds as lines, and handles dynamic
+ * position updates. Supports multiple molecular structures with accurate atomic
+ * positions and bond representations.
+ */
+
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Sphere, Line } from '@react-three/drei';
@@ -71,7 +83,7 @@ const Molecule = ({ molecule }) => {
         {/* Debug collision box / 调试用碰撞箱 */}
         <mesh>
           <boxGeometry args={[1.5, 1.5, 1.5]} />
-          <meshBasicMaterial wireframe color="yellow" opacity={0.2} transparent />
+          <meshBasicMaterial wireframe opacity={0.2} transparent />
         </mesh>
       </group>
 
