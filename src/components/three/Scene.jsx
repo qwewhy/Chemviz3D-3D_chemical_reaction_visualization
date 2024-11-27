@@ -1,3 +1,17 @@
+/**
+ * @file Scene.jsx
+ * @author1 [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description  * A React Three Fiber scene component that implements an interactive 3D chemical
+ * reaction simulation environment. Features include:
+ * - Real-time molecular visualization and physics simulation
+ * - Dynamic chemical reaction system with multiple reaction rules
+ * - Automated reaction detection and product generation
+ * - 3D environment with configurable camera controls
+ * - Physical interactions between molecules in a contained environment
+ */
+
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import Molecule from './Molecule';
@@ -79,6 +93,11 @@ const Scene = ({ mountKey }) => {
       reactants: { 'H2': 2, 'O2': 1 },
       products: { 'H2O': 2 },
       name: 'hydrogen and oxygen to water'
+    },
+    {
+      reactants: { 'H2': 1, 'Cl2': 1 },
+      products: { 'HCl': 2 },
+      name: 'hydrogen and chlorine to hydrogen chloride'
     }
   ];
 
@@ -221,15 +240,15 @@ const Scene = ({ mountKey }) => {
       
       {/* Physics world configuration 物理世界配置 */}
       <Physics
-        gravity={[0, 0, 0]}
-        defaultContactMaterial={{
-          friction: 0.2,
-          restitution: 0.5,
-          contactEquationStiffness: 1e7,
-          contactEquationRelaxation: 1,
+        gravity={[0, 0, 0]} // 重力 
+        defaultContactMaterial={{ 
+          friction: 0.2, // 摩擦力
+          restitution: 0.5, // 恢复系数
+          contactEquationStiffness: 1e7, // 接触方程刚度
+          contactEquationRelaxation: 1, // 接触方程松弛
         }}
-        allowSleep={false}
-        iterations={20}
+        allowSleep={false} // 禁止休眠
+        iterations={20} // 迭代次数
       >
         {/* Beaker container 烧杯容器 */}
         <Beaker />

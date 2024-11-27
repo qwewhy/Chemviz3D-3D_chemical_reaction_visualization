@@ -212,7 +212,7 @@ const Controls = ({
         className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addWater")} ({molecules.length})
+        {t("simulator.controls.addWater")} 
       </button>
 
       {/* 添加氢气分子按钮 / Add Hydrogen Molecule Button */}
@@ -221,7 +221,7 @@ const Controls = ({
         className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addHydrogen")} ({molecules.length})
+        {t("simulator.controls.addHydrogen")} 
       </button>
 
       {/* 添加氨分子按钮 / Add Ammonia Molecule Button */}
@@ -230,7 +230,7 @@ const Controls = ({
         className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addAmmonia")} ({molecules.length})
+        {t("simulator.controls.addAmmonia")} 
       </button>
 
       {/* 添加一水合氨分子按钮 / Add Ammonia Hydrate Molecule Button */}
@@ -239,7 +239,7 @@ const Controls = ({
         className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addAmmoniaHydrate")} ({molecules.length})
+        {t("simulator.controls.addAmmoniaHydrate")} 
       </button>
 
       {/* 添加氯分子按钮 / Add Chlorine Molecule Button */}
@@ -248,7 +248,7 @@ const Controls = ({
         className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addChlorine")} ({molecules.length})
+        {t("simulator.controls.addChlorine")} 
       </button>
 
       {/* 添加次氯酸分子按钮 / Add Hypochlorous Acid Molecule Button */}
@@ -257,7 +257,7 @@ const Controls = ({
         className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addHypochlorousAcid")} ({molecules.length})
+        {t("simulator.controls.addHypochlorousAcid")} 
       </button>
 
       {/* 添加氯化氢分子按钮 / Add Hydrochloric Acid Molecule Button */}
@@ -266,7 +266,7 @@ const Controls = ({
         className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addHydrochloricAcid")} ({molecules.length})
+        {t("simulator.controls.addHydrochloricAcid")}
       </button>
 
       {/* 添加氮分子按钮 / Add Nitrogen Molecule Button */}
@@ -275,7 +275,7 @@ const Controls = ({
         className="w-full bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg  
           transition-colors mb-4"
       >
-        {t("simulator.controls.addNitrogen")} ({molecules.length})
+        {t("simulator.controls.addNitrogen")} 
       </button>
 
       {/* 添加氧气分子按钮 / Add Oxygen Molecule Button */}
@@ -284,7 +284,7 @@ const Controls = ({
         className="w-full bg-blue-500 hover:bg-gray-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addOxygen")} ({molecules.length})
+        {t("simulator.controls.addOxygen")} 
       </button>
 
       {/* 添加过氧化氢分子按钮 / Add Hydrogen Peroxide Molecule Button */}
@@ -293,7 +293,7 @@ const Controls = ({
         className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg
           transition-colors mb-4"
       >
-        {t("simulator.controls.addHydrogenPeroxide")} ({molecules.length})
+        {t("simulator.controls.addHydrogenPeroxide")} 
       </button>
 
       {/* 修改重置按钮的点击处理函数 */}
