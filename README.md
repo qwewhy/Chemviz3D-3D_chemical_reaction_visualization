@@ -12,7 +12,7 @@ An interactive 3D visualization platform for chemical reactions, built with Reac
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 You can use any device with a browser to experience at any time - Computer experience is recommended, mobile phone please use landscape screen.
-v1.1.1:   [Have A Try!](http://chemviz3d.s3-website-ap-southeast-2.amazonaws.com) 
+v1.1.2:   [Have A Try!](http://chemviz3d.s3-website-ap-southeast-2.amazonaws.com) 
 <!-- | [Documentation](https://your-docs-link.com) -->
 
 ## 🚀 Features
