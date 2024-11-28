@@ -44,7 +44,10 @@ export default {
         addNitrogen: '添加氮气 (N₂)',
         addOxygen: '添加氧气 (O₂)',
         addHydrogenPeroxide: '添加过氧化氢 (H₂O₂)',
-        moleculeCount: '分子数量'
+        moleculeCount: '分子数量',
+        addCarbon: '添加碳 (C)',
+        addCarbonicAcid: '添加碳酸 (H₂CO₃)',
+        addAmmoniumBicarbonate: '添加碳酸氢铵 (NH₄HCO₃)'
       }
     },
     molecules: {

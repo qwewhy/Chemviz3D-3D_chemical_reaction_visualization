@@ -31,6 +31,10 @@ import { HCl } from '../../models/molecules/HCl';
 import { HClO } from '../../models/molecules/HClO';
 import { N2 } from '../../models/molecules/N2';
 import { NH4Cl } from '../../models/molecules/NH4Cl';
+import { C } from '../../models/molecules/C';
+import { H2CO3 } from '../../models/molecules/H2CO3';
+import { NH4HCO3 } from '../../models/molecules/NH4HCO3';
+
 
 import { reactionRules } from '../../data/reactionRules';
 
@@ -47,6 +51,9 @@ const moleculeClassMap = {
   'O2': O2,
   'Cl2': Cl2,
   'NH4Cl': NH4Cl,
+  'C': C,
+  'H2CO3': H2CO3,
+  'NH4HCO3': NH4HCO3,
 };
 
 /**

@@ -161,9 +161,9 @@ Tailwind CSS configuration is available in `tailwind.config.js`.
 ## 📱 Responsive Design
 
 The application is fully responsive and supports:
-- Desktop (1024px and above)
-- Tablet (768px to 1023px)
-- Mobile (below 768px)
+- Desktop (1024px and above) - recommended
+- Tablet (768px to 1023px) - recommended
+- Mobile (landscape)
 
 ## 🤝 Contributing
 
@@ -195,6 +195,34 @@ Navigate to src/models/atoms and check if the required atoms already exist:
 - If the atom class exists, you can use it directly
 - If needed, create a new atom class that extends BaseAtom.ts
 - Define all required physical and chemical properties as specified in BaseAtom.ts
+```typescript
+/**
+ * @file C.ts
+ * @author [ ] < >
+ * @copyright Copyright (c) 2024 [ ]
+ * @license MIT
+ */
+import { BaseAtom } from './BaseAtom';
+import { Vector3 } from 'three';
+
+export class C extends BaseAtom {
+    constructor(position?: Vector3) {
+        super(
+            6,                   // 原子序数 atomicNumber
+            12.011,              // 原子质量 atomicMass (以12C为主要同位素)
+            'C',                 // 元素符号 symbol
+            6,                   // 质子数 protons
+            6,                   // 中子数 neutrons (12C同位素)
+            6,                   // 电子数 electrons
+            11.260,              // 第一电离能 ionizationEnergy (eV)
+            70,                  // 原子半径 atomicRadius (pm)
+            '#909090',           // 显示颜色 color - 标准灰色
+            4,                   // 最大成键数 maxBonds (形成4个共价键)
+            position             // 位置 position
+        );
+    }
+}
+```
 
 ### 2. Create molecule models
 Create new molecule classes in src/models/molecules following BaseMolecule.ts structure:
@@ -254,34 +282,24 @@ export class YourMolecule extends BaseMolecule {
 ```
 
 ### 3. Import molecule class and add molecule creation handler
-In src/components/ui/Controls.jsx:
+In src\components\ui\moleculeButtonConfig.js:
 
 ```javascript
 // 1. Import your new molecule class:
 import { NewMolecule } from '../../models/molecules/NewMolecule';
 
 // 2. Add molecule creation handler:
-const handleAddNewMolecule = () => {
-  try {
-    const randomX = (Math.random() - 0.5) * 6;
-    const newMolecule = new NewMolecule(
-      new Vector3(randomX, 8, randomX) // Spawn position of the molecule
-    );
-    addMolecule(newMolecule);
-  } catch (error) {
-    console.error('Error creating molecule:', error);
+  HYDROGEN_PEROXIDE: {
+    class: H2O2,
+    bgColor: "bg-purple-500",
+    translationKey: "simulator.controls.addHydrogenPeroxide"
+  },
+  {
+    class: NewMolecule,
+    bgColor: "bg-yourButtonColor-500",
+    translationKey: "simulator.controls.addNewMolecule"
   }
-};
 
-// 3. Add UI button:
-<button
-  onClick={handleAddNewMolecule}
-  className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg
-    transition-colors mb-4"
->
-  //t('***') is a i18n translation key, please refer to src/i18n/config.json
-  {t('simulator.controls.addNewMolecule')} ({molecules.length}) 
-</button>
 ```
 
 ### 4. Register new molecule and add reaction rules and product handling
@@ -290,7 +308,24 @@ In src/components/three/Scene.jsx:
 // 1. Import new molecule:
 import { NewMolecule } from '../../models/molecules/NewMolecule';
 
-// 2. Add all reaction rules in ‘src\data\reactionRules.js’ about all molecules in this project:
+// 2. Update add molecule type mapping in src/components/three/Scene.jsx::
+const moleculeClassMap = {
+  'NH3H2O': NH3H2O,
+  'H2O': H2O,
+  'NH3': NH3,
+  'HClO': HClO,
+  'HCl': HCl,
+  'N2': N2,
+  'H2O2': H2O2,
+  'H2': H2,
+  'O2': O2,
+  'Cl2': Cl2,
+  'NH4Cl': NH4Cl,
+  'C': C,
+  'H2CO3': H2CO3,
+};
+
+// 3. Add all reaction rules in ‘src\data\reactionRules.js’ about all molecules in this project:
 const reactionRules = [
   {
     reactants: { 'ReactantA': 1, 'ReactantB': 1 },
@@ -304,21 +339,6 @@ const reactionRules = [
   }
   // ... add more reaction rules here
 ];
-
-// 3. Update add molecule type mapping in src/components/three/Scene.jsx::
-const moleculeClassMap = {
-  'NH3H2O': NH3H2O,
-  'H2O': H2O,
-  'NH3': NH3,
-  'HClO': HClO,
-  'HCl': HCl,
-  'N2': N2,
-  'H2O2': H2O2,
-  'H2': H2,
-  'O2': O2,
-  'Cl2': Cl2,
-  'NH4Cl': NH4Cl,
-};
 ```
 
 ### 5. Testing and validation

@@ -44,7 +44,10 @@ export default {
         addNitrogen: '窒素を追加 (N₂)',
         addOxygen: '酸素を追加 (O₂)',
         addHydrogenPeroxide: '過酸化水素を追加 (H₂O₂)',
-        moleculeCount: '分子数'
+        moleculeCount: '分子数',
+        addCarbon: '炭素を追加 (C)',
+        addCarbonicAcid: '炭酸を追加 (H₂CO₃)',
+        addAmmoniumBicarbonate: '炭酸水素アンモニウムを追加 (NH₄HCO₃)'
       }
     },
     molecules: {

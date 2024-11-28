@@ -44,7 +44,10 @@ export default {
         addNitrogen: 'Stickstoff hinzufügen (N₂)',
         addOxygen: 'Sauerstoff hinzufügen (O₂)',
         addHydrogenPeroxide: 'Wasserstoffperoxid hinzufügen (H₂O₂)',
-        moleculeCount: 'Molekülanzahl'
+        moleculeCount: 'Molekülanzahl',
+        addCarbon: 'Kohlenstoff hinzufügen (C)',
+        addCarbonicAcid: 'Kohlensäure hinzufügen (H₂CO₃)',
+        addAmmoniumBicarbonate: 'Ammoniumbicarbonat hinzufügen (NH₄HCO₃)'
       }
     },
     molecules: {

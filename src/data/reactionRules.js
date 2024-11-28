@@ -67,4 +67,19 @@ export const reactionRules = [
     products: { H2O: 2, O2: 1 },
     name: "hydrogen peroxide decomposition to water and oxygen",
   },
+  {
+    reactants: { C: 1, H2O: 1 },
+    products: { H2CO3: 1 },
+    name: "carbon and water to carbonic acid",
+  },
+  {
+    reactants: { H2CO3: 1, NH3: 1, H2O: 1 },
+    products: { NH4HCO3: 1, H2O: 1 },
+    name: "carbonic acid and ammonia to ammonium bicarbonate",
+  },
+  {
+    reactants: { H2CO3: 1, NH3H2O: 1 },
+    products: { NH4HCO3: 1, H2O: 1 },
+    name: "carbonic acid and ammonia water to ammonium bicarbonate and water",
+  },
 ];

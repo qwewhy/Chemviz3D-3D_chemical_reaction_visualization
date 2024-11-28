@@ -44,7 +44,10 @@ export default {
         addNitrogen: '질소 추가 (N₂)',
         addOxygen: '산소 추가 (O₂)',
         addHydrogenPeroxide: '과산화수소 추가 (H₂O₂)',
-        moleculeCount: '분자 수'
+        moleculeCount: '분자 수',
+        addCarbon: '탄소 추가 (C)',
+        addCarbonicAcid: '탄산 추가 (H₂CO₃)',
+        addAmmoniumBicarbonate: '탄산수소암모늄 추가 (NH₄HCO₃)'
       }
     },
     molecules: {

@@ -44,7 +44,10 @@ export default {
         addNitrogen: 'Add Nitrogen (N₂)',
         addOxygen: 'Add Oxygen (O₂)',
         addHydrogenPeroxide: 'Add Hydrogen Peroxide (H₂O₂)',
-        moleculeCount: 'Molecule Count'
+        moleculeCount: 'Molecule Count',
+        addCarbon: 'Add Carbon (C)',
+        addCarbonicAcid: 'Add Carbonic Acid (H₂CO₃)',
+        addAmmoniumBicarbonate: 'Add Ammonium Bicarbonate (NH₄HCO₃)'
       }
     },
     molecules: {
