@@ -1,10 +1,17 @@
+/**
+ * @file Cl.ts
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 import { BaseAtom } from './BaseAtom';
 import { Vector3 } from 'three';
 
 export class Cl extends BaseAtom {
   constructor(position?: Vector3) {
     super(
-      17,                   // 原子序数 atomicNumber
+      17,                  // 原子序数 atomicNumber
       35.45,               // 原子质量 atomicMass
       'Cl',                // 元素符号 symbol
       17,                  // 质子数 protons
@@ -14,7 +21,8 @@ export class Cl extends BaseAtom {
       100,                 // 原子半径 atomicRadius (pm)
       '#90E050',           // 显示颜色 color - 标准浅绿色
       1,                   // 最大成键数 maxBonds (通常形成单键)
-      position             // 位置 position
+      position,            // 位置 position
+      0                    // 电荷 charge
     );
   }
 } 

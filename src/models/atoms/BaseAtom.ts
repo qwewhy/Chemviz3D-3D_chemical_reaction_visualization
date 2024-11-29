@@ -1,19 +1,29 @@
+/**
+ * @file BaseAtom.ts
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the base atom class, providing
+ * atomic properties and 3D positioning calculations.
+ */
+
 import { Vector3 } from 'three';
 
 export abstract class BaseAtom {
   // 基础属性
-  readonly atomicNumber: number;
-  readonly atomicMass: number;
-  readonly symbol: string;
-  readonly protons: number;
-  readonly neutrons: number;
+  atomicNumber: number;
+  atomicMass: number;
+  symbol: string;
+  protons: number;
+  neutrons: number;
   electrons: number;
-  readonly ionizationEnergy: number;
-  readonly atomicRadius: number;
+  ionizationEnergy: number;
+  atomicRadius: number;
   position: Vector3;
-  readonly color: string;
-  readonly maxBonds: number;
-  currentBonds: number = 0;
+  color: string;
+  maxBonds: number;
+  currentBonds: number;
+  charge: number;
 
   constructor(
     atomicNumber: number,
@@ -27,6 +37,7 @@ export abstract class BaseAtom {
     color: string,
     maxBonds: number,
     position?: Vector3,
+    charge: number = 0
   ) {
     this.atomicNumber = atomicNumber;
     this.atomicMass = atomicMass;
@@ -39,6 +50,7 @@ export abstract class BaseAtom {
     this.color = color;
     this.maxBonds = maxBonds;
     this.position = position || new Vector3();
+    this.charge = charge;
   }
 
   setPosition(position: Vector3): void {

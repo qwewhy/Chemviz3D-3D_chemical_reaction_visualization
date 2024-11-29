@@ -7,6 +7,7 @@ const Navigation = () => {
   const navLinks = [
     { path: '/', label: t('nav.home') },
     { path: '/simulation', label: t('nav.simulator') },
+    { path: '/organic', label: t('nav.organicReaction') },
     { path: '/molecule-library', label: t('nav.molecules') },
     { path: '/about', label: t('nav.about') },
   ];

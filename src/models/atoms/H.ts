@@ -1,10 +1,17 @@
+/**
+ * @file H.ts
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 import { BaseAtom } from './BaseAtom';
 import { Vector3 } from 'three';
 
 export class H extends BaseAtom {
   constructor(position?: Vector3) {
     super(
-      1,                    // 原子序数 atomicNumber
+      1,                   // 原子序数 atomicNumber
       1.008,               // 原子质量 atomicMass
       'H',                 // 元素符号 symbol
       1,                   // 质子数 protons
@@ -14,7 +21,8 @@ export class H extends BaseAtom {
       25,                  // 原子半径 atomicRadius (pm)
       '#FFFFFF',           // 显示颜色 color - 白色
       1,                   // 最大成键数 maxBonds
-      position             // 位置 position
+      position,            // 位置 position
+      0                    // 电荷 charge
     );
   }
 } 

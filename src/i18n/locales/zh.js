@@ -4,7 +4,8 @@ export default {
       home: '首页',
       simulator: '模拟器',
       molecules: '分子库',
-      about: '关于'
+      about: '关于',
+      organicReaction: '有机反应'
     },
     home: {
       title: '化学反应3D可视化',
@@ -99,6 +100,15 @@ export default {
         email: '邮箱：?????@?????.com',
         github: 'GitHub：https://github.com/qwewhy/Chemviz3D-3D_chemical_reaction_visualization'
       }
+    },
+    organicReaction: {
+      dropZoneHint: '拖放.chemx文件到此处',
+      supportedFormats: '支持.chemx格式文件',
+      controls: '动画控制',
+      play: '播放',
+      pause: '暂停',
+      reset: '重置',
+      export: '导出.chemx'
     }
   }
 }; 

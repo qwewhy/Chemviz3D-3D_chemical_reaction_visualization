@@ -11,7 +11,7 @@ import { Vector3 } from 'three';
 export class C extends BaseAtom {
     constructor(position?: Vector3) {
         super(
-            6,                    // 原子序数 atomicNumber
+            6,                   // 原子序数 atomicNumber
             12.011,              // 原子质量 atomicMass (以12C为主要同位素)
             'C',                 // 元素符号 symbol
             6,                   // 质子数 protons
@@ -21,7 +21,8 @@ export class C extends BaseAtom {
             70,                  // 原子半径 atomicRadius (pm)
             '#909090',           // 显示颜色 color - 标准灰色
             4,                   // 最大成键数 maxBonds (形成4个共价键)
-            position             // 位置 position
+            position,            // 位置 position
+            0                    // 电荷 charge
         );
     }
 }

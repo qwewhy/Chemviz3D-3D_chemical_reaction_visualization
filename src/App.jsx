@@ -12,6 +12,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Simulator from './pages/Simulator';
+import OrganicReaction from './pages/OrganicReaction';
 import MoleculeLibrary from './pages/MoleculeLibrary';
 import About from './pages/About';
 
@@ -30,6 +31,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/simulation" element={<Simulator />} />
+              <Route path="/organic" element={<OrganicReaction />} />
               <Route path="/molecule-library" element={<MoleculeLibrary />} />
               <Route path="/about" element={<About />} />
             </Routes>

@@ -23,7 +23,8 @@ export class O extends BaseAtom {
       48,                  // 原子半径 atomicRadius (pm)
       '#FF0000',           // 显示颜色 color
       2,                   // 最大成键数 maxBonds 
-      position             // 位置 position 
+      position,            // 位置 position 
+      0                    // 电荷 charge
     );
   }
 } 
