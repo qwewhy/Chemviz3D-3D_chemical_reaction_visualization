@@ -109,6 +109,22 @@ export default {
       pause: '暂停',
       reset: '重置',
       export: '导出.chemx'
+    },
+    bonds: {
+      types: {
+        ionic: {
+          name: "离子键",
+          description: "带有相反电荷的离子之间的静电引力"
+        },
+        metallic: {
+          name: "金属键",
+          description: "金属原子间通过电子云共享形成的键"
+        },
+        covalent: {
+          name: "共价键",
+          description: "原子间共用电子对形成的化学键"
+        }
+      }
     }
   }
 }; 

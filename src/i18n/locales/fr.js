@@ -4,7 +4,8 @@ export default {
       home: 'Accueil',
       simulator: 'Simulateur',
       molecules: 'Bibliothèque de molécules',
-      about: 'À propos'
+      about: 'À propos',
+      organicReaction: 'Réaction organique'
     },
     home: {
       title: 'Visualisation 3D des réactions chimiques',
@@ -98,6 +99,31 @@ export default {
         title: 'Contact',
         email: 'Email : ?????@?????.com',
         github: 'GitHub : https://github.com/qwewhy/Chemviz3D-3D_chemical_reaction_visualization'
+      }
+    },
+    organicReaction: {
+      dropZoneHint: 'Déposez le fichier .chemx ici',
+      supportedFormats: 'Prend en charge les fichiers au format .chemx',
+      controls: 'Contrôles d\'animation',
+      play: 'Lecture',
+      pause: 'Pause',
+      reset: 'Réinitialiser',
+      export: 'Exporter .chemx'
+    },
+    bonds: {
+      types: {
+        ionic: {
+          name: "Liaison ionique",
+          description: "Attraction électrostatique entre des ions de charges opposées"
+        },
+        metallic: {
+          name: "Liaison métallique",
+          description: "Liaisons métalliques formées par le partage d'électrons entre atomes de métal"
+        },
+        covalent: {
+          name: "Liaison covalente",
+          description: "Liaison chimique formée par le partage de paires d'électrons entre atomes"
+        }
       }
     }
   }

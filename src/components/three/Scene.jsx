@@ -12,8 +12,9 @@
  * - Physical interactions between molecules in a contained environment
  */
 
+import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { OrbitControls, Environment, Text } from '@react-three/drei';
 import Molecule from './Molecule';
 import Beaker from './Beaker';
 import { useSimulationStore } from '../../store/simulationStore';
@@ -53,6 +54,57 @@ const moleculeClassMap = {
   'C': C,
   'H2CO3': H2CO3,
   'NH4HCO3': NH4HCO3,
+};
+
+// 添加Axes组件
+const Axes = ({ size = 5 }) => {
+  const groupRef = useRef(null);
+
+  useEffect(() => {
+    if (groupRef.current) {
+      // 创建坐标轴
+      const axesHelper = new THREE.AxesHelper(size);
+      
+      // 创建箭头 - 箭头大小为轴长的2%
+      const arrowSize = size * 0.02;
+      const xArrow = new THREE.ConeGeometry(arrowSize, arrowSize * 2, 8);
+      const yArrow = new THREE.ConeGeometry(arrowSize, arrowSize * 2, 8);
+      const zArrow = new THREE.ConeGeometry(arrowSize, arrowSize * 2, 8);
+
+      // 创建材质
+      const xMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // 红色
+      const yMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // 绿色
+      const zMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff }); // 蓝色
+
+      // 创建箭头网格
+      const xArrowMesh = new THREE.Mesh(xArrow, xMaterial);
+      const yArrowMesh = new THREE.Mesh(yArrow, yMaterial);
+      const zArrowMesh = new THREE.Mesh(zArrow, zMaterial);
+
+      // 设置箭头位置
+      xArrowMesh.position.set(size, 0, 0);
+      yArrowMesh.position.set(0, size, 0);
+      zArrowMesh.position.set(0, 0, size);
+
+      // 设置箭头旋转
+      xArrowMesh.rotation.z = -Math.PI / 2;
+      zArrowMesh.rotation.x = Math.PI / 2;
+
+      // 将所有元素添加到组中
+      groupRef.current.add(axesHelper);
+      groupRef.current.add(xArrowMesh);
+      groupRef.current.add(yArrowMesh);
+      groupRef.current.add(zArrowMesh);
+    }
+  }, [size]);
+
+  return (
+    <group ref={groupRef}>
+      <Text position={[size + 0.2, 0, 0]} fontSize={0.2} color="red">X</Text>
+      <Text position={[0, size + 0.2, 0]} fontSize={0.2} color="green">Y</Text>
+      <Text position={[0, 0, size + 0.2]} fontSize={0.2} color="blue">Z</Text>
+    </group>
+  );
 };
 
 /**
@@ -180,33 +232,40 @@ const Scene = ({ mountKey }) => {
   }, [molecules]);
 
   return (
-    <Canvas key={mountKey} camera={{ position: [0, 10, 30], fov: 50 }}>
-      {/* Environment and lighting setup 环境和光照设置 */}
+    <Canvas 
+      key={mountKey} 
+      camera={{ position: [0, 10, 30], fov: 50 }}
+      gl={{ alpha: false, antialias: true }}
+    >
+      {/* 设置浅灰色背景 */}
+      <color attach="background" args={["#808080"]} />
+      
+      {/* 环境和光照设置 */}
       <Environment preset="studio" />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} />
       
-      {/* Physics world configuration 物理世界配置 */}
+      {/* 添加坐标轴 */}
+      <Axes size={5} />
+      
+      {/* Physics world configuration */}
       <Physics
-        gravity={[0, 0, 0]} // 重力 
+        gravity={[0, 0, 0]}
         defaultContactMaterial={{ 
-          friction: 0.2, // 摩擦力
-          restitution: 0.5, // 恢复系数
-          contactEquationStiffness: 1e7, // 接触方程刚度
-          contactEquationRelaxation: 1, // 接触方程松弛
+          friction: 0.2,
+          restitution: 0.5,
+          contactEquationStiffness: 1e7,
+          contactEquationRelaxation: 1,
         }}
-        allowSleep={false} // 禁止休眠
-        iterations={20} // 迭代次数
+        allowSleep={false}
+        iterations={20}
       >
-        {/* Beaker container 烧杯容器 */}
         <Beaker />
-        {/* Render all molecules 渲染所有分子 */}
         {molecules.map((molecule, index) => (
           <Molecule key={`molecule-${index}-${molecule.id}`} molecule={molecule} />
         ))}
       </Physics>
 
-      {/* Camera controls 相机控制 */}
       <OrbitControls 
         enablePan={true}
         enableZoom={true}

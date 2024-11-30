@@ -24,7 +24,7 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen">
           {/* 头部导航 / Header navigation */}
-          <Header className="fixed top-0 w-full z-50" />
+          <Header className="fixed top-0 w-full z-1000" />
           
           {/* 主要内容区域 / Main content area */}
           <main className="flex-1">

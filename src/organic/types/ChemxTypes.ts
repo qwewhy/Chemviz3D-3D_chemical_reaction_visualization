@@ -8,17 +8,35 @@ import { Vector3 } from 'three';
 import { BaseAtom } from '../../models/atoms/BaseAtom';
 
 /**
+ * 化学键类型枚举
+ * Chemical Bond Type Enum
+ */
+export enum BondType {
+  IONIC = "ionic", // 离子键 Ionic bond
+  METALLIC = "metallic", // 金属键 Metallic bond
+  COVALENT = "covalent", // 共价键 Covalent bond
+}
+
+/**
  * 原子状态接口
  * 定义了原子在动画中的基本属性，包括类型和位置信息
  * Atom State Interface
  * Defines basic properties of an atom in animation, including type and position information
  */
 export interface AtomState {
-  id: string;
+  atomicNumber: number;
+  atomicMass: number;
   symbol: string;
-  position: Vector3;
-  charge: number;
+  protons: number;
+  neutrons: number;
   electrons: number;
+  ionizationEnergy: number;
+  atomicRadius: number;
+  color: string;
+  maxBonds: number;
+  position: Vector3;
+  charge?: number;
+  currentBonds: number;
 }
 
 /**
@@ -51,6 +69,12 @@ export interface BondState {
    * Bond strength (used for animation effects)
    */
   strength: number;
+
+  /**
+   * 键类型
+   * Bond type
+   */
+  bondType: BondType;
 }
 
 /**

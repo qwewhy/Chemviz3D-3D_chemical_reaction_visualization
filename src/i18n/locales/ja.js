@@ -4,7 +4,8 @@ export default {
       home: 'ホーム',
       simulator: 'シミュレーター',
       molecules: '分子ライブラリ',
-      about: '概要'
+      about: '概要',
+      organicReaction: '有機反応'
     },
     home: {
       title: '化学反応3D可視化',
@@ -98,6 +99,31 @@ export default {
         title: 'お問い合わせ',
         email: 'メール：?????@?????.com',
         github: 'GitHub：https://github.com/qwewhy/Chemviz3D-3D_chemical_reaction_visualization'
+      }
+    },
+    organicReaction: {
+      dropZoneHint: '.chemxファイルをここにドロップ',
+      supportedFormats: '.chemx形式のファイルをサポート',
+      controls: 'アニメーション制御',
+      play: '再生',
+      pause: '一時停止',
+      reset: 'リセット',
+      export: '.chemxをエクスポート'
+    },
+    bonds: {
+      types: {
+        ionic: {
+          name: "イオン結合",
+          description: "反対の電荷を持つイオン間の静電引力"
+        },
+        metallic: {
+          name: "金属結合",
+          description: "金属原子間で電子雲を共有して形成される金属結合"
+        },
+        covalent: {
+          name: "共有結合",
+          description: "原子間で電子対を共有して形成される化学結合"
+        }
       }
     }
   }

@@ -36,13 +36,13 @@ export class FileHandler {
     // 检查文件扩展名
     if (!file.name.toLowerCase().endsWith('.chemx') && 
         !file.name.toLowerCase().endsWith('.json')) {
-      throw new Error('请上传.chemx或.json格式的文件');
+      throw new Error('Please upload a .chemx or .json file');
     }
 
     // 检查文件大小 (例如限制为10MB)
     const MAX_SIZE = 10 * 1024 * 1024;
     if (file.size > MAX_SIZE) {
-      throw new Error('文件大小不能超过10MB');
+      throw new Error('The file size cannot exceed 10MB');
     }
 
     return true;
@@ -64,7 +64,7 @@ export class FileHandler {
       try {
         jsonData = JSON.parse(content);
       } catch (e) {
-        throw new Error('文件格式不正确，请确保是有效的JSON格式');
+        throw new Error('The file format is incorrect, please ensure it is a valid JSON format');
       }
 
       // 通过ChemxParser解析和验证数据结构
@@ -75,7 +75,7 @@ export class FileHandler {
       
       return data;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : '文件处理失败';
+      const errorMessage = error instanceof Error ? error.message : 'File processing failed';
       this.onError?.(errorMessage);
       throw error;
     }
@@ -93,11 +93,11 @@ export class FileHandler {
         if (typeof content === 'string') {
           resolve(content);
         } else {
-          reject(new Error('文件读取失败'));
+          reject(new Error('File reading failed'));
         }
       };
       
-      reader.onerror = () => reject(new Error('文件读取错误'));
+      reader.onerror = () => reject(new Error('File reading error'));
       reader.readAsText(file);
     });
   }
@@ -119,7 +119,7 @@ export class FileHandler {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : '文件导出失败';
+        const errorMessage = error instanceof Error ? error.message : 'File export failed';
       this.onError?.(errorMessage);
       throw error;
     }

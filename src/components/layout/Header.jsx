@@ -22,9 +22,11 @@ const Header = () => {
         </Link>
         
         {/* 导航菜单 / Navigation menu */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 relative z-[1000]">
           <Navigation />
-          <LanguageSwitch />
+          <div className="relative z-[1001]"> 
+            <LanguageSwitch />
+          </div>
         </div>
       </div>
     </header>

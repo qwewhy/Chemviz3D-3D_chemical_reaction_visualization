@@ -4,7 +4,8 @@ export default {
       home: '홈',
       simulator: '시뮬레이터',
       molecules: '분자 라이브러리',
-      about: '소개'
+      about: '소개',
+      organicReaction: '유기 반응'
     },
     home: {
       title: '화학 반응 3D 시각화',
@@ -98,6 +99,31 @@ export default {
         title: '연락처',
         email: '이메일: ?????@?????.com',
         github: 'GitHub: https://github.com/qwewhy/Chemviz3D-3D_chemical_reaction_visualization'
+      }
+    },
+    organicReaction: {
+      dropZoneHint: '.chemx 파일을 여기에 드롭하세요',
+      supportedFormats: '.chemx 형식 파일 지원',
+      controls: '애니메이션 제어',
+      play: '재생',
+      pause: '일시정지',
+      reset: '초기화',
+      export: '.chemx 내보내기'
+    },
+    bonds: {
+      types: {
+        ionic: {
+          name: "이온 결합",
+          description: "반대 전하를 가진 이온 사이의 정전기적 인력"
+        },
+        metallic: {
+          name: "금속 결합",
+          description: "금속 원자 간 전자 구름을 공유하여 형성되는 금속 결합"
+        },
+        covalent: {
+          name: "공유 결합",
+          description: "원자 간 전자쌍을 공유하여 형성되는 화학 결합"
+        }
       }
     }
   }
