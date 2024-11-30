@@ -5,7 +5,8 @@ export default {
       simulator: '模拟器',
       molecules: '分子库',
       about: '关于',
-      organicReaction: '有机反应'
+      organicReaction: '动画',
+      keyframeEditor: '动画编辑器'
     },
     home: {
       title: '化学反应3D可视化',
@@ -77,7 +78,7 @@ export default {
         education: '教育性的反应演示'
       },
       team: {
-        title: '我们的团队',
+        title: '我们团队',
         description: '一群充满热情的开发者和化学家'
       },
       technology: {
@@ -124,6 +125,77 @@ export default {
           name: "共价键",
           description: "原子间共用电子对形成的化学键"
         }
+      }
+    },
+    keyframeEditor: {
+      hints: {
+        addAtom: "点击场景添加原子",
+        addBond: "点击两个原子创建键",
+        select: "鼠标拖拽旋转视角、滚轮缩放视角、右键单击后拖动摄像机"
+      }
+    },
+    keyframePanel: {
+      title: "关键帧",
+      current: "当前: {{current}} / {{total}}",
+      saveFrame: "保存当前帧",
+      keyframe: "关键帧 {{number}}",
+      export: "导出.chemx文件"
+    },
+    toolbar: {
+      animationName: "动画名称",
+      description: "描述",
+      select: "选择",
+      addAtom: "添加原子",
+      addBond: "添加化学键",
+      breakBond: "断开化学键",
+      undo: "撤销",
+      atomType: "原子类型:",
+      bondType: "键类型:"
+    },
+    atoms: {
+      H: "氢",
+      B: "硼",
+      C: "碳",
+      N: "氮",
+      O: "氧",
+      F: "氟",
+      Na: "钠",
+      Mg: "镁",
+      Al: "铝",
+      Si: "硅",
+      P: "磷",
+      S: "硫",
+      Cl: "氯",
+      K: "钾",
+      Ca: "钙",
+      As: "砷",
+      Se: "硒",
+      Br: "溴",
+      I: "碘",
+      Pb: "铅",
+      Fe: "铁",
+      Cu: "铜",
+      Zn: "锌",
+      Hg: "汞"
+    },
+    sceneController: {
+      bondCreation: {
+        title: "化学键创建",
+        selectFirst: "请选择起始原子",
+        startingAtom: "起始原子",
+        selectTarget: "请选择目标原子"
+      }
+    },
+    atomPositionEditor: {
+      title: "原子位置编辑"
+    },
+    draggableAtom: {
+      startAtom: " 起始原子 "
+    },
+    keyframeEditor: {
+      maximumKeyframes: "最多允许10个关键帧", 
+      hints: {
+        select: "鼠标拖拽旋转视角、鼠标滚轮缩放视角、右键单击场景拖动摄像机"
       }
     }
   }

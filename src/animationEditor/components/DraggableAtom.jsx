@@ -2,12 +2,15 @@ import React from 'react';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { ATOM_COLORS, ATOM_RADIUS } from '../constants/atomProperties';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 原子组件（移除拖拽功能）
  * Atom Component (without drag functionality)
  */
 const DraggableAtom = ({ atom, selected, onSelect, editMode, isStartAtom }) => {
+  const { t } = useTranslation();
+
   const handleClick = (e) => {
     e.stopPropagation();
     
@@ -64,12 +67,16 @@ const DraggableAtom = ({ atom, selected, onSelect, editMode, isStartAtom }) => {
       >
         <div 
           className={`
-            text-sm px-1 rounded pointer-events-none select-none
+            text-sm px-2 rounded pointer-events-none select-none
             ${isStartAtom ? 'bg-green-500 text-white' : 'bg-black/50 text-white'}
           `}
         >
           {atom.symbol}
-          {isStartAtom && ' (起始)'}
+          {isStartAtom && (
+            <span className="text-xs opacity-75">
+              {t('draggableAtom.startAtom')}
+            </span>
+          )}
         </div>
       </Html>
     </group>

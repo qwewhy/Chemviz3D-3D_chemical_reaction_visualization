@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Grid, Html, Plane } from '@react-three/drei';
 import * as THREE from 'three';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 场景交互控制器
@@ -22,6 +23,7 @@ const SceneController = ({
   const raycaster = new THREE.Raycaster();
   const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0));
   const planeIntersectPoint = new THREE.Vector3();
+  const { t } = useTranslation();
 
   const handleClick = useCallback((event) => {
     event.stopPropagation();
@@ -84,22 +86,22 @@ const SceneController = ({
         <Html position={[5, 5, 0]}>
           <div className="fixed top-20 left-4 bg-white/90 p-4 rounded-lg shadow-lg border border-blue-500">
             <h3 className="font-bold mb-2 text-blue-600">
-              化学键创建 / Bond Creation
+              {t('sceneController.bondCreation.title')}
             </h3>
             {!bondStartAtom ? (
               <p className="text-gray-700">
-                请选择起始原子 / Please select the first atom
+                {t('sceneController.bondCreation.selectFirst')}
               </p>
             ) : (
               <div>
                 <p className="text-gray-700 mb-2">
-                  起始原子 / Starting Atom: 
+                  {t('sceneController.bondCreation.startingAtom')}: 
                   <span className="ml-2 font-bold text-blue-600">
                     {atoms[bondStartAtom]?.symbol || ''}
                   </span>
                 </p>
                 <p className="text-gray-700">
-                  请选择目标原子 / Please select the target atom
+                  {t('sceneController.bondCreation.selectTarget')}
                 </p>
               </div>
             )}

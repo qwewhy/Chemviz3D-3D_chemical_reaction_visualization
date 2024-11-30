@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 关键帧控制面板组件
@@ -13,17 +14,18 @@ const KeyframePanel = ({
   onSelectKeyframe,
   onExport,
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="w-80 m-4 bg-white rounded-lg shadow-lg p-4">
       <div className="mb-4">
-        <h2 className="text-xl font-bold mb-1">关键帧 / Keyframes</h2>
+        <h2 className="text-xl font-bold mb-1">{t('keyframePanel.title')}</h2>
         <p className="text-sm text-gray-600">
-          当前: {currentKeyframe + 1} / {keyframes.length}
+          {t('keyframePanel.current', { current: currentKeyframe + 1, total: keyframes.length })}
         </p>
       </div>
 
       <div className="space-y-4">
-        {/* 保存关键帧按钮 / Save keyframe button */}
         <button 
           className={`w-full py-2 rounded-lg transition-colors ${
             keyframes.length >= 10
@@ -33,10 +35,9 @@ const KeyframePanel = ({
           onClick={onSaveKeyframe}
           disabled={keyframes.length >= 10}
         >
-          保存当前帧 / Save Current Frame
+          {t('keyframePanel.saveFrame')}
         </button>
 
-        {/* 关键帧列表 / Keyframe list */}
         <div className="space-y-2">
           {keyframes.map((_, index) => (
             <button
@@ -48,12 +49,11 @@ const KeyframePanel = ({
               }`}
               onClick={() => onSelectKeyframe(index)}
             >
-              关键帧 / Keyframe {index + 1}
+              {t('keyframePanel.keyframe', { number: index + 1 })}
             </button>
           ))}
         </div>
 
-        {/* 导出按钮 / Export button */}
         <button
           className={`w-full py-2 rounded-lg transition-colors ${
             keyframes.length === 0
@@ -63,7 +63,7 @@ const KeyframePanel = ({
           onClick={onExport}
           disabled={keyframes.length === 0}
         >
-          导出.chemx文件 / Export .chemx
+          {t('keyframePanel.export')}
         </button>
       </div>
     </div>

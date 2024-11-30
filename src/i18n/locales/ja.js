@@ -5,7 +5,8 @@ export default {
       simulator: 'シミュレーター',
       molecules: '分子ライブラリ',
       about: '概要',
-      organicReaction: '有機反応'
+      organicReaction: 'アニメーション',
+      keyframeEditor: 'アニメーションエディター'
     },
     home: {
       title: '化学反応3D可視化',
@@ -125,6 +126,77 @@ export default {
           description: "原子間で電子対を共有して形成される化学結合"
         }
       }
+    },
+    keyframeEditor: {
+      hints: {
+        addAtom: "シーンをクリックして原子を追加",
+        addBond: "2つの原子をクリックして結合を作成",
+        select: "ドラッグで視点を回転、スクロールでズーム、右クリックでカメラ移動"
+      }
+    },
+    keyframePanel: {
+      title: "キーフレーム",
+      current: "現在: {{current}} / {{total}}",
+      saveFrame: "現在のフレームを保存",
+      keyframe: "キーフレーム {{number}}",
+      export: ".chemxファイルをエクスポート"
+    },
+    toolbar: {
+      animationName: "アニメーション名",
+      description: "説明",
+      select: "選択",
+      addAtom: "原子を追加",
+      addBond: "結合を追加",
+      breakBond: "結合を切断",
+      undo: "元に戻す",
+      atomType: "原子タイプ:",
+      bondType: "結合タイプ:"
+    },
+    atoms: {
+      H: "水素",
+      B: "ホウ素",
+      C: "炭素",
+      N: "窒素",
+      O: "酸素",
+      F: "フッ素",
+      Na: "ナトリウム",
+      Mg: "マグネシウム",
+      Al: "アルミニウム",
+      Si: "ケイ素",
+      P: "リン",
+      S: "硫黄",
+      Cl: "塩素",
+      K: "カリウム",
+      Ca: "カルシウム",
+      As: "ヒ素",
+      Se: "セレン",
+      Br: "臭素",
+      I: "ヨウ素",
+      Pb: "鉛",
+      Fe: "鉄",
+      Cu: "銅",
+      Zn: "亜鉛",
+      Hg: "水銀"
+    },
+    sceneController: {
+      bondCreation: {
+        title: "結合の作成",
+        selectFirst: "最初の原子を選択してください",
+        startingAtom: "開始原子",
+        selectTarget: "目標原子を選択してください"
+      }
+    },
+    atomPositionEditor: {
+      title: "原子位置エディター"
+    },
+    draggableAtom: {
+      startAtom: " 開始原子"
+    },
+    keyframeEditor: {
+      maximumKeyframes: "最大10キーフレームが許可されています",
+      hints: {
+        select: "ドラッグで視点を回転、スクロールでズーム、右クリックでカメラ移動"
+      }   
     }
   }
 }; 

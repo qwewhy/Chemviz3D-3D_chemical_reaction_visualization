@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ATOM_COLORS } from '../../constants/atomProperties';
 import { BondType } from '../../../organic/types/ChemxTypes';
 
@@ -20,19 +21,21 @@ const Toolbar = ({
   onUndo,
   canUndo
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="p-4 bg-gray-100 shadow-md">
       {/* 元数据输入区 / Metadata input area */}
       <div className="flex gap-4 mb-4">
         <input
           className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="动画名称 / Animation Name"
+          placeholder={t('toolbar.animationName')}
           value={metadata.name}
           onChange={e => setMetadata(prev => ({...prev, name: e.target.value}))}
         />
         <input
           className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="描述 / Description"
+          placeholder={t('toolbar.description')}
           value={metadata.description}
           onChange={e => setMetadata(prev => ({...prev, description: e.target.value}))}
         />
@@ -49,7 +52,7 @@ const Toolbar = ({
           }`}
           onClick={() => setEditMode('select')}
         >
-          选择 / Select
+          {t('toolbar.select')}
         </button>
 
         {/* 添加原子模式 / Add atom mode */}
@@ -61,7 +64,7 @@ const Toolbar = ({
           }`}
           onClick={() => setEditMode('addAtom')}
         >
-          添加原子 / Add Atom
+          {t('toolbar.addAtom')}
         </button>
 
         {/* 添加化学键模式 / Add bond mode */}
@@ -73,7 +76,7 @@ const Toolbar = ({
           }`}
           onClick={() => setEditMode('addBond')}
         >
-          添加化学键 / Add Bond
+          {t('toolbar.addBond')}
         </button>
 
         {/* 断开化学键模式 / Break bond mode */}
@@ -85,7 +88,7 @@ const Toolbar = ({
           }`}
           onClick={() => setEditMode('breakBond')}
         >
-          断开化学键 / Break Bond
+          {t('toolbar.breakBond')}
         </button>
 
         {/* 撤销按钮 / Undo button */}
@@ -99,13 +102,13 @@ const Toolbar = ({
           disabled={!canUndo}
           title="Ctrl+Z"
         >
-          撤销 / Undo
+          {t('toolbar.undo')}
         </button>
 
         {/* 原子类型选择器 - 移除样式覆盖 */}
         <div className="flex items-center gap-2 ml-4">
           <label className="text-gray-700">
-            原子类型 / Atom Type:
+            {t('toolbar.atomType')}
           </label>
           <select
             className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -114,7 +117,7 @@ const Toolbar = ({
           >
             {Object.keys(ATOM_COLORS).map(symbol => (
               <option key={symbol} value={symbol}>
-                {symbol} - {getAtomName(symbol)}
+                {symbol} - {t(`atoms.${symbol}`)}
               </option>
             ))}
           </select>
@@ -124,16 +127,16 @@ const Toolbar = ({
         {editMode === 'addBond' && (
           <div className="flex items-center gap-2 ml-4">
             <label className="text-gray-700">
-              键类型 / Bond Type:
+              {t('toolbar.bondType')}
             </label>
             <select
               className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={selectedBondType}
               onChange={e => setSelectedBondType(e.target.value)}
             >
-              <option value={BondType.COVALENT}>共价键 / Covalent</option>
-              <option value={BondType.IONIC}>离子键 / Ionic</option>
-              <option value={BondType.METALLIC}>金属键 / Metallic</option>
+              <option value={BondType.COVALENT}>{t('bonds.types.covalent.name')}</option>
+              <option value={BondType.IONIC}>{t('bonds.types.ionic.name')}</option>
+              <option value={BondType.METALLIC}>{t('bonds.types.metallic.name')}</option>
             </select>
           </div>
         )}
@@ -145,27 +148,11 @@ const Toolbar = ({
             backgroundColor: ATOM_COLORS[selectedAtomType],
             border: '2px solid #666'
           }}
-          title={`${selectedAtomType} - ${getAtomName(selectedAtomType)}`}
+          title={`${selectedAtomType} - ${t(`atoms.${selectedAtomType}`)}`}
         />
       </div>
     </div>
   );
-};
-
-/**
- * 获取原子名称
- * Get atom name
- * @param {string} symbol - 原子符号 / Atom symbol
- * @returns {string} 原子名称 / Atom name
- */
-const getAtomName = (symbol) => {
-  const names = {
-    H: '氢 / Hydrogen',
-    C: '碳 / Carbon',
-    O: '氧 / Oxygen',
-    N: '氮 / Nitrogen'
-  };
-  return names[symbol] || symbol;
 };
 
 export default Toolbar; 

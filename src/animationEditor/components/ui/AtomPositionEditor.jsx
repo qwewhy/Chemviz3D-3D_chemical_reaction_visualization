@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 原子位置编辑器组件
@@ -6,6 +7,8 @@ import React from 'react';
  * 用于精确控制选中原子的位置
  */
 const AtomPositionEditor = ({ selectedAtom, onUpdatePosition }) => {
+  const { t } = useTranslation();
+
   if (!selectedAtom) return null;
 
   const handleAxisChange = (axis, value) => {
@@ -23,7 +26,7 @@ const AtomPositionEditor = ({ selectedAtom, onUpdatePosition }) => {
   return (
     <div className="absolute bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg">
       <h3 className="text-lg font-bold mb-2">
-        原子位置编辑 / Atom Position Edit
+        {t('atomPositionEditor.title')}
         <span className="ml-2 text-sm text-gray-500">
           {selectedAtom.symbol} - {selectedAtom.id}
         </span>

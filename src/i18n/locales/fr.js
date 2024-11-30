@@ -5,7 +5,8 @@ export default {
       simulator: 'Simulateur',
       molecules: 'Bibliothèque de molécules',
       about: 'À propos',
-      organicReaction: 'Réaction organique'
+      organicReaction: 'Animation',
+      keyframeEditor: 'Éditeur de clés'
     },
     home: {
       title: 'Visualisation 3D des réactions chimiques',
@@ -125,6 +126,77 @@ export default {
           description: "Liaison chimique formée par le partage de paires d'électrons entre atomes"
         }
       }
+    },
+    keyframeEditor: {
+      hints: {
+        addAtom: "Cliquez sur la scène pour ajouter un atome",
+        addBond: "Cliquez sur deux atomes pour créer une liaison",
+        select: "Faites glisser pour faire pivoter la vue, défilez pour zoomer, clic droit et glisser pour déplacer la caméra"
+      }
+    },
+    keyframePanel: {
+      title: "Images clés",
+      current: "Actuel : {{current}} / {{total}}",
+      saveFrame: "Enregistrer l'image actuelle",
+      keyframe: "Image clé {{number}}",
+      export: "Exporter le fichier .chemx"
+    },
+    toolbar: {
+      animationName: "Nom de l'animation",
+      description: "Description",
+      select: "Sélectionner",
+      addAtom: "Ajouter un atome",
+      addBond: "Ajouter une liaison",
+      breakBond: "Rompre la liaison",
+      undo: "Annuler",
+      atomType: "Type d'atome :",
+      bondType: "Type de liaison :"
+    },
+    atoms: {
+      H: "Hydrogène",
+      B: "Bore",
+      C: "Carbone",
+      N: "Azote",
+      O: "Oxygène",
+      F: "Fluor",
+      Na: "Sodium",
+      Mg: "Magnésium",
+      Al: "Aluminium",
+      Si: "Silicium",
+      P: "Phosphore",
+      S: "Soufre",
+      Cl: "Chlore",
+      K: "Potassium",
+      Ca: "Calcium",
+      As: "Arsenic",
+      Se: "Sélénium",
+      Br: "Brome",
+      I: "Iode",
+      Pb: "Plomb",
+      Fe: "Fer",
+      Cu: "Cuivre",
+      Zn: "Zinc",
+      Hg: "Mercure"
+    },
+    sceneController: {
+      bondCreation: {
+        title: "Création de liaison",
+        selectFirst: "Veuillez sélectionner le premier atome",
+        startingAtom: "Atome de départ",
+        selectTarget: "Veuillez sélectionner l'atome cible"
+      }
+    },
+    atomPositionEditor: {
+      title: "Éditeur de position atomique"
+    },
+    draggableAtom: {
+      startAtom: " Atome de départ"
+    },
+    keyframeEditor: {
+      maximumKeyframes: "Maximum 10 images clés autorisées",
+      hints: {
+        select: "Faites glisser pour faire pivoter la vue, défilez pour zoomer, clic droit et glisser pour déplacer la caméra"
+      } 
     }
   }
 }; 

@@ -5,7 +5,8 @@ export default {
       simulator: 'Simulator',
       molecules: 'Molecules',
       about: 'About',
-      organicReaction: 'Organic Reaction'
+      organicReaction: 'Animation',
+      keyframeEditor: 'Animation Editor'
     },
     home: {
       title: 'Chemical Reaction 3D Visualization',
@@ -125,6 +126,77 @@ export default {
           description: "Chemical bond formed by sharing electron pairs between atoms"
         }
       }
-    }
+    },
+    keyframeEditor: {
+      hints: {
+        addAtom: "Click scene to add atom",
+        addBond: "Click two atoms to create bond",
+        select: "Drag to rotate view, scroll to zoom, right-click and drag to move camera"
+      }
+    },
+    keyframePanel: {
+      title: "Keyframes",
+      current: "Current: {{current}} / {{total}}",
+      saveFrame: "Save Current Frame",
+      keyframe: "Keyframe {{number}}",
+      export: "Export .chemx"
+    },
+    toolbar: {
+      animationName: "Animation Name",
+      description: "Description",
+      select: "Select",
+      addAtom: "Add Atom",
+      addBond: "Add Bond",
+      breakBond: "Break Bond",
+      undo: "Undo",
+      atomType: "Atom Type:",
+      bondType: "Bond Type:"
+    },
+    atoms: {
+      H: "Hydrogen",
+      B: "Boron",
+      C: "Carbon",
+      N: "Nitrogen",
+      O: "Oxygen",
+      F: "Fluorine",
+      Na: "Sodium",
+      Mg: "Magnesium",
+      Al: "Aluminum",
+      Si: "Silicon",
+      P: "Phosphorus",
+      S: "Sulfur",
+      Cl: "Chlorine",
+      K: "Potassium",
+      Ca: "Calcium",
+      As: "Arsenic",
+      Se: "Selenium",
+      Br: "Bromine",
+      I: "Iodine",
+      Pb: "Lead",
+      Fe: "Iron",
+      Cu: "Copper",
+      Zn: "Zinc",
+      Hg: "Mercury"
+    },
+    sceneController: {
+      bondCreation: {
+        title: "Bond Creation",
+        selectFirst: "Please select the first atom",
+        startingAtom: "Starting Atom",
+        selectTarget: "Please select the target atom"
+      }
+    },
+    atomPositionEditor: {
+      title: "Atom Position Editor"
+    },
+    draggableAtom: {
+      startAtom: " Start Atom"
+    },
+    keyframeEditor: {
+      maximumKeyframes: "Maximum 10 Keyframes allowed",
+      hints: {
+        select: "Drag to rotate view, scroll to zoom, right-click and drag to move camera"
+      } 
+    } 
   }
 }; 

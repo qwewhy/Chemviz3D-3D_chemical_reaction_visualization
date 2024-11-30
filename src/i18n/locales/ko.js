@@ -5,7 +5,8 @@ export default {
       simulator: '시뮬레이터',
       molecules: '분자 라이브러리',
       about: '소개',
-      organicReaction: '유기 반응'
+      organicReaction: '애니메이션',
+      keyframeEditor: '키프레임 에디터'
     },
     home: {
       title: '화학 반응 3D 시각화',
@@ -125,6 +126,77 @@ export default {
           description: "원자 간 전자쌍을 공유하여 형성되는 화학 결합"
         }
       }
+    },
+    keyframeEditor: {
+      hints: {
+        addAtom: "장면을 클릭하여 원자 추가",
+        addBond: "두 원자를 클릭하여 결합 생성",
+        select: "드래그로 시점 회전, 스크롤로 확대/축소, 우클릭 후 드래그로 카메라 이동"
+      }
+    },
+    keyframePanel: {
+      title: "키프레임",
+      current: "현재: {{current}} / {{total}}",
+      saveFrame: "현재 프레임 저장",
+      keyframe: "키프레임 {{number}}",
+      export: ".chemx 파일 내보내기"
+    },
+    toolbar: {
+      animationName: "애니메이션 이름",
+      description: "설명",
+      select: "선택",
+      addAtom: "원자 추가",
+      addBond: "결합 추가",
+      breakBond: "결합 해제",
+      undo: "실행 취소",
+      atomType: "원자 유형:",
+      bondType: "결합 유형:"
+    },
+    atoms: {
+      H: "수소",
+      B: "붕소",
+      C: "탄소",
+      N: "질소",
+      O: "산소",
+      F: "플루오린",
+      Na: "나트륨",
+      Mg: "마그네슘",
+      Al: "알루미늄",
+      Si: "규소",
+      P: "인",
+      S: "황",
+      Cl: "염소",
+      K: "칼륨",
+      Ca: "칼슘",
+      As: "비소",
+      Se: "셀레늄",
+      Br: "브롬",
+      I: "요오드",
+      Pb: "납",
+      Fe: "철",
+      Cu: "구리",
+      Zn: "아연",
+      Hg: "수은"
+    },
+    sceneController: {
+      bondCreation: {
+        title: "결합 생성",
+        selectFirst: "첫 번째 원자를 선택하세요",
+        startingAtom: "시작 원자",
+        selectTarget: "대상 원자를 선택하세요"
+      }
+    },
+    atomPositionEditor: {
+      title: "원자 위치 편집기"
+    },
+    draggableAtom: {
+      startAtom: " 시작 원자"
+    },
+    keyframeEditor: {
+      maximumKeyframes: "최대 10 키프레임 허용",
+      hints: {
+        select: "드래그로 시점 회전, 스크롤로 확대/축소, 우클릭 후 드래그로 카메라 이동"
+      }     
     }
   }
 }; 

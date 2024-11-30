@@ -13,6 +13,7 @@ import useKeyframes from '../animationEditor/hooks/useKeyframes';
 import useAtomDrag from '../animationEditor/hooks/useAtomDrag';
 import AtomPositionEditor from '../animationEditor/components/ui/AtomPositionEditor';
 import useHistoryState from '../animationEditor/hooks/useHistoryState';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 化学反应动画编辑器主页面
@@ -47,6 +48,8 @@ const KeyframeEditor = () => {
     updateDrag,
     endDrag
   } = useAtomDrag();
+
+  const { t } = useTranslation();
 
   /**
    * 处理原子放置
@@ -271,11 +274,11 @@ const KeyframeEditor = () => {
             />
           </Canvas>
   
-          {/* 编辑模式提示 / Edit mode hint */}
+          {/* 编辑模式提示 */}
           <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-2 rounded">
-            {editMode === 'addAtom' && "点击场景添加原子 / Click scene to add atom"}
-            {editMode === 'addBond' && "点击两个原子创建键 / Click two atoms to create bond"}
-            {editMode === 'select' && "拖拽原子移动位置 / Drag atoms to move position"}
+            {editMode === 'addAtom' && t('keyframeEditor.hints.addAtom')}
+            {editMode === 'addBond' && t('keyframeEditor.hints.addBond')}
+            {editMode === 'select' && t('keyframeEditor.hints.select')}
           </div>
         </div>
 

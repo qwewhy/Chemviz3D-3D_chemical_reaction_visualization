@@ -5,7 +5,8 @@ export default {
       simulator: 'Simulator',
       molecules: 'Molekülbibliothek',
       about: 'Über uns',
-      organicReaction: 'Organische Reaktion'
+      organicReaction: 'Animation',
+      keyframeEditor: 'Animationseditor'
     },
     home: {
       title: '3D-Visualisierung chemischer Reaktionen',
@@ -125,6 +126,77 @@ export default {
           description: "Chemische Bindung durch gemeinsame Elektronenpaare zwischen Atomen"
         }
       }
+    },
+    keyframeEditor: {
+      hints: {
+        addAtom: "Klicken Sie auf die Szene, um ein Atom hinzuzufügen",
+        addBond: "Klicken Sie auf zwei Atome, um eine Bindung zu erstellen",
+        select: "Ziehen zum Drehen der Ansicht, Scrollen zum Zoomen, Rechtsklick und Ziehen zum Bewegen der Kamera"
+      }
+    },
+    keyframePanel: {
+      title: "Keyframes",
+      current: "Aktuell: {{current}} / {{total}}",
+      saveFrame: "Aktuellen Frame speichern",
+      keyframe: "Keyframe {{number}}",
+      export: ".chemx-Datei exportieren"
+    },
+    toolbar: {
+      animationName: "Animationsname",
+      description: "Beschreibung",
+      select: "Auswählen",
+      addAtom: "Atom hinzufügen",
+      addBond: "Bindung hinzufügen",
+      breakBond: "Bindung brechen",
+      undo: "Rückgängig",
+      atomType: "Atomtyp:",
+      bondType: "Bindungstyp:"
+    },
+    atoms: {
+      H: "Wasserstoff",
+      B: "Bor",
+      C: "Kohlenstoff",
+      N: "Stickstoff",
+      O: "Sauerstoff",
+      F: "Fluor",
+      Na: "Natrium",
+      Mg: "Magnesium",
+      Al: "Aluminium",
+      Si: "Silizium",
+      P: "Phosphor",
+      S: "Schwefel",
+      Cl: "Chlor",
+      K: "Kalium",
+      Ca: "Calcium",
+      As: "Arsen",
+      Se: "Selen",
+      Br: "Brom",
+      I: "Iod",
+      Pb: "Blei",
+      Fe: "Eisen",
+      Cu: "Kupfer",
+      Zn: "Zink",
+      Hg: "Quecksilber"
+    },
+    sceneController: {
+      bondCreation: {
+        title: "Bindungserstellung",
+        selectFirst: "Bitte wählen Sie das erste Atom",
+        startingAtom: "Startatom",
+        selectTarget: "Bitte wählen Sie das Zielatom"
+      }
+    },
+    atomPositionEditor: {
+      title: "Atomposition bearbeiten"
+    },
+    draggableAtom: {
+      startAtom: " Startatom"
+    },
+    keyframeEditor: {
+      maximumKeyframes: "Maximal 10 Keyframes erlaubt",
+      hints: {
+        select: "Maus ziehen zum Drehen der Ansicht, Mausrad zum Zoomen, Rechtsklick und Ziehen zum Bewegen der Kamera"
+      } 
     }
   }
 }; 
