@@ -15,7 +15,7 @@ import Simulator from './pages/Simulator';
 import OrganicReaction from './pages/OrganicReaction';
 import MoleculeLibrary from './pages/MoleculeLibrary';
 import About from './pages/About';
-
+import KeyframeEditor from './pages/KeyframeEditor';
 // App组件：应用程序的主要入口点
 // App component: Main entry point of the application
 function App() {
@@ -34,6 +34,7 @@ function App() {
               <Route path="/organic" element={<OrganicReaction />} />
               <Route path="/molecule-library" element={<MoleculeLibrary />} />
               <Route path="/about" element={<About />} />
+              <Route path="/keyframe-editor" element={<KeyframeEditor />} />
             </Routes>
           </main>
           

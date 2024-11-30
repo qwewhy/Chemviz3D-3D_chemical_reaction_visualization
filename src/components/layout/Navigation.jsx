@@ -8,6 +8,7 @@ const Navigation = () => {
     { path: '/', label: t('nav.home') },
     { path: '/simulation', label: t('nav.simulator') },
     { path: '/organic', label: t('nav.organicReaction') },
+    { path: '/keyframe-editor', label: t('nav.keyframeEditor') },
     { path: '/molecule-library', label: t('nav.molecules') },
     { path: '/about', label: t('nav.about') },
   ];
