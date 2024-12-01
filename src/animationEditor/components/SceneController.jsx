@@ -83,31 +83,31 @@ const SceneController = ({
       />
       
       {editMode === 'addBond' && (
-        <Html position={[5, 5, 0]}>
-          <div className="fixed top-20 left-4 bg-white/90 p-4 rounded-lg shadow-lg border border-blue-500">
-            <h3 className="font-bold mb-2 text-blue-600">
-              {t('sceneController.bondCreation.title')}
-            </h3>
-            {!bondStartAtom ? (
-              <p className="text-gray-700">
-                {t('sceneController.bondCreation.selectFirst')}
-              </p>
-            ) : (
-              <div>
-                <p className="text-gray-700 mb-2">
-                  {t('sceneController.bondCreation.startingAtom')}: 
-                  <span className="ml-2 font-bold text-blue-600">
-                    {atoms[bondStartAtom]?.symbol || ''}
-                  </span>
-                </p>
-                <p className="text-gray-700">
-                  {t('sceneController.bondCreation.selectTarget')}
-                </p>
-              </div>
-            )}
-          </div>
-        </Html>
-      )}
+  <Html position={[5, 5, 0]}>
+    <div className="fixed top-20 left-4 bg-white/90 p-4 rounded-lg shadow-lg border border-blue-500 w-64">
+      <h3 className="font-bold mb-2 text-blue-600 whitespace-normal">
+        {t('sceneController.bondCreation.title')}
+      </h3>
+      {!bondStartAtom ? (
+        <p className="text-gray-700 whitespace-normal">
+          {t('sceneController.bondCreation.selectFirst')}
+        </p>
+      ) : (
+        <div className="whitespace-normal">
+          <p className="text-gray-700 mb-2">
+            {t('sceneController.bondCreation.startingAtom')}:
+            <span className="ml-2 font-bold text-blue-600">
+              {atoms[bondStartAtom]?.symbol || ''}
+            </span>
+          </p>
+          <p className="text-gray-700">
+            {t('sceneController.bondCreation.selectTarget')}
+          </p>
+        </div>
+          )}
+        </div>
+      </Html>
+      )}  
     </>
   );
 };

@@ -15,6 +15,8 @@ export enum BondType {
   IONIC = "ionic", // 离子键 Ionic bond
   METALLIC = "metallic", // 金属键 Metallic bond
   COVALENT = "covalent", // 共价键 Covalent bond
+  HYDROGEN = "hydrogen", // 氢键 Hydrogen bond
+  PI = "pi", // 大π键 Pi bond
 }
 
 /**

@@ -42,7 +42,7 @@ const Bond = ({ bond, atom1, atom2, editMode, onBreakBond }) => {
         };
       case BondType.IONIC:
         return {
-          radius: 0.05,  // 更细
+          radius: 0.05,  
           color: '#ff0000',  // 红色
           emissive: '#440000'
         };
@@ -51,6 +51,18 @@ const Bond = ({ bond, atom1, atom2, editMode, onBreakBond }) => {
           radius: 0.1,
           color: '#cccccc',  // 灰白色
           emissive: '#444444'
+        };
+      case BondType.HYDROGEN:
+        return {
+          radius: 0.02,
+          color: '#0000FF', // 蓝色
+          emissive: '#000000'
+        };
+      case BondType.PI:
+        return {
+          radius: 0.05,
+          color: '#000000', // 黑色
+          emissive: '#000000'
         };
       default:
         return {

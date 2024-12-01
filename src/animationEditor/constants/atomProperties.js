@@ -34,6 +34,12 @@ export const ATOM_COLORS = {
   Cu: "#C88033", // 铜原子 - 铜色 / Copper - Copper
   Zn: "#7D80B0",  // 锌原子 - 蓝灰色 / Zinc - Blue-gray
   Hg: "#D4B454", // 汞原子 - 黄色 / Mercury - Yellow
+
+  // 其它辅助元素 / Other auxiliary elements
+  R: "#FF0000", // 有机官能团 红色 / Organic functional group - Red
+  '+': "#00FF00", // 正电荷 绿色 / Positive charge - Green
+  '-': "#0000FF", // 负电荷 蓝色 / Negative charge - Blue
+  '?': "#CCCCCC", // 未知元素 灰色 / Unknown element - Gray
 };
 
 
@@ -43,7 +49,7 @@ export const ATOM_COLORS = {
  */
 export const ATOM_RADIUS = {
   // 第一周期 / First period
-  H: 0.25,   // 氢原子最小 / Hydrogen is the smallest
+  H: 0.30,   // 氢原子最小 / Hydrogen is the smallest
   
   // 第二周期 / Second period
   B: 0.85,   // 硼原子 / Boron
@@ -77,4 +83,10 @@ export const ATOM_RADIUS = {
   Cu: 1.35,  // 铜原子 / Copper
   Zn: 1.35,  // 锌原子 / Zinc
   Hg: 1.35,  // 汞原子 / Mercury
+
+  // 其它辅助元素 / Other auxiliary elements
+  R: 1.00,  // 有机官能团 / Organic functional group
+  '+': 0.1, // 正电荷 / Positive charge
+  '-': 0.1, // 负电荷 / Negative charge
+  '?': 1.00, // 未知元素 / Unknown element
 };

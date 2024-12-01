@@ -60,6 +60,12 @@ const ATOM_COLORS: { [key: string]: string } = {
   Cu: '#C88033', // 铜 - 铜色
   Zn: '#7D80B0', // 锌 - 蓝灰色
   Hg: '#D4B454', // 汞 - 黄色
+
+  // 其它辅助元素
+  R: '#FF0000', // 有机官能团 
+  '+': '#00FF00', // 正电荷 绿色
+  '-': '#0000FF', // 负电荷 蓝色  
+  '?': '#CCCCCC', // 未知元素 灰色
 };
 
 // 添加原子半径映射
@@ -99,6 +105,12 @@ const ATOM_RADIUS: { [key: string]: number } = {
   Cu: 1.35,  // 铜
   Zn: 1.35,  // 锌
   Hg: 1.35,  // 汞
+
+  // 其它辅助元素
+  R: 1.00,  // 有机官能团
+  '+': 0.05, // 正电荷
+  '-': 0.05, // 负电荷
+  '?': 1.00, // 未知元素
 };
 
 // 定义不同类型化学键的样式
@@ -118,6 +130,16 @@ const BOND_STYLES: Record<BondType, BondStyle> = {
   [BondType.COVALENT]: {
     color: "#00FF00",
     radius: 0.12,
+    dashed: false,
+  },
+  [BondType.HYDROGEN]: {
+    color: "#0000FF",
+    radius: 0.02,
+    dashed: false,
+  },
+  [BondType.PI]: {
+    color: "#000000",
+    radius: 0.05,
     dashed: false,
   },
 };

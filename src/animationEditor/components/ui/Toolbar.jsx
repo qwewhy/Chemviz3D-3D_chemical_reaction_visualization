@@ -91,6 +91,18 @@ const Toolbar = ({
           {t('toolbar.breakBond')}
         </button>
 
+        {/* 删除原子模式 / Delete atom mode */}
+        <button
+          className={`px-4 py-2 rounded-lg transition-colors ${
+            editMode === 'deleteAtom' 
+              ? 'bg-red-500 text-white' 
+              : 'bg-gray-200 hover:bg-gray-300'
+          }`}
+          onClick={() => setEditMode('deleteAtom')}
+        >
+          {t('toolbar.deleteAtom')}
+        </button>
+
         {/* 撤销按钮 / Undo button */}
         <button
           className={`px-4 py-2 rounded-lg transition-colors ${
@@ -137,6 +149,8 @@ const Toolbar = ({
               <option value={BondType.COVALENT}>{t('bonds.types.covalent.name')}</option>
               <option value={BondType.IONIC}>{t('bonds.types.ionic.name')}</option>
               <option value={BondType.METALLIC}>{t('bonds.types.metallic.name')}</option>
+              <option value={BondType.HYDROGEN}>{t('bonds.types.hydrogen.name')}</option>
+              <option value={BondType.PI}>{t('bonds.types.pi.name')}</option>
             </select>
           </div>
         )}

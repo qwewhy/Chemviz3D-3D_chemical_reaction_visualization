@@ -124,33 +124,54 @@ export default {
         covalent: {
           name: "공유 결합",
           description: "원자 간 전자쌍을 공유하여 형성되는 화학 결합"
-        }
+        },
+        hydrogen: {
+          name: "수소 결합",
+          description: "수소 원자와 다른 원자 간 형성되는 수소 결합"
+        },
+        pi: {
+          name: "π 결합",
+          description: "여러 원자 간 π 전자 구름을 공유하여 형성되는 π 결합"
+        } 
       }
     },
     keyframeEditor: {
+      title: "키프레임 에디터",
+      maximumKeyframes: "최대 10 키프레임 허용",
       hints: {
-        addAtom: "장면을 클릭하여 원자 추가",
-        addBond: "두 원자를 클릭하여 결합 생성",
-        select: "드래그로 시점 회전, 스크롤로 확대/축소, 우클릭 후 드래그로 카메라 이동"
+        addAtom: "장면을 클릭하여 물질 추가", 
+        addBond: "두 물질을 클릭하여 결합 생성",
+        select: "드래그로 시점 회전, 스크롤로 확대/축소, 우클릭 후 드래그로 카메라 이동, 물질을 클릭하여 위치 변경",
+        deleteAtom: '물질을 클릭하여 삭제',
+        breakBond: '결합을 클릭하여 해제'
+      },
+      importantNotes: {
+        title: "중요한 주의사항",
+        note1: "먼저, 첫 번째 프레임에서 모든 필요한 원자를 배치하고 초기 분자 구조를 구축하세요. 모든 화학 반응은 원자 보존 법칙을 따라야 합니다.",
+        note2: "첫 번째 프레임에서 마지막 프레임까지 화학 반응의 순서대로 만들어주세요. 그 후의 키프레임에서는 원자만 이동할 수 있습니다. 양성 및 음성 전하는 생성, 이동, 삭제할 수 있습니다. 화학 결합은 각 프레임에서 분리 및 연결할 수 있으며, 화학 반응의 애니메이션 효과를 실현합니다.",
+        note3: "분자, 화학 결합, 전하가 평면 그리드(y=0) 아래에 있는 경우, 작업을 수행하기 전에 평면 그리드의 아래쪽으로 카메라를 회전하세요. 모든 장면 작업은 카메라의 그리드 쪽에서만 수행됩니다.",
+        note4: "각 프레임의 애니메이션이 완료되면 현재 키프레임을 저장하세요. 모든 키프레임이 완료되면 내보낸 .chemx 파일을 애니메이션 창에 직접 드래그하여 애니메이션을 확인하세요."
       }
     },
     keyframePanel: {
       title: "키프레임",
-      current: "현재: {{current}} / {{total}}",
+      current: "현재: {{current}} / 20",
       saveFrame: "현재 프레임 저장",
       keyframe: "키프레임 {{number}}",
-      export: ".chemx 파일 내보내기"
+      export: ".chemx 파일 내보내기",
+      createNewFrame: "새 프레임 생성"    
     },
     toolbar: {
       animationName: "애니메이션 이름",
       description: "설명",
       select: "선택",
-      addAtom: "원자 추가",
+      addAtom: "물질 추가",
       addBond: "결합 추가",
-      breakBond: "결합 해제",
+      breakBond: "결합 해제", 
       undo: "실행 취소",
-      atomType: "원자 유형:",
-      bondType: "결합 유형:"
+      atomType: "물질 유형:",
+      bondType: "결합 유형:",
+      deleteAtom: '물질 삭제'
     },
     atoms: {
       H: "수소",
@@ -176,7 +197,11 @@ export default {
       Fe: "철",
       Cu: "구리",
       Zn: "아연",
-      Hg: "수은"
+      Hg: "수은",
+      R: "유기 기능 그룹",
+      '+': "양성 전하",
+      '-': "음성 전하",
+      '?': "알 수 없는 원소"  
     },
     sceneController: {
       bondCreation: {
@@ -191,12 +216,6 @@ export default {
     },
     draggableAtom: {
       startAtom: " 시작 원자"
-    },
-    keyframeEditor: {
-      maximumKeyframes: "최대 10 키프레임 허용",
-      hints: {
-        select: "드래그로 시점 회전, 스크롤로 확대/축소, 우클릭 후 드래그로 카메라 이동"
-      }     
     }
   }
 }; 

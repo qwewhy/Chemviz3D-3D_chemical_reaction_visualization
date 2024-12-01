@@ -135,33 +135,53 @@ export default {
           description:
             "Legame chimico formato dalla condivisione di coppie di elettroni tra atomi",
         },
+        hydrogen: {
+          name: "Legame idrogeno",
+          description: "Legame idrogeno tra atomi di idrogeno e altri atomi"
+        },
+        pi: {
+          name: "Legame π",
+          description: "Legame π formato dal condividimento di un nuvola π tra più atomi"
+        }  
       },
     },
     keyframeEditor: {
+      title: "Editor fotogrammi chiave",
+      maximumKeyframes: "Massimo 10 fotogrammi chiave consentiti",
       hints: {
-        addAtom: "Clicca sulla scena per aggiungere un atomo",
-        addBond: "Clicca su due atomi per creare un legame",
-        select:
-          "Trascina per ruotare la vista, scorri per zoom, clic destro e trascina per muovere la camera",
+        addAtom: "Clicca sulla scena per aggiungere un materiale",  
+        addBond: "Clicca su due materiali per creare un legame",
+        select: "Trascina per ruotare la vista, scorri per zoom, clic destro e trascina per muovere la camera, clicca su un materiale per muovere la sua posizione",
+        deleteAtom: 'Clicca su un materiale per eliminarlo',
+        breakBond: 'Clicca su un legame per romperlo'
       },
+      importantNotes: {
+        title: "Importante",
+        note1: "Per favore, inserisci tutti gli atomi richiesti e costruisci la struttura molecolare iniziale nel primo fotogramma. Tutte le reazioni chimiche devono seguire la conservazione degli atomi.",
+        note2: "Per favore, crea dalla prima alla ultima fotogrammi chiave della reazione chimica nell'ordine corretto. Negli altri fotogrammi chiave, gli atomi possono solo essere spostati; le cariche positive e negative possono essere create, spostate e eliminate; e i legami chimici possono essere rotto e collegato in ogni fotogramma per raggiungere l'effetto animato della reazione chimica.",
+        note3: "Quando si opera su molecole, legami chimici o cariche localizzate sotto la griglia del piano (y=0), ruota la camera verso il basso della griglia del piano prima di operare, e tutte le operazioni della scena saranno eseguite solo sulla parte della griglia della camera.",
+        note4: "Dopo aver completato ogni fotogramma dell'animazione, è necessario salvare il fotogramma chiave corrente. Dopo aver completato tutti i fotogrammi chiave, trascina il file .chemx esportato direttamente nella finestra dell'animazione per vedere la tua animazione."
+      }     
     },
     keyframePanel: {
       title: "Fotogrammi chiave",
-      current: "Attuale: {{current}} / {{total}}",
+      current: "Attuale: {{current}} / 20",
       saveFrame: "Salva fotogramma corrente",
       keyframe: "Fotogramma chiave {{number}}",
       export: "Esporta file .chemx",
+      createNewFrame: "Crea nuovo fotogramma"   
     },
     toolbar: {
       animationName: "Nome animazione",
       description: "Descrizione",
       select: "Seleziona",
-      addAtom: "Aggiungi atomo",
+      addAtom: "Aggiungi materiale",
       addBond: "Aggiungi legame",
       breakBond: "Rompi legame",
       undo: "Annulla",
-      atomType: "Tipo di atomo:",
-      bondType: "Tipo di legame:",
+      atomType: "Tipo di materiale:",
+      bondType: "Tipo di legame:",  
+      deleteAtom: 'Elimina materiale'
     },
     atoms: {
       H: "Idrogeno",
@@ -188,6 +208,10 @@ export default {
       Cu: "Rame",
       Zn: "Zinco",
       Hg: "Mercurio",
+      R: "Gruppo funzionale organico",
+      '+': "Carica positiva",
+      '-': "Carica negativa",
+      '?': "Elemento sconosciuto" 
     },
     sceneController: {
       bondCreation: {
@@ -197,25 +221,11 @@ export default {
         selectTarget: "Seleziona l'atomo target",
       },
     },
-    keyframeEditor: {
-      hints: {
-        addAtom: "Clicca sulla scena per aggiungere un atomo",
-        addBond: "Clicca su due atomi per creare un legame",
-        select:
-          "Trascina per ruotare la vista, scorri per zoom, clic destro e trascina per muovere la camera",
-      },
-    },
     atomPositionEditor: {
       title: "Editor posizione atomo",
     },
     draggableAtom: {
       startAtom: " Atomo di partenza",
-    },
-    keyframeEditor: {
-      maximumKeyframes: "Massimo 10 fotogrammi chiave consentiti",
-      hints: {
-        select: "Trascina per ruotare la vista, scorri per zoom, clic destro e trascina per muovere la camera"
-      }  
     },
   },
 };

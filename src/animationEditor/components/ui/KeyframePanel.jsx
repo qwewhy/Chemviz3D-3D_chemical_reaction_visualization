@@ -11,57 +11,74 @@ const KeyframePanel = ({
   currentKeyframe,
   keyframes,
   onSaveKeyframe,
+  onCreateNewFrame,
   onSelectKeyframe,
   onExport,
 }) => {
   const { t } = useTranslation();
   
+  console.log('KeyframePanel render:', {
+    currentKeyframe,
+    keyframesCount: keyframes.length,
+    keyframes
+  });
+  
   return (
-    <div className="w-80 m-4 bg-white rounded-lg shadow-lg p-4">
-      <div className="mb-4">
-        <h2 className="text-xl font-bold mb-1">{t('keyframePanel.title')}</h2>
-        <p className="text-sm text-gray-600">
-          {t('keyframePanel.current', { current: currentKeyframe + 1, total: keyframes.length })}
-        </p>
+    <div className="w-64 bg-gray-100 p-4 flex flex-col h-full">
+      <div className="text-lg font-bold mb-4 flex-none">
+        Keyframes
+        <div className="text-sm font-normal">
+          Current: {currentKeyframe + 1} / 20
+        </div>
       </div>
 
-      <div className="space-y-4">
-        <button 
-          className={`w-full py-2 rounded-lg transition-colors ${
-            keyframes.length >= 10
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-blue-500 text-white hover:bg-blue-600'
-          }`}
+      <div className="flex flex-col gap-2 mb-4 flex-none">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           onClick={onSaveKeyframe}
-          disabled={keyframes.length >= 10}
         >
           {t('keyframePanel.saveFrame')}
         </button>
+        
+        <button
+          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+          onClick={onCreateNewFrame}
+          disabled={keyframes.length >= 20}
+        >
+          {t('keyframePanel.createNewFrame')}
+        </button>
+      </div>
 
-        <div className="space-y-2">
-          {keyframes.map((_, index) => (
-            <button
-              key={index}
-              className={`w-full py-2 rounded-lg transition-colors ${
-                currentKeyframe === index
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 hover:bg-gray-300'
+      <div className="flex-1 overflow-y-auto min-h-0" style={{
+        maxHeight: 'calc(100vh - 400px)'
+      }}>
+        <div className="space-y-2 pr-2">
+          {keyframes.map((frame, index) => (
+            <div
+              key={frame.timestamp}
+              className={`p-2 rounded cursor-pointer transition-colors duration-200 ${
+                currentKeyframe === index ? 'bg-blue-200' : 'bg-white hover:bg-gray-50'
               }`}
               onClick={() => onSelectKeyframe(index)}
             >
-              {t('keyframePanel.keyframe', { number: index + 1 })}
-            </button>
+              <div className="font-medium">
+                Keyframe {index + 1}
+              </div>
+              <div className="text-sm text-gray-600">
+                {Object.keys(frame.atoms).length} objects, {frame.bonds.length} bonds
+              </div>
+              {/* <div className="text-xs text-gray-500"> */}
+                {/* {t('keyframePanel.editing')} */}
+              {/* </div> */}
+            </div>
           ))}
         </div>
+      </div>
 
+      <div className="mt-4 flex-none">
         <button
-          className={`w-full py-2 rounded-lg transition-colors ${
-            keyframes.length === 0
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-green-500 text-white hover:bg-green-600'
-          }`}
+          className="w-full bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
           onClick={onExport}
-          disabled={keyframes.length === 0}
         >
           {t('keyframePanel.export')}
         </button>

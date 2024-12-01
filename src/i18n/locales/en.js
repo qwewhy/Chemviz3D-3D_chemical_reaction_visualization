@@ -124,33 +124,54 @@ export default {
         covalent: {
           name: "Covalent Bond",
           description: "Chemical bond formed by sharing electron pairs between atoms"
-        }
+        },
+        hydrogen: {
+          name: "Hydrogen Bond",
+          description: "Hydrogen bond formed between hydrogen atoms and other atoms"
+        },
+        pi: {
+          name: "Pi Bond",
+          description: "Pi bond formed by sharing π electron cloud among multiple atoms"
+        } 
       }
     },
     keyframeEditor: {
+      title: "Animation Editor",
+      maximumKeyframes: "Maximum 10 Keyframes allowed",
       hints: {
-        addAtom: "Click scene to add atom",
-        addBond: "Click two atoms to create bond",
-        select: "Drag to rotate view, scroll to zoom, right-click and drag to move camera"
-      }
+        addAtom: "Click scene to add material",
+        addBond: "Click two materials to create bond",
+        select: "Drag to rotate view, scroll to zoom, right-click and drag to move camera, click material to move position",
+        deleteAtom: 'Click material to delete',
+        breakBond: 'Click bond to break'
+      },
+      importantNotes: {
+        title: "Important Notes",
+        note1: "Please place all required atoms and build the initial molecular structure in the first frame. All chemical reactions should follow atomic conservation.",
+        note2: "Please create from the first frame to the last frame of the chemical reaction in order. In the subsequent keyframes, atoms can only be moved; positive and negative charges can be created, moved, and deleted; and chemical bonds can be broken and connected in each frame to achieve the animation effect of the chemical reaction.",
+        note3: "When operating molecules, chemical bonds, or charges located below the plane grid (y=0), please rotate the camera to the bottom of the plane grid before operating, and all scene operations will only operate on the side of the camera's grid.",
+        note4: "After each frame of animation is completed, the current keyframe must be saved. After all keyframes are completed, drag the exported .chemx file directly into the animation window to see your animation."
+      }   
     },
     keyframePanel: {
       title: "Keyframes",
-      current: "Current: {{current}} / {{total}}",
+      current: "Current: {{current}} / 20",
       saveFrame: "Save Current Frame",
       keyframe: "Keyframe {{number}}",
-      export: "Export .chemx"
+      export: "Export .chemx",
+      createNewFrame: "Create New Frame"  
     },
     toolbar: {
       animationName: "Animation Name",
       description: "Description",
       select: "Select",
-      addAtom: "Add Atom",
+      addAtom: "Add Material",
       addBond: "Add Bond",
-      breakBond: "Break Bond",
+      breakBond: "Break Bond",  
       undo: "Undo",
-      atomType: "Atom Type:",
-      bondType: "Bond Type:"
+      atomType: "Material Type:",
+      bondType: "Bond Type:",
+      deleteAtom: 'Delete Material'  
     },
     atoms: {
       H: "Hydrogen",
@@ -176,7 +197,11 @@ export default {
       Fe: "Iron",
       Cu: "Copper",
       Zn: "Zinc",
-      Hg: "Mercury"
+      Hg: "Mercury",
+      R: "Organic Functional Group",
+      '+': "Positive Charge",
+      '-': "Negative Charge",
+      '?': "Unknown Element"  
     },
     sceneController: {
       bondCreation: {
@@ -191,12 +216,6 @@ export default {
     },
     draggableAtom: {
       startAtom: " Start Atom"
-    },
-    keyframeEditor: {
-      maximumKeyframes: "Maximum 10 Keyframes allowed",
-      hints: {
-        select: "Drag to rotate view, scroll to zoom, right-click and drag to move camera"
-      } 
-    } 
+    }
   }
 }; 

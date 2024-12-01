@@ -14,13 +14,14 @@ import useAtomDrag from '../animationEditor/hooks/useAtomDrag';
 import AtomPositionEditor from '../animationEditor/components/ui/AtomPositionEditor';
 import useHistoryState from '../animationEditor/hooks/useHistoryState';
 import { useTranslation } from 'react-i18next';
+import KeyFrameEditorImportantNotesAlert from '../components/layout/KeyFrameEditorImportantNotesAlert';
 
 /**
  * 化学反应动画编辑器主页面
  * Chemical Reaction Animation Editor Main Page
  */
 const KeyframeEditor = () => {
-  // 态管理 / State management
+  // 状态管理 / State management
   const [atoms, setAtoms, undoAtoms, canUndoAtoms] = useHistoryState({});
   const [bonds, setBonds, undoBonds, canUndoBonds] = useHistoryState([]);
   const [selectedAtom, setSelectedAtom] = useState(null);
@@ -39,7 +40,9 @@ const KeyframeEditor = () => {
     keyframes,
     currentKeyframe,
     saveKeyframe,
-    switchKeyframe
+    switchKeyframe,
+    getCurrentKeyframeData,
+    validateAllKeyframes
   } = useKeyframes();
 
   const {
@@ -134,9 +137,19 @@ const KeyframeEditor = () => {
    * Handle export
    */
   const handleExport = useCallback(() => {
-    const blob = exportToChemx(metadata, keyframes);
-    downloadFile(blob, `${metadata.name || 'reaction'}.chemx`);
-  }, [metadata, keyframes]);
+    try {
+      if (!validateAllKeyframes()) {
+        alert('Some keyframes contain invalid data. Please check your data before exporting.');
+        return;
+      }
+
+      const blob = exportToChemx(metadata, keyframes);
+      downloadFile(blob, `${metadata.name || 'reaction'}.chemx`);
+    } catch (error) {
+      console.error('Export failed:', error);
+      alert(`Export failed: ${error.message}`);
+    }
+  }, [metadata, keyframes, validateAllKeyframes]);
 
   /**
    * 处理原子位置更新
@@ -160,13 +173,26 @@ const KeyframeEditor = () => {
    */
   const handleUndo = useCallback(() => {
     console.log('Undo triggered', { canUndoAtoms, canUndoBonds });
+    
+    // 只回退最近的一个操作
     if (canUndoAtoms) {
-      console.log('Undoing atoms');
-      undoAtoms();
+      const atomsTimestamp = undoAtoms.getLastTimestamp?.() || 0;
+      const bondsTimestamp = undoBonds.getLastTimestamp?.() || 0;
+      
+      if (atomsTimestamp >= bondsTimestamp) {
+        console.log('Undoing atoms');
+        undoAtoms();
+      }
     }
+    
     if (canUndoBonds) {
-      console.log('Undoing bonds');
-      undoBonds();
+      const atomsTimestamp = undoAtoms.getLastTimestamp?.() || 0;
+      const bondsTimestamp = undoBonds.getLastTimestamp?.() || 0;
+      
+      if (bondsTimestamp > atomsTimestamp) {
+        console.log('Undoing bonds');
+        undoBonds();
+      }
     }
   }, [canUndoAtoms, canUndoBonds, undoAtoms, undoBonds]);
 
@@ -187,6 +213,92 @@ const KeyframeEditor = () => {
   const handleBreakBond = useCallback((bondId) => {
     setBonds(prev => prev.filter(bond => bond.id !== bondId));
   }, [setBonds]);
+
+  /**
+   * 处理原子删除
+   * Handle atom deletion
+   */
+  const handleDeleteAtom = useCallback((atomId) => {
+    // 删除与该原子相关的所有化学键
+    setBonds(prev => prev.filter(bond => 
+      !bond.atomIds.includes(atomId)
+    ));
+    
+    // 删除原子
+    setAtoms(prev => {
+      const newAtoms = { ...prev };
+      delete newAtoms[atomId];
+      return newAtoms;
+    });
+    
+    // 如果删除的是当前选中的原子，清除选中状态
+    if (selectedAtom === atomId) {
+      setSelectedAtom(null);
+    }
+    
+    // 如果删除的是正在创建化学键的原子，清除化学键创建状态
+    if (bondStartAtom === atomId) {
+      setBondStartAtom(null);
+    }
+  }, [selectedAtom, bondStartAtom, setBonds, setAtoms]);
+
+  // 新增：处理关键帧切换的函数
+  const handleKeyframeSwitch = useCallback((index) => {
+    console.log('Switching to keyframe:', index);
+    
+    // 如果切换到新的空帧位置
+    if (index === keyframes.length) {
+      setAtoms({});
+      setBonds([]);
+      switchKeyframe(index);
+      return;
+    }
+    
+    // 切换到已存在的帧
+    const targetKeyframe = keyframes[index];
+    if (targetKeyframe) {
+      setAtoms(targetKeyframe.atoms);
+      setBonds(targetKeyframe.bonds);
+      switchKeyframe(index);
+    }
+  }, [keyframes, switchKeyframe, setAtoms, setBonds]);
+
+  // 在 KeyframePanel 组件的 onSaveKeyframe 回调中添加日志
+  const handleSaveKeyframe = useCallback(() => {
+    console.log('Saving keyframe:', {
+      atomsCount: Object.keys(atoms).length,
+      bondsCount: bonds.length,
+      currentKeyframe
+    });
+    
+    // 检查是否有原子或键
+    if (Object.keys(atoms).length === 0 && bonds.length === 0) {
+      alert('Please add some atoms or bonds first');
+      return;
+    }
+    
+    saveKeyframe(atoms, bonds);
+  }, [atoms, bonds, currentKeyframe, saveKeyframe]);
+
+  // 在现有的 handleSaveKeyframe 函数旁添加新的处理函数
+  const handleCreateNewFrame = useCallback(() => {
+    console.log('Creating new frame');
+    
+    // 检查是否有原子或键
+    if (Object.keys(atoms).length === 0 && bonds.length === 0) {
+      alert('Please add some atoms or bonds first');
+      return;
+    }
+    
+    // 切换到新的帧位置
+    const newFrameIndex = keyframes.length;
+    if (newFrameIndex < 20) {
+      switchKeyframe(newFrameIndex);
+      saveKeyframe(atoms, bonds);
+    } else {
+      alert('Maximum 20 keyframes allowed');
+    }
+  }, [atoms, bonds, keyframes.length, switchKeyframe, saveKeyframe]);
 
   return (
     <div className="h-screen flex flex-col">
@@ -249,6 +361,7 @@ const KeyframeEditor = () => {
                     setSelectedAtom(id);
                   }
                 }}
+                onDelete={handleDeleteAtom}
                 onMove={handleAtomMove}
                 isStartAtom={bondStartAtom === id}
               />
@@ -273,20 +386,25 @@ const KeyframeEditor = () => {
               maxDistance={20}
             />
           </Canvas>
-  
+          
+          <KeyFrameEditorImportantNotesAlert />
+
           {/* 编辑模式提示 */}
           <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-2 rounded">
             {editMode === 'addAtom' && t('keyframeEditor.hints.addAtom')}
             {editMode === 'addBond' && t('keyframeEditor.hints.addBond')}
             {editMode === 'select' && t('keyframeEditor.hints.select')}
+            {editMode === 'deleteAtom' && t('keyframeEditor.hints.deleteAtom')}
+            {editMode === 'breakBond' && t('keyframeEditor.hints.breakBond')}
           </div>
         </div>
 
         <KeyframePanel
           currentKeyframe={currentKeyframe}
           keyframes={keyframes}
-          onSaveKeyframe={() => saveKeyframe(atoms, bonds)}
-          onSelectKeyframe={switchKeyframe}
+          onSaveKeyframe={handleSaveKeyframe}
+          onCreateNewFrame={handleCreateNewFrame}
+          onSelectKeyframe={handleKeyframeSwitch}
           onExport={handleExport}
         />
       </div>

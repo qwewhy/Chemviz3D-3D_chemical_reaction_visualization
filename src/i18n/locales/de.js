@@ -124,33 +124,54 @@ export default {
         covalent: {
           name: "Kovalente Bindung",
           description: "Chemische Bindung durch gemeinsame Elektronenpaare zwischen Atomen"
-        }
+        },
+        hydrogen: {
+          name: "Wasserstoffbindung",
+          description: "Wasserstoffbindung zwischen Wasserstoffatomen und anderen Atomen"
+        },
+        pi: {
+          name: "Pi-Bindung",
+          description: "Pi-Bindung durch gemeinsames π-Elektronen-Wolke zwischen mehreren Atomen"
+        } 
       }
     },
     keyframeEditor: {
+      title: "Animationseditor",
+      maximumKeyframes: "Maximal 10 Keyframes erlaubt",
       hints: {
-        addAtom: "Klicken Sie auf die Szene, um ein Atom hinzuzufügen",
-        addBond: "Klicken Sie auf zwei Atome, um eine Bindung zu erstellen",
-        select: "Ziehen zum Drehen der Ansicht, Scrollen zum Zoomen, Rechtsklick und Ziehen zum Bewegen der Kamera"
-      }
+        addAtom: "Klicken Sie auf die Szene, um ein Materialien hinzuzufügen",
+        addBond: "Klicken Sie auf zwei Materialien, um eine Bindung zu erstellen",
+        select: "Ziehen zum Drehen der Ansicht, Scrollen zum Zoomen, Rechtsklick und Ziehen zum Bewegen der Kamera, Material anklicken um Position zu ändern",
+        deleteAtom: 'Materialien anklicken um zu löschen',
+        breakBond: 'Bindung anklicken um zu brechen'
+      },
+      importantNotes: {
+        title: "Wichtige Hinweise",
+        note1: "Bitte platzieren Sie alle erforderlichen Atome und bauen Sie die initiale Molekülstruktur in der ersten Keyframe ein. Alle chemischen Reaktionen sollten den Atomerhaltung folgen.",
+        note2: "Bitte erstellen Sie von der ersten bis zur letzten Keyframe der chemischen Reaktion in der richtigen Reihenfolge. In den nachfolgenden Keyframes können Atome nur bewegt werden; positive und negative Ladungen können erstellt, bewegt und gelöscht werden; und chemische Bindungen können in jedem Frame gebrochen und verbunden werden, um die Animation der chemischen Reaktion zu erreichen.",
+        note3: "Wenn Sie Moleküle, chemische Bindungen oder Ladungen, die sich unter der Ebene (y=0) befinden, betätigen, drehen Sie bitte die Kamera auf die Unterseite der Ebene, bevor Sie betätigen, und alle Szenenoperationen werden nur auf der Seite der Kamera's Ebene ausgeführt.",
+        note4: "Nachdem jedes Frame der Animation abgeschlossen ist, muss die aktuelle Keyframe gespeichert werden. Nachdem alle Keyframes abgeschlossen sind, ziehen Sie die exportierte .chemx-Datei direkt in das Animationfenster, um Ihre Animation zu sehen."
+      }   
     },
     keyframePanel: {
       title: "Keyframes",
-      current: "Aktuell: {{current}} / {{total}}",
+      current: "Aktuell: {{current}} / 20",
       saveFrame: "Aktuellen Frame speichern",
       keyframe: "Keyframe {{number}}",
-      export: ".chemx-Datei exportieren"
+      export: ".chemx-Datei exportieren",
+      createNewFrame: "Neuen Keyframe erstellen"  
     },
     toolbar: {
       animationName: "Animationsname",
       description: "Beschreibung",
       select: "Auswählen",
-      addAtom: "Atom hinzufügen",
+      addAtom: "Material hinzufügen",
       addBond: "Bindung hinzufügen",
       breakBond: "Bindung brechen",
       undo: "Rückgängig",
-      atomType: "Atomtyp:",
-      bondType: "Bindungstyp:"
+      atomType: "Materialtyp:",
+      bondType: "Bindungstyp:",
+      deleteAtom: 'Material löschen'    
     },
     atoms: {
       H: "Wasserstoff",
@@ -176,7 +197,11 @@ export default {
       Fe: "Eisen",
       Cu: "Kupfer",
       Zn: "Zink",
-      Hg: "Quecksilber"
+      Hg: "Quecksilber",
+      R: "Organische Funktionelle Gruppe",
+      '+': "Positive Ladung",
+      '-': "Negative Ladung",
+      '?': "Unbekanntes Element"  
     },
     sceneController: {
       bondCreation: {
@@ -191,12 +216,6 @@ export default {
     },
     draggableAtom: {
       startAtom: " Startatom"
-    },
-    keyframeEditor: {
-      maximumKeyframes: "Maximal 10 Keyframes erlaubt",
-      hints: {
-        select: "Maus ziehen zum Drehen der Ansicht, Mausrad zum Zoomen, Rechtsklick und Ziehen zum Bewegen der Kamera"
-      } 
     }
   }
 }; 

@@ -8,18 +8,16 @@ import { useTranslation } from 'react-i18next';
  * 原子组件（移除拖拽功能）
  * Atom Component (without drag functionality)
  */
-const DraggableAtom = ({ atom, selected, onSelect, editMode, isStartAtom }) => {
+const DraggableAtom = ({ atom, selected, onSelect, editMode, isStartAtom, onDelete }) => {
   const { t } = useTranslation();
 
   const handleClick = (e) => {
     e.stopPropagation();
     
-    // 记录点击的具体位置，用于判断是否点击到了当前原子
     const clickPosition = e.point;
     const atomPosition = new THREE.Vector3(atom.position.x, atom.position.y, atom.position.z);
     const distance = clickPosition.distanceTo(atomPosition);
     
-    // 只有当点击位置在原子半径范围内时才触发选择
     if (distance <= ATOM_RADIUS[atom.symbol] * 1.5) {
       console.log('Atom clicked:', {
         id: atom.id,
@@ -28,7 +26,9 @@ const DraggableAtom = ({ atom, selected, onSelect, editMode, isStartAtom }) => {
         editMode: editMode
       });
       
-      if (editMode === 'select' || editMode === 'addBond') {
+      if (editMode === 'deleteAtom') {
+        onDelete(atom.id);
+      } else if (editMode === 'select' || editMode === 'addBond') {
         onSelect();
       }
     }
@@ -36,9 +36,10 @@ const DraggableAtom = ({ atom, selected, onSelect, editMode, isStartAtom }) => {
 
   // 根据不同状态显示不同的发光效果
   const getEmissiveColor = () => {
-    if (isStartAtom) return '#00ff00';  // 起始原子显示绿色发光
-    if (selected) return '#ffffff';      // 选中状态显示白色发光
-    return '#000000';                    // 普通状态不发光
+    if (editMode === 'deleteAtom') return '#ff0000';  // 删除模式显示红色发光
+    if (isStartAtom) return '#00ff00';  
+    if (selected) return '#ffffff';      
+    return '#000000';                    
   };
 
   return (

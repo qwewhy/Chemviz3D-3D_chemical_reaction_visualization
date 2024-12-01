@@ -124,33 +124,54 @@ export default {
         covalent: {
           name: "Liaison covalente",
           description: "Liaison chimique formée par le partage de paires d'électrons entre atomes"
-        }
+        },
+        hydrogen: {
+          name: "Liaison hydrogène",
+          description: "Liaison hydrogène entre atomes d'hydrogène et d'autres atomes"
+        },
+        pi: {
+          name: "Liaison π",
+          description: "Liaison π formée par le partage de nuage π entre plusieurs atomes"
+        } 
       }
     },
     keyframeEditor: {
+      title: "Éditeur d'animation",
+      maximumKeyframes: "Maximum 10 images clés autorisées",
       hints: {
-        addAtom: "Cliquez sur la scène pour ajouter un atome",
-        addBond: "Cliquez sur deux atomes pour créer une liaison",
-        select: "Faites glisser pour faire pivoter la vue, défilez pour zoomer, clic droit et glisser pour déplacer la caméra"
-      }
+        addAtom: "Cliquez sur la scène pour ajouter un matériau", 
+        addBond: "Cliquez sur deux matériaux pour créer une liaison",
+        select: "Faites glisser pour faire pivoter la vue, défilez pour zoomer, clic droit et glisser pour déplacer la caméra, cliquer sur un matériau pour le déplacer",
+        deleteAtom: 'Cliquer sur un matériau pour le supprimer',
+        breakBond: 'Cliquer sur une liaison pour la casser' 
+      },
+      importantNotes: {
+        title: "Important Notes",
+        note1: "Please place all required atoms and build the initial molecular structure in the first frame. All chemical reactions should follow atomic conservation.",
+        note2: "Please create from the first frame to the last frame of the chemical reaction in order. In the subsequent keyframes, atoms can only be moved; positive and negative charges can be created, moved, and deleted; and chemical bonds can be broken and connected in each frame to achieve the animation effect of the chemical reaction.",
+        note3: "When operating molecules, chemical bonds, or charges located below the plane grid (y=0), please rotate the camera to the bottom of the plane grid before operating, and all scene operations will only operate on the side of the camera's grid.",
+        note4: "After each frame of animation is completed, the current keyframe must be saved. After all keyframes are completed, drag the exported .chemx file directly into the animation window to see your animation."
+      }     
     },
     keyframePanel: {
       title: "Images clés",
-      current: "Actuel : {{current}} / {{total}}",
+      current: "Actuel : {{current}} / 20",
       saveFrame: "Enregistrer l'image actuelle",
       keyframe: "Image clé {{number}}",
-      export: "Exporter le fichier .chemx"
+      export: "Exporter le fichier .chemx",
+      createNewFrame: "Créer une nouvelle image clé"    
     },
     toolbar: {
       animationName: "Nom de l'animation",
       description: "Description",
       select: "Sélectionner",
-      addAtom: "Ajouter un atome",
+      addAtom: "Ajouter un matériau",
       addBond: "Ajouter une liaison",
       breakBond: "Rompre la liaison",
       undo: "Annuler",
-      atomType: "Type d'atome :",
-      bondType: "Type de liaison :"
+      atomType: "Type de matériau :", 
+      bondType: "Type de liaison :",
+      deleteAtom: 'Supprimer matériau'
     },
     atoms: {
       H: "Hydrogène",
@@ -176,7 +197,11 @@ export default {
       Fe: "Fer",
       Cu: "Cuivre",
       Zn: "Zinc",
-      Hg: "Mercure"
+      Hg: "Mercure",
+      R: "Groupe fonctionnel organique",
+      '+': "Charge positive",
+      '-': "Charge négative",
+      '?': "Élément inconnu"  
     },
     sceneController: {
       bondCreation: {
@@ -191,12 +216,6 @@ export default {
     },
     draggableAtom: {
       startAtom: " Atome de départ"
-    },
-    keyframeEditor: {
-      maximumKeyframes: "Maximum 10 images clés autorisées",
-      hints: {
-        select: "Faites glisser pour faire pivoter la vue, défilez pour zoomer, clic droit et glisser pour déplacer la caméra"
-      } 
     }
   }
 }; 
