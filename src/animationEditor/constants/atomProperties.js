@@ -19,15 +19,24 @@ export const ATOM_COLORS = {
   F: "#90E050",  // 氟原子 - 浅绿色 / Fluorine - Light green
   
   // 第三周期 / Third period
+  Na: "#0000FF", // 钠原子 - 蓝色 / Sodium - Blue
+  Mg: "#808080", // 镁原子 - 绿色 / Magnesium - Green
+  Al: "#FFA500", // 铝原子 - 橙色 / Aluminum - Orange
+  Si: "#808080", // 硅原子 - 灰色 / Silicon - Gray
   P: "#FF8000",  // 磷原子 - 橙色 / Phosphorus - Orange
   S: "#FFFF30",  // 硫原子 - 黄色 / Sulfur - Yellow
   Cl: "#1FF01F", // 氯原子 - 绿色 / Chlorine - Green
   
   // 第四周期 / Fourth period
+  K: "#0000FF", // 钾原子 - 蓝色 / Potassium - Blue
+  Ca: "#808080", // 钙原子 - 灰色 / Calcium - Gray
+  As: "#FFA500", // 砷原子 - 橙色 / Arsenic - Orange
+  Se: "#FFFF30", // 硒原子 - 黄色 / Selenium - Yellow
   Br: "#A62929", // 溴原子 - 棕红色 / Bromine - Brownish red
   
   // 第五周期 / Fifth period
   I: "#940094",  // 碘原子 - 紫色 / Iodine - Purple
+  Pb: "#A62929", // 铅原子 - 棕红色 / Lead - Brownish red
   
   // 过渡金属 / Transition metals
   Fe: "#FFA500", // 铁原子 - 橙色 / Iron - Orange
@@ -59,7 +68,7 @@ export const ATOM_RADIUS = {
   F: 0.50,   // 氟原子最小的卤素 / Fluorine is the smallest halogen
   
   // 第三周期 / Third period
-  Na: 1.80,  // 钠原子碱金属较大 / Sodium is a large alkali metal
+  Na: 1.6,  // 钠原子碱金属 / Sodium is a large alkali metal
   Mg: 1.50,  // 镁原子碱土金属 / Magnesium is an alkaline earth metal
   Al: 1.25,  // 铝原子金属 / Aluminum metal
   Si: 1.10,  // 硅原子介于金属与非金属之间 / Silicon is between metal and non-metal
@@ -68,8 +77,8 @@ export const ATOM_RADIUS = {
   Cl: 0.75,  // 氯原子 / Chlorine
   
   // 第四周期 / Fourth period
-  K: 2.20,   // 钾原子最大的碱金属 / Potassium is the largest alkali metal
-  Ca: 1.95,  // 钙原子碱土金属 / Calcium is an alkaline earth metal
+  K: 1.80,   // 钾原子最大的碱金属 / Potassium is the largest alkali metal
+  Ca: 1.7,  // 钙原子碱土金属 / Calcium is an alkaline earth metal
   As: 1.15,  // 砷原子类金属 / Arsenic is a metalloid
   Se: 1.15,  // 硒原子与砷相近 / Selenium is similar to arsenic
   Br: 0.85,  // 溴原子 / Bromine
