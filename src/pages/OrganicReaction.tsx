@@ -9,7 +9,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useTranslation } from "react-i18next";
-import { Text, Html } from '@react-three/drei';
+import { Text, Html } from "@react-three/drei";
 
 import { AnimationEngine } from "../organic/animation/AnimationEngine";
 import { FileHandler } from "../organic/utils/FileHandler";
@@ -26,91 +26,91 @@ import { DEFAULT_REACTION } from "../organic/examples/carbonic-acid";
 // 添加原子颜色映射
 const ATOM_COLORS: { [key: string]: string } = {
   // 第一周期
-  H: '#FFFFFF',  // 氢 - 白色
-  
+  H: "#FFFFFF", // 氢 - 白色
+
   // 第二周期
-  B: '#FFB5B5',  // 硼 - 浅粉色
-  C: '#808080',  // 碳 - 灰色
-  N: '#0000FF',  // 氮 - 蓝色
-  O: '#FF0000',  // 氧 - 红色
-  F: '#90E050',  // 氟 - 浅绿色
-  
+  B: "#FFB5B5", // 硼 - 浅粉色
+  C: "#808080", // 碳 - 灰色
+  N: "#0000FF", // 氮 - 蓝色
+  O: "#FF0000", // 氧 - 红色
+  F: "#90E050", // 氟 - 浅绿色
+
   // 第三周期
-  Na: '#AB5CF2', // 钠 - 紫色
-  Mg: '#8AFF00', // 镁 - 亮绿色
-  Al: '#BFA6A6', // 铝 - 银灰色
-  Si: '#F0C8A0', // 硅 - 米色
-  P: '#FF8000',  // 磷 - 橙色
-  S: '#FFFF30',  // 硫 - 黄色
-  Cl: '#1FF01F', // 氯 - 绿色
-  
+  Na: "#AB5CF2", // 钠 - 紫色
+  Mg: "#8AFF00", // 镁 - 亮绿色
+  Al: "#BFA6A6", // 铝 - 银灰色
+  Si: "#F0C8A0", // 硅 - 米色
+  P: "#FF8000", // 磷 - 橙色
+  S: "#FFFF30", // 硫 - 黄色
+  Cl: "#1FF01F", // 氯 - 绿色
+
   // 第四周期
-  K: '#8F40D4',  // 钾 - 深紫色
-  Ca: '#808090', // 钙 - 深灰色
-  As: '#BD80E3', // 砷 - 紫红色
-  Se: '#FFA100', // 硒 - 深橙色
-  Br: '#A62929', // 溴 - 棕红色
-  
+  K: "#8F40D4", // 钾 - 深紫色
+  Ca: "#808090", // 钙 - 深灰色
+  As: "#BD80E3", // 砷 - 紫红色
+  Se: "#FFA100", // 硒 - 深橙色
+  Br: "#A62929", // 溴 - 棕红色
+
   // 第五周期
-  I: '#940094',  // 碘 - 紫色
-  Pb: '#575961', // 铅 - 铅灰色
-  
+  I: "#940094", // 碘 - 紫色
+  Pb: "#575961", // 铅 - 铅灰色
+
   // 常见过渡金属
-  Fe: '#FFA500', // 铁 - 橙色
-  Cu: '#C88033', // 铜 - 铜色
-  Zn: '#7D80B0', // 锌 - 蓝灰色
-  Hg: '#D4B454', // 汞 - 黄色
+  Fe: "#FFA500", // 铁 - 橙色
+  Cu: "#C88033", // 铜 - 铜色
+  Zn: "#7D80B0", // 锌 - 蓝灰色
+  Hg: "#D4B454", // 汞 - 黄色
 
   // 其它辅助元素
-  R: '#FF0000', // 有机官能团 
-  '+': '#00FF00', // 正电荷 绿色
-  '-': '#0000FF', // 负电荷 蓝色  
-  '?': '#CCCCCC', // 未知元素 灰色
+  R: "#FF0000", // 有机官能团
+  "+": "#00FF00", // 正电荷 绿色
+  "-": "#0000FF", // 负电荷 蓝色
+  "?": "#CCCCCC", // 未知元素 灰色
 };
 
 // 添加原子半径映射
 const ATOM_RADIUS: { [key: string]: number } = {
   // 第一周期
-  H: 0.25,  // 氢
-  
+  H: 0.25, // 氢
+
   // 第二周期
-  B: 0.85,  // 硼
-  C: 0.70,  // 碳
-  N: 0.65,  // 氮
-  O: 0.60,  // 氧
-  F: 0.50,  // 氟
-  
+  B: 0.85, // 硼
+  C: 0.7, // 碳
+  N: 0.65, // 氮
+  O: 0.6, // 氧
+  F: 0.5, // 氟
+
   // 第三周期
-  Na: 1.80,  // 钠
-  Mg: 1.50,  // 镁
-  Al: 1.25,  // 铝
-  Si: 1.10,  // 硅
-  P: 1.00,   // 磷
-  S: 1.00,   // 硫
-  Cl: 0.75,  // 氯
-  
+  Na: 1.8, // 钠
+  Mg: 1.5, // 镁
+  Al: 1.25, // 铝
+  Si: 1.1, // 硅
+  P: 1.0, // 磷
+  S: 1.0, // 硫
+  Cl: 0.75, // 氯
+
   // 第四周期
-  K: 2.20,   // 钾
-  Ca: 1.95,  // 钙
-  As: 1.15,  // 砷
-  Se: 1.15,  // 硒
-  Br: 0.85,  // 溴
-  
+  K: 2.2, // 钾
+  Ca: 1.95, // 钙
+  As: 1.15, // 砷
+  Se: 1.15, // 硒
+  Br: 0.85, // 溴
+
   // 第五周期
-  I: 0.98,   // 碘
-  Pb: 1.75,  // 铅
-  
+  I: 0.98, // 碘
+  Pb: 1.75, // 铅
+
   // 常见过渡金属
-  Fe: 1.40,  // 铁
-  Cu: 1.35,  // 铜
-  Zn: 1.35,  // 锌
-  Hg: 1.35,  // 汞
+  Fe: 1.4, // 铁
+  Cu: 1.35, // 铜
+  Zn: 1.35, // 锌
+  Hg: 1.35, // 汞
 
   // 其它辅助元素
-  R: 1.00,  // 有机官能团
-  '+': 0.05, // 正电荷
-  '-': 0.05, // 负电荷
-  '?': 1.00, // 未知元素
+  R: 1.0, // 有机官能团
+  "+": 0.05, // 正电荷
+  "-": 0.05, // 负电荷
+  "?": 1.0, // 未知元素
 };
 
 // 定义不同类型化学键的样式
@@ -159,31 +159,60 @@ interface BondStyle {
  * Atom Rendering Component
  * Responsible for rendering 3D sphere representation of a single atom
  */
+
 const Atom = ({ atom }: { atom: BaseAtom }) => {
   const radius = ATOM_RADIUS[atom.symbol] || 0.5;
   const color = ATOM_COLORS[atom.symbol] || "#CCCCCC";
+
+  const materialProps = useMemo(
+    () => ({
+      color: new THREE.Color(color),
+      metalness: 0.2, // 增加金属感，让原子看起来更有质感
+      roughness: 0.2, // 降低粗糙度，使表面更光滑有光泽
+      envMapIntensity: 1, // 增强环境反射
+      clearcoat: 0.3, // 添加清漆层，产生额外的镜面反射
+      clearcoatRoughness: 0.2, // 清漆层的粗糙度
+      transmission: 0.02, // 轻微的透明感
+      thickness: 0.8, // 材质厚度，影响透明效果
+      ior: 1.5, // 折射率，增加真实感
+    }),
+    [color]
+  );
+
+  // 创建原子的光晕效果
+  const glowMaterialProps = useMemo(
+    () => ({
+      color: new THREE.Color(color),
+      transparent: true,
+      opacity: 0.1,
+      side: THREE.BackSide,
+    }),
+    [color]
+  );
 
   return (
     <group position={[atom.position.x, atom.position.y, atom.position.z]}>
       {/* 原子球体 */}
       <mesh>
         <sphereGeometry args={[radius, 32, 32]} />
-        <meshStandardMaterial 
-          color={color}
-          metalness={0.3}
-          roughness={0.4}
-        />
+        <meshPhysicalMaterial {...materialProps} />
       </mesh>
-      
+
+      {/* 原子光晕效果 */}
+      <mesh>
+        <sphereGeometry args={[radius * 1.2, 32, 32]} />
+        <meshBasicMaterial {...glowMaterialProps} />
+      </mesh>
+
       {/* 原子标签 */}
       <Html
         position={[0, radius * 1.5, 0]}
         center
         style={{
-          pointerEvents: 'none'  // 确保HTML元素不会捕获任何鼠标事件
+          pointerEvents: "none", // 确保HTML元素不会捕获任何鼠标事件
         }}
       >
-        <div 
+        <div
           className={`
             text-sm px-2 py-1 rounded 
             pointer-events-none 
@@ -224,7 +253,7 @@ const Bond: React.FC<BondProps> = ({
   end,
   bondType = BondType.COVALENT,
 }) => {
-  // 获取键类型对应的样式，如果未找到则使用默认样式 
+  // 获取键类型对应的样式，如果未找到则使用默认样式
   // Get the style corresponding to the bond type, if not found, use the default style
   const style = BOND_STYLES[bondType] || BOND_STYLES[BondType.COVALENT];
 
@@ -288,9 +317,9 @@ const Axes: React.FC<{ size?: number }> = ({ size = 2 }) => {
     if (groupRef.current) {
       // 创建坐标轴 / Create axes helper
       const axesHelper = new THREE.AxesHelper(size);
-      
+
       // 创建箭头 - 箭头大小为轴长的2% / Create arrows - arrow size is 2% of axis length
-      const arrowSize = size * 0.02; 
+      const arrowSize = size * 0.02;
       // 创建圆锥体几何体作为箭头 / Create cone geometries as arrows
       const xArrow = new THREE.ConeGeometry(arrowSize, arrowSize * 2, 8);
       const yArrow = new THREE.ConeGeometry(arrowSize, arrowSize * 2, 8);
@@ -326,38 +355,28 @@ const Axes: React.FC<{ size?: number }> = ({ size = 2 }) => {
   // 添加轴标签 / Add axis labels
   return (
     <group ref={groupRef}>
-      <Text
-        position={[size + 0.2, 0, 0]}
-        fontSize={0.2}
-        color="red"
-      >
+      <Text position={[size + 0.2, 0, 0]} fontSize={0.2} color="red">
         X
       </Text>
-      <Text
-        position={[0, size + 0.2, 0]}
-        fontSize={0.2}
-        color="green"
-      >
+      <Text position={[0, size + 0.2, 0]} fontSize={0.2} color="green">
         Y
       </Text>
-      <Text
-        position={[0, 0, size + 0.2]}
-        fontSize={0.2}
-        color="blue"
-      >
+      <Text position={[0, 0, size + 0.2]} fontSize={0.2} color="blue">
         Z
       </Text>
     </group>
   );
 };
 
-// 修改化学键图例组件
+// 化学键图例组件
 const BondLegend: React.FC = () => {
   const { t } = useTranslation();
 
-  return (  
+  return (
     <div className="absolute left-4 bottom-4 bg-gray-800/80 p-4 rounded-lg z-10 backdrop-blur-sm">
-      <h3 className="text-white text-sm mb-2">{t('bonds.types.title', 'BondTypes')}</h3>
+      <h3 className="text-white text-sm mb-2">
+        {t("bonds.types.title", "BondTypes")}
+      </h3>
       <div className="space-y-3">
         {Object.entries(BOND_STYLES).map(([type, style]) => {
           const bondType = type.toLowerCase();
@@ -375,12 +394,21 @@ const BondLegend: React.FC = () => {
                 <span className="text-white text-xs">
                   {t(`bonds.types.${bondType}.name`)}
                 </span>
-                <button 
+                <button
                   className="ml-1 text-gray-400 hover:text-white"
                   title={t(`bonds.types.${bondType}.description`)}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
               </div>
@@ -412,6 +440,10 @@ const OrganicReaction = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // 网格和坐标轴显示状态
+  const [showGrid, setShowGrid] = useState(true);
+  const [showAxes, setShowAxes] = useState(true);
 
   // 引用管理
   const animationEngineRef = useRef<AnimationEngine | null>(null);
@@ -595,11 +627,37 @@ const OrganicReaction = () => {
             {animationData?.metadata.name || "Organic Reaction Animation"}
           </h1>
           <p className="text-sm text-gray-400">
-            {animationData?.metadata.description ||
-              "Drag .chemx or .json file here"}
+            {animationData?.metadata.description || "Drag .chemx or .json file here"}
           </p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
+          {/* 网格显示切换按钮 */}
+          <button
+            onClick={() => setShowGrid(!showGrid)}
+            className={`px-4 py-2 rounded transition-colors ${
+              showGrid 
+                ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                : 'bg-gray-600 text-gray-300 hover:bg-gray-700'
+            }`}
+            title={showGrid ? "Hide Grid" : "Show Grid"}
+          >
+            Grid
+          </button>
+
+          {/* 坐标轴显示切换按钮 */}
+          <button
+            onClick={() => setShowAxes(!showAxes)}
+            className={`px-4 py-2 rounded transition-colors ${
+              showAxes 
+                ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                : 'bg-gray-600 text-gray-300 hover:bg-gray-700'
+            }`}
+            title={showAxes ? "Hide Axes" : "Show Axes"}
+          >
+            Axes
+          </button>
+
+          {/* 原有的播放和重置按钮 */}
           <button
             onClick={handlePlayPause}
             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -617,21 +675,34 @@ const OrganicReaction = () => {
 
       {/* 3D场景渲染区域 */}
       <div className="flex-1">
-        <Canvas 
+        <Canvas
           camera={{ position: [5, 5, 5], fov: 50 }}
-          gl={{ 
+          gl={{
             alpha: false,
-            antialias: true 
+            antialias: true,
           }}
         >
-          {/* 设置更浅的背景色 */}
-          <color attach="background" args={["#808080"]} />
-          
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} />
+          {/* 浅灰色背景 */}
+          <color attach="background" args={["#f0f0f0"]} />
 
-          {/* 添加坐标轴并增大尺寸 */}
-          <Axes size={5} />
+          {/* 环境光和点光源 */}
+          <ambientLight intensity={0.6} />
+          <pointLight position={[10, 10, 10]} intensity={0.8} />
+          <pointLight position={[-10, -10, -10]} intensity={0.5} />
+
+          {/* 条件渲染网格 */}
+          {showGrid && (
+            <group position={[0, 0, 0]}>
+              <gridHelper 
+                args={[20, 20, "#999999", "#CCCCCC"]}
+                position={[0, 0, 0]}
+                rotation={[0, 0, 0]}
+              />
+            </group>
+          )}
+
+          {/* 条件渲染坐标轴 */}
+          {showAxes && <Axes size={5} />}
 
           {Object.entries(currentFrame.atoms).map(([id, atom]) => (
             <Atom key={id} atom={atom as BaseAtom} />
@@ -665,13 +736,9 @@ const OrganicReaction = () => {
           })}
 
           {/* 调整OrbitControls以更好地控制场景 */}
-          <OrbitControls 
-            makeDefault 
-            minDistance={2}
-            maxDistance={20}
-          />
+          <OrbitControls makeDefault minDistance={2} maxDistance={20} />
         </Canvas>
-        
+
         <BondLegend />
       </div>
     </div>
