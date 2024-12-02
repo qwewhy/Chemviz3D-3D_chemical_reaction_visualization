@@ -139,6 +139,19 @@ export class AnimationEngine {
   }
 
   /**
+  * 缓动函数：先慢后快再慢
+  * Easing function: ease-in-out
+  * @param t 原始插值系数(0-1)
+  * @returns 缓动后的插值系数
+  */
+  private easeInOutQuint(t: number): number {
+    // 使用五次方的缓动函数，提供更明显的加速和减速效果
+    return t < 0.5
+      ? 16 * t * t * t * t * t
+      : 1 - Math.pow(-2 * t + 2, 5) / 2;
+  }
+
+  /**
    * 设置帧更新回调函数
    * @param callback 回调函数，接收当前帧的原子和键数据
    * Set frame update callback
@@ -190,8 +203,13 @@ export class AnimationEngine {
    */
   public reset() {
     this.currentTime = 0;
+    const initialAtoms = Object.fromEntries(
+      Object.entries(this.animationData.keyframes[0].atoms).map(
+        ([id, atom]) => [id, createAtom(atom as AtomState)]
+      )
+    );
     this.frameUpdateCallback?.(
-      this.animationData.keyframes[0].atoms,
+      initialAtoms,
       this.animationData.keyframes[0].bonds
     );
   }
@@ -217,6 +235,9 @@ export class AnimationEngine {
    * @param t Interpolation factor(0-1)
    */
   private interpolateFrames(frame1: Keyframe, frame2: Keyframe, t: number) {
+    // 应用缓动函数处理插值系数
+    const easedT = this.easeInOutQuint(t);
+    
     const interpolatedAtoms: Record<string, BaseAtom> = {};
     
     Object.entries(frame1.atoms).forEach(([atomId, atom1]) => {
@@ -226,7 +247,7 @@ export class AnimationEngine {
       const newPosition = new Vector3().lerpVectors(
         atom1.position,
         atom2.position,
-        t
+        easedT  // 使用缓动后的插值系数
       );
   
       // Create a new atom instance with interpolated values
@@ -244,26 +265,26 @@ export class AnimationEngine {
             atom1.color,
             atom1.maxBonds,
             newPosition,
-            atom1.charge + (atom2.charge - atom1.charge) * t
+            (atom1.charge ?? 0) + ((atom2.charge ?? 0) - (atom1.charge ?? 0)) * easedT  // 电荷也使用缓动插值
           );
         }
       })();
   
       interpolatedAtom.currentBonds = Math.round(
-        atom1.currentBonds + (atom2.currentBonds - atom1.currentBonds) * t
+        atom1.currentBonds + (atom2.currentBonds - atom1.currentBonds) * easedT  // 键数也使用缓动插值
       );
       
       interpolatedAtoms[atomId] = interpolatedAtom;
     });
   
-    // Calculate bond interpolation
+    // Calculate bond interpolation with easing
     const interpolatedBonds = frame1.bonds.map(bond => {
       const bond2 = frame2.bonds.find(b => b.id === bond.id);
       if (!bond2) return bond;
   
       return {
         ...bond,
-        strength: bond.strength + (bond2.strength - bond.strength) * t
+        strength: bond.strength + (bond2.strength - bond.strength) * easedT  // 键强度也使用缓动插值
       };
     });
   
@@ -300,26 +321,29 @@ export class AnimationEngine {
   private updateFrame() {
     const { keyframes } = this.animationData;
     if (keyframes.length === 0) return;
-    
+
     // 找到当前时间所在的关键帧索引
     // Find keyframe index for current time
     let frameIndex = 0;
-    while (frameIndex < keyframes.length - 1 && 
-           keyframes[frameIndex + 1].timestamp < this.currentTime) {
+    while (frameIndex < keyframes.length - 1 &&
+      keyframes[frameIndex + 1].timestamp < this.currentTime) {
       frameIndex++;
     }
 
     if (frameIndex < keyframes.length - 1) {
       const frame1 = keyframes[frameIndex];
       const frame2 = keyframes[frameIndex + 1];
-      const t = (this.currentTime - frame1.timestamp) / 
-                (frame2.timestamp - frame1.timestamp);
-      
+      const t = (this.currentTime - frame1.timestamp) /
+        (frame2.timestamp - frame1.timestamp);
+
       const interpolated = this.interpolateFrames(frame1, frame2, t);
       this.frameUpdateCallback?.(interpolated.atoms, interpolated.bonds);
     } else {
       const lastFrame = keyframes[frameIndex];
-      this.frameUpdateCallback?.(lastFrame.atoms, lastFrame.bonds);
+      const lastFrameAtoms = Object.fromEntries(
+        Object.entries(lastFrame.atoms).map(([id, atom]) => [id, createAtom(atom as AtomState)])
+      );
+      this.frameUpdateCallback?.(lastFrameAtoms, lastFrame.bonds);
     }
   }
 }

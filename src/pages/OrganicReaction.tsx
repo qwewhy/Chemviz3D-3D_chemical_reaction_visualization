@@ -9,7 +9,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useTranslation } from "react-i18next";
-import { Text } from '@react-three/drei';
+import { Text, Html } from '@react-three/drei';
 
 import { AnimationEngine } from "../organic/animation/AnimationEngine";
 import { FileHandler } from "../organic/utils/FileHandler";
@@ -164,10 +164,48 @@ const Atom = ({ atom }: { atom: BaseAtom }) => {
   const color = ATOM_COLORS[atom.symbol] || "#CCCCCC";
 
   return (
-    <mesh position={[atom.position.x, atom.position.y, atom.position.z]}>
-      <sphereGeometry args={[radius, 32, 32]} />
-      <meshStandardMaterial color={color} />
-    </mesh>
+    <group position={[atom.position.x, atom.position.y, atom.position.z]}>
+      {/* 原子球体 */}
+      <mesh>
+        <sphereGeometry args={[radius, 32, 32]} />
+        <meshStandardMaterial 
+          color={color}
+          metalness={0.3}
+          roughness={0.4}
+        />
+      </mesh>
+      
+      {/* 原子标签 */}
+      <Html
+        position={[0, radius * 1.5, 0]}
+        center
+        style={{
+          pointerEvents: 'none'  // 确保HTML元素不会捕获任何鼠标事件
+        }}
+      >
+        <div 
+          className={`
+            text-sm px-2 py-1 rounded 
+            pointer-events-none 
+            select-none
+            bg-black/50 
+            text-white
+            font-medium
+            backdrop-blur-sm
+            shadow-lg
+            whitespace-nowrap
+          `}
+        >
+          {atom.symbol}
+          {/* 如果有电荷，显示在右上角 */}
+          {atom.charge !== 0 && atom.charge !== undefined && (
+            <sup className="text-xs ml-0.5">
+              {atom.charge > 0 ? `+${atom.charge}` : atom.charge}
+            </sup>
+          )}
+        </div>
+      </Html>
+    </group>
   );
 };
 
