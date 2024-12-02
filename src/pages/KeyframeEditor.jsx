@@ -15,6 +15,7 @@ import AtomPositionEditor from '../animationEditor/components/ui/AtomPositionEdi
 import useHistoryState from '../animationEditor/hooks/useHistoryState';
 import { useTranslation } from 'react-i18next';
 import KeyFrameEditorImportantNotesAlert from '../components/layout/KeyFrameEditorImportantNotesAlert';
+import Axes from '../animationEditor/components/scene/Axes';
 
 /**
  * 化学反应动画编辑器主页面
@@ -242,7 +243,7 @@ const KeyframeEditor = () => {
     }
   }, [selectedAtom, bondStartAtom, setBonds, setAtoms]);
 
-  // 新增：处理关键帧切换的函数
+  // 处理关键帧切换的函数
   const handleKeyframeSwitch = useCallback((index) => {
     console.log('Switching to keyframe:', index);
     
@@ -300,6 +301,9 @@ const KeyframeEditor = () => {
     }
   }, [atoms, bonds, keyframes.length, switchKeyframe, saveKeyframe]);
 
+
+  
+
   return (
     <div className="h-screen flex flex-col">
       <Toolbar
@@ -320,7 +324,7 @@ const KeyframeEditor = () => {
           <Canvas camera={{ position: [5, 5, 5], fov: 50 }}>
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} />
-            
+            <Axes size={10} />
             <SceneController
               editMode={editMode}
               onPlaceAtom={handlePlaceAtom}
