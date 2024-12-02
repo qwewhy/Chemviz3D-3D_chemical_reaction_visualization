@@ -67,29 +67,39 @@ const Toolbar = ({
           {t('toolbar.addAtom')}
         </button>
 
-        {/* 添加化学键模式 / Add bond mode */}
-        <button
-          className={`px-4 py-2 rounded-lg transition-colors ${
-            editMode === 'addBond' 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-gray-200 hover:bg-gray-300'
-          }`}
-          onClick={() => setEditMode('addBond')}
-        >
-          {t('toolbar.addBond')}
-        </button>
+        {/* 原子类型选择器和预览 - 仅在addAtom模式下显示 */}
+        {editMode === 'addAtom' && (
+          <>
+            <div className="flex items-center gap-2 ml-4">
+              <label className="text-gray-700">
+                {t('toolbar.atomType')}
+              </label>
+              <select
+                className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={selectedAtomType}
+                onChange={e => setSelectedAtomType(e.target.value)}
+              >
+                {Object.keys(ATOM_COLORS).map(symbol => (
+                  <option key={symbol} value={symbol}>
+                    {symbol} - {t(`atoms.${symbol}`)}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        {/* 断开化学键模式 / Break bond mode */}
-        <button
-          className={`px-4 py-2 rounded-lg transition-colors ${
-            editMode === 'breakBond' 
-              ? 'bg-red-500 text-white' 
-              : 'bg-gray-200 hover:bg-gray-300'
-          }`}
-          onClick={() => setEditMode('breakBond')}
-        >
-          {t('toolbar.breakBond')}
-        </button>
+            {/* 当前选中的原子类型预览 */}
+            <div 
+              className="w-8 h-8 rounded-full ml-2"
+              style={{
+                backgroundColor: ATOM_COLORS[selectedAtomType],
+                border: '2px solid #666'
+              }}
+              title={`${selectedAtomType} - ${t(`atoms.${selectedAtomType}`)}`}
+            />
+          </>
+        )}
+
+                
 
         {/* 删除原子模式 / Delete atom mode */}
         <button
@@ -103,37 +113,17 @@ const Toolbar = ({
           {t('toolbar.deleteAtom')}
         </button>
 
-        {/* 撤销按钮 / Undo button */}
+        {/* 添加化学键模式 / Add bond mode */}
         <button
           className={`px-4 py-2 rounded-lg transition-colors ${
-            canUndo
-              ? 'bg-yellow-500 text-white hover:bg-yellow-600'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            editMode === 'addBond' 
+              ? 'bg-blue-500 text-white' 
+              : 'bg-gray-200 hover:bg-gray-300'
           }`}
-          onClick={onUndo}
-          disabled={!canUndo}
-          title="Ctrl+Z"
+          onClick={() => setEditMode('addBond')}
         >
-          {t('toolbar.undo')}
+          {t('toolbar.addBond')}
         </button>
-
-        {/* 原子类型选择器 - 移除样式覆盖 */}
-        <div className="flex items-center gap-2 ml-4">
-          <label className="text-gray-700">
-            {t('toolbar.atomType')}
-          </label>
-          <select
-            className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={selectedAtomType}
-            onChange={e => setSelectedAtomType(e.target.value)}
-          >
-            {Object.keys(ATOM_COLORS).map(symbol => (
-              <option key={symbol} value={symbol}>
-                {symbol} - {t(`atoms.${symbol}`)}
-              </option>
-            ))}
-          </select>
-        </div>
 
         {/* 化学键类型选择器 - 仅在addBond模式下显示 */}
         {editMode === 'addBond' && (
@@ -155,15 +145,33 @@ const Toolbar = ({
           </div>
         )}
 
-        {/* 当前选中的原子类型预览 */}
-        <div 
-          className="w-8 h-8 rounded-full ml-2"
-          style={{
-            backgroundColor: ATOM_COLORS[selectedAtomType],
-            border: '2px solid #666'
-          }}
-          title={`${selectedAtomType} - ${t(`atoms.${selectedAtomType}`)}`}
-        />
+        {/* 断开化学键模式 / Break bond mode */}
+        <button
+          className={`px-4 py-2 rounded-lg transition-colors ${
+            editMode === 'breakBond' 
+              ? 'bg-red-500 text-white' 
+              : 'bg-gray-200 hover:bg-gray-300'
+          }`}
+          onClick={() => setEditMode('breakBond')}
+        >
+          {t('toolbar.breakBond')}
+        </button>
+
+        {/* 撤销按钮 / Undo button */}
+        <button
+          className={`px-4 py-2 rounded-lg transition-colors ${
+            canUndo
+              ? 'bg-yellow-500 text-white hover:bg-yellow-600'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
+          onClick={onUndo}
+          disabled={!canUndo}
+          title="Ctrl+Z"
+        >
+          {t('toolbar.undo')}
+        </button>
+
+
       </div>
     </div>
   );
