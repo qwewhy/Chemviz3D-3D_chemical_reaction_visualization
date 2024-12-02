@@ -1,4 +1,4 @@
-# Chemical Reaction 3D Visualization V1.1.1
+# Chemical Reaction 3D Visualization V2.0.1
 
 <p align="center">
   <img src="public/chemistry-3d-logo.svg" alt="Project Logo" width="200"/>
@@ -12,7 +12,7 @@ An interactive 3D visualization platform for chemical reactions, built with Reac
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 You can use any device with a browser to experience at any time - Computer experience is recommended, mobile phone please use landscape screen.
-v1.1.2:   [Have A Try!](http://chemviz3d.s3-website-ap-southeast-2.amazonaws.com) 
+v2.0.1:   [Have A Try!](http://chemviz3d.s3-website-ap-southeast-2.amazonaws.com) 
 <!-- | [Documentation](https://your-docs-link.com) -->
 
 ## 🚀 Features
@@ -37,7 +37,7 @@ v1.1.2:   [Have A Try!](http://chemviz3d.s3-website-ap-southeast-2.amazonaws.com
 - **Build Tool**: Vite 5.4.10
 - **Type Support**: TypeScript support included
 
-## 📦 Project Structure
+## 📦 Project Structure V1.1.1
 
 ```plaintext
 chemical-reaction-3d/
