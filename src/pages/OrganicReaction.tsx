@@ -226,12 +226,12 @@ const Atom = ({ atom }: { atom: BaseAtom }) => {
           `}
         >
           {atom.symbol}
-          {/* 如果有电荷，显示在右上角 */}
+          {/* 如果有电荷，显示在右上角
           {atom.charge !== 0 && atom.charge !== undefined && (
             <sup className="text-xs ml-0.5">
               {atom.charge > 0 ? `+${atom.charge}` : atom.charge}
             </sup>
-          )}
+          )} */}
         </div>
       </Html>
     </group>
@@ -309,7 +309,7 @@ interface CurrentFrame {
   bonds: BondState[];
 }
 
-// 修改坐标轴组件 / Modify Axes component
+// 坐标轴组件 / Modify Axes component
 const Axes: React.FC<{ size?: number }> = ({ size = 2 }) => {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -676,7 +676,7 @@ const OrganicReaction = () => {
       {/* 3D场景渲染区域 */}
       <div className="flex-1">
         <Canvas
-          camera={{ position: [5, 5, 5], fov: 50 }}
+          camera={{ position: [10, 10, 10], fov: 50 }}
           gl={{
             alpha: false,
             antialias: true,
