@@ -1,3 +1,10 @@
+/**
+ * @file Beaker.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 import { useRef } from "react";
 import { useCylinder } from "@react-three/cannon";
 import { useFrame } from "@react-three/fiber";

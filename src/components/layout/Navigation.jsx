@@ -1,3 +1,10 @@
+/**
+ * @file Navigation.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

@@ -1,3 +1,5 @@
+
+
 /**
  * 原子属性常量定义
  * Atom property constants

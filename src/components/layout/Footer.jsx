@@ -1,3 +1,10 @@
+/**
+ * @file Footer.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 // Footer.tsx
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

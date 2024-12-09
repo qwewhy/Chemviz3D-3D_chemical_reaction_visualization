@@ -1,3 +1,10 @@
+/**
+ * @file SceneController.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 import React, { useCallback } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Grid, Html, Plane } from '@react-three/drei';

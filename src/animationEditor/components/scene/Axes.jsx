@@ -1,3 +1,10 @@
+/**
+ * @file Axes.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 

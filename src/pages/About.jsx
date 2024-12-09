@@ -1,3 +1,10 @@
+/**
+ * @file About.jsx
+ * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ */
+
 // 关于页面：项目信息和说明
 // About page: Project information and description
 import { useTranslation } from 'react-i18next';
