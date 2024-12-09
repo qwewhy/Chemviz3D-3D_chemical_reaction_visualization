@@ -1,6 +1,6 @@
 /**
  * @file simulationStore.js - Global State Management for Chemistry Simulation
- * @author Hongyuan Wang <HW8545626@gmail.com>
+ * @author1 Hongyuan Wang <HW8545626@gmail.com>
  * @copyright Copyright (c) 2024 Hongyuan Wang
  * @license MIT
  * @description

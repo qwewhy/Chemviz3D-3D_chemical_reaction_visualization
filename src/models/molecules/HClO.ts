@@ -1,6 +1,6 @@
 /**
  * @file HClO.ts
- * @author [Hongyuan Wang] <HW8545626@gmail.com>
+ * @author1 [Hongyuan Wang] <HW8545626@gmail.com>
  * @copyright Copyright (c) 2024 [Hongyuan Wang]
  * @license MIT
  * @description This module implements the HClO (Hypochlorous acid) molecule class, providing

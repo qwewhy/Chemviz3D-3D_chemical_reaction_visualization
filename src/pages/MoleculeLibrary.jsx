@@ -1,3 +1,11 @@
+/**
+ * @file MoleculeLibrary.jsx
+ * @author1 [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the MoleculeLibrary page component, providing a molecule library.
+ */
+
 // 分子库页面：展示可用的分子模型
 // Molecule Library page: Display available molecule models
 import { useTranslation } from 'react-i18next';

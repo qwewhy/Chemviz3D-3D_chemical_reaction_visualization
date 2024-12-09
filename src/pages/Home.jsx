@@ -1,3 +1,11 @@
+/**
+ * @file Home.jsx
+ * @author1 [Hongyuan Wang] <HW8545626@gmail.com>
+ * @copyright Copyright (c) 2024 [Hongyuan Wang]
+ * @license MIT
+ * @description This module implements the Home page component, providing a hero section and feature showcase.
+ */
+
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
